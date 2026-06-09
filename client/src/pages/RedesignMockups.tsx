@@ -662,12 +662,12 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
               <div className="lg:col-span-6 space-y-7 text-left">
                 <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/8 text-sky-200 text-[11px] font-black uppercase tracking-[0.24em] border border-white/12 shadow-[0_16px_40px_rgba(0,0,0,0.22)] backdrop-blur">
                   <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_0_5px_rgba(52,211,153,0.14)]"></span>
-                  Healthcare IT • Cloud • Cybersecurity
+                  HEALTHCARE IT • FEDERAL • CLOUD • CYBERSECURITY
                 </div>
 
                 <div className="space-y-5">
                   <h1 className="text-4xl md:text-6xl lg:text-7xl font-black tracking-[-0.055em] leading-[0.96] text-white font-sans">
-                    Technology That Improves Healthcare, Strengthens Security, and Accelerates Growth
+                    Healthcare IT & Federal Technology Solutions
                   </h1>
                   <p className="text-slate-200/88 text-base md:text-lg leading-8 max-w-2xl font-medium">
                     NDE HealthTech Solutions helps healthcare organizations, government agencies, and enterprise teams modernize infrastructure, secure critical systems, and build scalable cloud-ready environments.
