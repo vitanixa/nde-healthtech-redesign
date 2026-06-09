@@ -36,7 +36,13 @@ import {
   BarChart3,
   GraduationCap,
   BookOpen,
-  Send
+  Send,
+  Home as HomeIcon,
+  HeartPulse,
+  Landmark,
+  BadgeCheck,
+  Newspaper,
+  ShieldCheck
 } from "lucide-react";
 
 // Types for Mockup Definition
@@ -431,43 +437,50 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
 
   // Global Header Redesign
   const navLinks = [
-    { href: "/", label: "Home", id: "home" },
-    { href: "/services", label: "Services", id: "services" },
-    { href: "/healthcare-it", label: "Healthcare IT", id: "healthcare_it" },
-    { href: "/federal", label: "Federal", id: "federal" },
-    { href: "/why-us", label: "Why Choose Us", id: "why_us" },
-    { href: "/team", label: "Our Team", id: "team" },
-    { href: "/blog", label: "Blog", id: "blog" },
-    { href: "/academy", label: "Academy", id: "academy" },
+    { href: "/", label: "Home", id: "home", icon: HomeIcon },
+    { href: "/services", label: "Services", id: "services", icon: Briefcase },
+    { href: "/healthcare-it", label: "Healthcare IT", id: "healthcare_it", icon: HeartPulse },
+    { href: "/federal", label: "Federal", id: "federal", icon: Landmark },
+    { href: "/why-us", label: "Why Us", id: "why_us", icon: BadgeCheck },
+    { href: "/team", label: "Team", id: "team", icon: Users },
+    { href: "/blog", label: "Blog", id: "blog", icon: Newspaper },
+    { href: "/academy", label: "Academy", id: "academy", icon: GraduationCap },
   ];
 
   const renderHeader = () => (
-    <header className="bg-white/95 backdrop-blur-md border-b border-slate-100 text-slate-900 sticky top-0 z-50 shadow-sm shrink-0">
-      <div className="px-4 md:px-6 h-[68px] flex justify-between items-center max-w-7xl mx-auto">
+    <header className="bg-white/90 backdrop-blur-xl border-b border-slate-200/70 text-slate-900 sticky top-0 z-50 shadow-[0_8px_30px_rgba(15,23,42,0.08)] shrink-0">
+      <div className="px-4 md:px-6 h-[76px] flex justify-between items-center max-w-7xl mx-auto">
         <Link href="/">
-          <div className="flex items-center gap-2.5 min-w-0 cursor-pointer" onClick={() => setMobileMenuOpen(false)}>
+          <div className="flex items-center gap-3 min-w-0 cursor-pointer" onClick={() => setMobileMenuOpen(false)}>
             <img 
               src="/assets/nde-logo.png" 
               alt="NDE HealthTech Logo" 
-              className="w-9 h-9 md:w-10 md:h-10 object-contain rounded bg-slate-50 border border-slate-100 p-0.5 shadow-sm shrink-0"
+              className="w-11 h-11 md:w-12 md:h-12 object-contain rounded-xl bg-white border border-slate-200 p-0.5 shadow-[0_12px_30px_rgba(15,23,42,0.12)] shrink-0"
             />
             <div className="leading-none min-w-0">
-              <span className="font-black text-sm md:text-base tracking-tight text-slate-900 block whitespace-nowrap">NDE HealthTech</span>
-              <span className="text-[9px] md:text-[10px] font-bold text-orange-600 uppercase tracking-[0.18em] block mt-1">Solutions</span>
+              <span className="font-black text-base md:text-lg tracking-[-0.04em] text-slate-950 block whitespace-nowrap">NDE HealthTech</span>
+              <span className="text-[9px] md:text-[10px] font-black text-orange-600 uppercase tracking-[0.24em] block mt-1.5">Solutions</span>
             </div>
           </div>
         </Link>
 
         {!isMobile ? (
-          <div className="flex items-center gap-3 xl:gap-5 text-[11px] xl:text-xs font-bold text-slate-600">
-            {navLinks.map((link) => (
-              <Link key={link.href} href={link.href}>
-                <span className={`pb-0.5 transition-all cursor-pointer ${pageId === link.id ? 'text-slate-900 border-b-2 border-slate-900' : 'hover:text-slate-900'}`}>{link.label}</span>
-              </Link>
-            ))}
+          <div className="flex items-center gap-1.5 xl:gap-2 text-[11px] font-black text-slate-600">
+            {navLinks.map((link) => {
+              const Icon = link.icon;
+              const active = pageId === link.id;
+              return (
+                <Link key={link.href} href={link.href}>
+                  <span className={`inline-flex items-center gap-1.5 rounded-full px-3 py-2 transition-all cursor-pointer border ${active ? 'bg-slate-950 text-white border-slate-950 shadow-[0_10px_25px_rgba(15,23,42,0.18)]' : 'bg-white text-slate-600 border-transparent hover:border-slate-200 hover:bg-slate-50 hover:text-slate-950 hover:shadow-sm'}`}>
+                    <Icon className={`w-3.5 h-3.5 ${active ? 'text-orange-400' : 'text-orange-500'}`} />
+                    {link.label}
+                  </span>
+                </Link>
+              );
+            })}
             <Link href="/contact">
-              <button className="bg-slate-900 text-white text-[11px] px-4 py-2 rounded-lg font-bold hover:bg-slate-800 transition-colors shadow-sm cursor-pointer">
-                Contact
+              <button className="ml-1 bg-orange-600 text-white text-[11px] px-4 py-2.5 rounded-full font-black hover:bg-orange-500 transition-all shadow-[0_12px_24px_rgba(234,88,12,0.25)] cursor-pointer">
+                Schedule Consultation
               </button>
             </Link>
           </div>
@@ -477,30 +490,36 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
             aria-label="Open navigation menu"
             aria-expanded={mobileMenuOpen}
             onClick={() => setMobileMenuOpen((open) => !open)}
-            className="w-10 h-10 flex items-center justify-center rounded-lg bg-slate-50 cursor-pointer border border-slate-100 shadow-sm active:scale-95 transition-transform"
+            className="w-11 h-11 flex items-center justify-center rounded-xl bg-slate-950 cursor-pointer border border-slate-900 shadow-[0_12px_25px_rgba(15,23,42,0.18)] active:scale-95 transition-transform"
           >
-            <Menu className="w-5 h-5 text-slate-800" />
+            <Menu className="w-5 h-5 text-white" />
           </button>
         )}
       </div>
 
       {isMobile && mobileMenuOpen && (
-        <nav className="absolute left-0 right-0 top-[68px] z-50 bg-white border-b border-slate-200 shadow-xl px-4 py-4">
-          <div className="grid gap-1 max-w-md mx-auto">
-            {navLinks.map((link) => (
-              <Link key={link.href} href={link.href}>
-                <span
-                  onClick={() => setMobileMenuOpen(false)}
-                  className={`block rounded-xl px-4 py-3 text-sm font-bold transition-colors ${pageId === link.id ? 'bg-slate-900 text-white' : 'text-slate-700 hover:bg-slate-50'}`}
-                >
-                  {link.label}
-                </span>
-              </Link>
-            ))}
+        <nav className="absolute left-0 right-0 top-[76px] z-50 bg-white border-b border-slate-200 shadow-2xl px-4 py-4">
+          <div className="grid gap-2 max-w-md mx-auto">
+            {navLinks.map((link) => {
+              const Icon = link.icon;
+              return (
+                <Link key={link.href} href={link.href}>
+                  <span
+                    onClick={() => setMobileMenuOpen(false)}
+                    className={`flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-black transition-colors ${pageId === link.id ? 'bg-slate-950 text-white shadow-lg' : 'text-slate-800 hover:bg-slate-50 border border-slate-100'}`}
+                  >
+                    <span className="w-9 h-9 rounded-xl bg-orange-50 flex items-center justify-center border border-orange-100 shrink-0">
+                      <Icon className="w-4.5 h-4.5 text-orange-600" />
+                    </span>
+                    {link.label}
+                  </span>
+                </Link>
+              );
+            })}
             <Link href="/contact">
               <span
                 onClick={() => setMobileMenuOpen(false)}
-                className="mt-2 block rounded-xl px-4 py-3 text-sm font-black text-center bg-orange-600 text-white shadow-sm"
+                className="mt-2 block rounded-2xl px-4 py-3 text-sm font-black text-center bg-orange-600 text-white shadow-[0_12px_24px_rgba(234,88,12,0.25)]"
               >
                 Schedule Consultation
               </span>
@@ -663,7 +682,7 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
               {/* Category A: Clinical Health IT Solutions - Rebuilt with premium imagery */}
-              <div className="rounded-2xl border border-slate-200 bg-white overflow-hidden shadow-sm hover:shadow-md hover:border-orange-200 transition-all duration-300 flex flex-col justify-between">
+              <div className="rounded-2xl border border-slate-200 bg-white overflow-hidden shadow-[0_18px_45px_rgba(15,23,42,0.08)] hover:shadow-[0_24px_65px_rgba(15,23,42,0.14)] hover:border-orange-200 transition-all duration-300 flex flex-col justify-between">
                 <div>
                   {/* Premium Image Header */}
                   <div className="h-44 relative overflow-hidden bg-slate-900">
@@ -695,7 +714,7 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
                         <h4 className="font-extrabold text-xs text-slate-900 flex items-center gap-2">
                           <span className="w-1.5 h-1.5 bg-orange-600 rounded-full"></span> {srv.title}
                         </h4>
-                        <p className="text-sm text-slate-600 leading-relaxed pl-3.5">{srv.desc}</p>
+                        <p className="text-[15px] text-slate-700 leading-relaxed pl-3.5">{srv.desc}</p>
                       </div>
                     ))}
                   </div>
@@ -703,7 +722,7 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
               </div>
 
               {/* Category B: Enterprise IT & Security - Rebuilt with premium imagery */}
-              <div className="rounded-2xl border border-slate-200 bg-white overflow-hidden shadow-sm hover:shadow-md hover:border-blue-200 transition-all duration-300 flex flex-col justify-between">
+              <div className="rounded-2xl border border-slate-200 bg-white overflow-hidden shadow-[0_18px_45px_rgba(15,23,42,0.08)] hover:shadow-[0_24px_65px_rgba(15,23,42,0.14)] hover:border-blue-200 transition-all duration-300 flex flex-col justify-between">
                 <div>
                   {/* Premium Image Header */}
                   <div className="h-44 relative overflow-hidden bg-slate-900">
@@ -735,7 +754,7 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
                         <h4 className="font-extrabold text-xs text-slate-900 flex items-center gap-2">
                           <span className="w-1.5 h-1.5 bg-blue-600 rounded-full"></span> {srv.title}
                         </h4>
-                        <p className="text-sm text-slate-600 leading-relaxed pl-3.5">{srv.desc}</p>
+                        <p className="text-[15px] text-slate-700 leading-relaxed pl-3.5">{srv.desc}</p>
                       </div>
                     ))}
                   </div>
@@ -807,7 +826,7 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
           <div 
             className="relative py-14 px-6 bg-cover bg-center text-white text-center space-y-3 shrink-0"
             style={{ 
-              backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.92)), url("https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1800&q=85")` 
+              backgroundImage: `linear-gradient(rgba(8, 15, 30, 0.82), rgba(8, 15, 30, 0.94)), url("https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1800&q=85")` 
             }}
           >
             <div className="relative z-10 max-w-2xl mx-auto space-y-2">
@@ -864,9 +883,9 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
                 ].map((srv, idx) => {
                   const Icon = srv.icon;
                   return (
-                    <div key={idx} className="rounded-2xl border border-slate-150 bg-white overflow-hidden shadow-sm hover:shadow-md hover:border-orange-200 transition-all duration-300 flex flex-col justify-between">
+                    <div key={idx} className="rounded-2xl border border-slate-150 bg-white overflow-hidden shadow-[0_18px_45px_rgba(15,23,42,0.08)] hover:shadow-[0_24px_65px_rgba(15,23,42,0.14)] hover:border-orange-200 transition-all duration-300 flex flex-col justify-between">
                       <div>
-                        <div className="h-32 relative overflow-hidden bg-slate-900">
+                        <div className="h-40 relative overflow-hidden bg-slate-900">
                           <img src={srv.img} alt={srv.title} className="w-full h-full object-cover opacity-85" loading="lazy" onError={(e) => imageFallback(e, srv.fallback || "/assets/workflow-card.svg")} />
                           <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent"></div>
                           <div className="absolute bottom-3 left-4 flex items-center gap-2">
@@ -877,12 +896,12 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
                           </div>
                         </div>
                         <div className="p-4">
-                          <p className="text-sm text-slate-600 leading-relaxed">{srv.desc}</p>
+                          <p className="text-[15px] text-slate-700 leading-relaxed">{srv.desc}</p>
                         </div>
                       </div>
                       <div className="px-4 pb-4 pt-2 border-t border-slate-50 mt-1 flex justify-between items-center">
                         <Link href="/contact">
-                          <span className="text-xs font-bold text-slate-900 hover:text-slate-600 flex items-center gap-1 cursor-pointer">
+                          <span className="text-xs font-black text-slate-950 hover:text-orange-600 flex items-center gap-1 cursor-pointer">
                             Request Details <ArrowRight className="w-3.5 h-3.5 text-orange-600" />
                           </span>
                         </Link>
@@ -934,9 +953,9 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
                 ].map((srv, idx) => {
                   const Icon = srv.icon;
                   return (
-                    <div key={idx} className="rounded-2xl border border-slate-150 bg-white overflow-hidden shadow-sm hover:shadow-md hover:border-blue-200 transition-all duration-300 flex flex-col justify-between">
+                    <div key={idx} className="rounded-2xl border border-slate-150 bg-white overflow-hidden shadow-[0_18px_45px_rgba(15,23,42,0.08)] hover:shadow-[0_24px_65px_rgba(15,23,42,0.14)] hover:border-blue-200 transition-all duration-300 flex flex-col justify-between">
                       <div>
-                        <div className="h-32 relative overflow-hidden bg-slate-900">
+                        <div className="h-40 relative overflow-hidden bg-slate-900">
                           <img src={srv.img} alt={srv.title} className="w-full h-full object-cover opacity-85" loading="lazy" onError={(e) => imageFallback(e, srv.fallback || "/assets/workflow-card.svg")} />
                           <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent"></div>
                           <div className="absolute bottom-3 left-4 flex items-center gap-2">
@@ -947,12 +966,12 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
                           </div>
                         </div>
                         <div className="p-4">
-                          <p className="text-sm text-slate-600 leading-relaxed">{srv.desc}</p>
+                          <p className="text-[15px] text-slate-700 leading-relaxed">{srv.desc}</p>
                         </div>
                       </div>
                       <div className="px-4 pb-4 pt-2 border-t border-slate-50 mt-1 flex justify-between items-center">
                         <Link href="/contact">
-                          <span className="text-xs font-bold text-slate-900 hover:text-slate-600 flex items-center gap-1 cursor-pointer">
+                          <span className="text-xs font-black text-slate-950 hover:text-orange-600 flex items-center gap-1 cursor-pointer">
                             Request Details <ArrowRight className="w-3.5 h-3.5 text-blue-600" />
                           </span>
                         </Link>
@@ -977,7 +996,7 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
           <div 
             className="relative py-14 px-6 bg-cover bg-center text-white space-y-4 shrink-0"
             style={{ 
-              backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.92)), url("https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1800&q=85")` 
+              backgroundImage: `linear-gradient(rgba(8, 15, 30, 0.82), rgba(8, 15, 30, 0.94)), url("https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1800&q=85")` 
             }}
           >
             <div className="relative z-10 space-y-2 max-w-2xl">
@@ -1023,7 +1042,7 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
                 ].map((cap, idx) => {
                   const Icon = cap.icon;
                   return (
-                    <div key={idx} className="rounded-xl border border-slate-150 bg-white overflow-hidden shadow-sm hover:shadow-md hover:border-orange-200 transition-all duration-300 flex flex-col justify-between">
+                    <div key={idx} className="rounded-xl border border-slate-150 bg-white overflow-hidden shadow-[0_18px_45px_rgba(15,23,42,0.08)] hover:shadow-[0_24px_65px_rgba(15,23,42,0.14)] hover:border-orange-200 transition-all duration-300 flex flex-col justify-between">
                       <div>
                         <div className="h-28 relative overflow-hidden bg-slate-900">
                           <img src={cap.img} alt={cap.title} className="w-full h-full object-cover opacity-85" loading="lazy" onError={(e) => imageFallback(e, cap.fallback || "/assets/workflow-card.svg")} />
@@ -1036,7 +1055,7 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
                           </div>
                         </div>
                         <div className="p-4">
-                          <p className="text-sm text-slate-600 leading-relaxed">{cap.desc}</p>
+                          <p className="text-[15px] text-slate-700 leading-relaxed">{cap.desc}</p>
                         </div>
                       </div>
                     </div>
@@ -1059,7 +1078,7 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
           <div 
             className="relative py-14 px-6 bg-cover bg-center text-white space-y-4 shrink-0"
             style={{ 
-              backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.92)), url("https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1800&q=85")` 
+              backgroundImage: `linear-gradient(rgba(8, 15, 30, 0.82), rgba(8, 15, 30, 0.94)), url("https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1800&q=85")` 
             }}
           >
             <div className="relative z-10 space-y-2 max-w-2xl">
@@ -1163,7 +1182,7 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
           <div 
             className="relative py-14 px-6 bg-cover bg-center text-white text-center space-y-3 shrink-0"
             style={{ 
-              backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.92)), url("https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1800&q=85")` 
+              backgroundImage: `linear-gradient(rgba(8, 15, 30, 0.82), rgba(8, 15, 30, 0.94)), url("https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1800&q=85")` 
             }}
           >
             <div className="relative z-10 space-y-2 max-w-2xl mx-auto">
@@ -1200,7 +1219,7 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
                   fallback: "/assets/workflow-card.svg"
                 }
               ].map((plr, idx) => (
-                <div key={idx} className="rounded-xl border border-slate-150 bg-white overflow-hidden shadow-sm hover:shadow-md hover:border-orange-200 transition-all duration-300 flex flex-col justify-between">
+                <div key={idx} className="rounded-xl border border-slate-150 bg-white overflow-hidden shadow-[0_18px_45px_rgba(15,23,42,0.08)] hover:shadow-[0_24px_65px_rgba(15,23,42,0.14)] hover:border-orange-200 transition-all duration-300 flex flex-col justify-between">
                   <div>
                     <div className="h-28 relative overflow-hidden bg-slate-900">
                       <img src={plr.img} alt={plr.title} className="w-full h-full object-cover opacity-85" loading="lazy" onError={(e) => imageFallback(e, plr.fallback || "/assets/workflow-card.svg")} />
@@ -1211,7 +1230,7 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
                       </div>
                     </div>
                     <div className="p-4">
-                      <p className="text-sm text-slate-600 leading-relaxed">{plr.desc}</p>
+                      <p className="text-[15px] text-slate-700 leading-relaxed">{plr.desc}</p>
                     </div>
                   </div>
                 </div>
@@ -1284,7 +1303,7 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
                         <Linkedin className="w-4 h-4" />
                       </a>
                     </div>
-                    <p className="text-sm text-slate-600 leading-relaxed pt-2.5 border-t border-slate-100">
+                    <p className="text-[15px] text-slate-700 leading-relaxed pt-2.5 border-t border-slate-100">
                       {mem.bio}
                     </p>
                   </div>
@@ -1334,12 +1353,12 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
               ].map((path, idx) => {
                 const Icon = path.icon;
                 return (
-                  <div key={idx} className="p-5 rounded-2xl border border-slate-100 bg-white shadow-sm hover:shadow-md hover:border-orange-200 transition-all space-y-3">
+                  <div key={idx} className="p-5 rounded-2xl border border-slate-100 bg-white shadow-[0_18px_45px_rgba(15,23,42,0.08)] hover:shadow-[0_24px_65px_rgba(15,23,42,0.14)] hover:border-orange-200 transition-all space-y-3">
                     <div className="w-10 h-10 rounded-xl bg-orange-50 text-orange-600 flex items-center justify-center border border-orange-100">
                       <Icon className="w-5 h-5" />
                     </div>
                     <h3 className="font-black text-sm text-slate-900">{path.title}</h3>
-                    <p className="text-sm text-slate-600 leading-relaxed">{path.desc}</p>
+                    <p className="text-[15px] text-slate-700 leading-relaxed">{path.desc}</p>
                   </div>
                 );
               })}
@@ -1535,7 +1554,7 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
                       <span className="font-bold text-slate-500">{art.author}</span>
                     </div>
                     <h3 className="font-black text-xs md:text-sm text-slate-900 hover:text-slate-700 cursor-pointer leading-snug">{art.title}</h3>
-                    <p className="text-sm text-slate-600 leading-relaxed">{art.desc}</p>
+                    <p className="text-[15px] text-slate-700 leading-relaxed">{art.desc}</p>
                   </div>
                   <div className="pt-3 border-t border-slate-50 mt-4">
                     <Link href="/blog"><span className="text-xs font-bold text-slate-900 cursor-pointer hover:underline">Read Article →</span></Link>
