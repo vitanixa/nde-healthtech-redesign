@@ -650,13 +650,12 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
         <div className="a-plus-site flex-1 flex flex-col bg-white text-slate-800">
           {renderHeader()}
           
-          {/* Compact Professional Hero Section */}
-          <section className="relative overflow-hidden bg-gradient-to-br from-white via-slate-50 to-blue-50 border-b border-slate-100 shrink-0">
-            <div className="absolute inset-y-0 right-0 w-1/2 bg-gradient-to-l from-blue-100/80 to-transparent pointer-events-none"></div>
-            <div className="absolute -top-24 -right-24 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
-            <div className="absolute -bottom-20 left-1/4 w-80 h-80 bg-orange-500/10 rounded-full blur-3xl"></div>
+          {/* Hero Section */}
+          <section className="relative overflow-hidden bg-white border-b border-slate-100 shrink-0">
+            {/* Subtle right-panel tint */}
+            <div className="absolute inset-y-0 right-0 w-5/12 bg-slate-50 pointer-events-none hidden lg:block"></div>
 
-            <div className="max-w-7xl mx-auto px-6 py-10 md:py-14 relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <div className="max-w-7xl mx-auto px-6 py-12 md:py-16 pb-16 relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
               {/* Left: Value Proposition */}
               <div className="lg:col-span-6 space-y-6 text-left">
                 <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white text-blue-800 text-[11px] font-black uppercase tracking-widest border border-blue-100 shadow-sm">
@@ -708,38 +707,43 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
                 </div>
               </div>
 
-              {/* Right: Enterprise Technology Visual */}
-              <div className="lg:col-span-6 relative">
-                <div className="relative rounded-[2rem] overflow-hidden border border-white shadow-[0_24px_80px_rgba(15,23,42,0.18)] bg-slate-900 min-h-[380px]">
-                  <img
-                    src="/assets/enterprise-hero.svg"
-                    alt="Healthcare cloud cybersecurity and enterprise infrastructure"
-                    className="absolute inset-0 w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-r from-slate-950/10 via-transparent to-slate-950/10"></div>
-
-                  <div className="absolute top-5 left-5 right-5 flex items-center justify-between gap-3">
-                    <div className="rounded-2xl bg-white/95 backdrop-blur-md border border-white/70 px-4 py-3 shadow-xl">
-                      <p className="text-[10px] font-black text-orange-600 uppercase tracking-widest">Federal Ready</p>
-                      <p className="text-xs font-black text-slate-950 mt-1">CAGE 209X4 • UEI G7YUFGEZBHP4</p>
-                    </div>
-                    <div className="hidden sm:flex rounded-2xl bg-blue-900/90 text-white backdrop-blur-md border border-blue-300/20 px-4 py-3 shadow-xl items-center gap-2">
-                      <ShieldCheck className="w-4 h-4 text-emerald-400" />
-                      <span className="text-xs font-black">Secure. Compliant. Scalable.</span>
-                    </div>
+              {/* Right: Professional Photo Collage */}
+              <div className="lg:col-span-6 relative hidden lg:block">
+                {/* Tall primary image */}
+                <div className="grid grid-cols-2 gap-3 h-[480px]">
+                  <div className="rounded-2xl overflow-hidden shadow-lg row-span-2">
+                    <img
+                      src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=800&q=80"
+                      alt="Healthcare IT professional at work"
+                      className="w-full h-full object-cover"
+                      fetchPriority="high"
+                    />
                   </div>
-
-                  <div className="absolute bottom-5 left-5 right-5 grid grid-cols-3 gap-3">
-                    {[
-                      ["HIPAA", "Healthcare safeguards"],
-                      ["NIST", "Risk alignment"],
-                      ["AWS", "Modern cloud"]
-                    ].map(([title, text]) => (
-                      <div key={title} className="rounded-2xl bg-slate-950/75 backdrop-blur-md border border-white/10 p-3 text-white shadow-xl">
-                        <p className="text-sm font-black">{title}</p>
-                        <p className="text-[10px] text-slate-300 font-semibold mt-0.5">{text}</p>
-                      </div>
-                    ))}
+                  <div className="rounded-2xl overflow-hidden shadow-lg">
+                    <img
+                      src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80"
+                      alt="Secure cloud infrastructure"
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div className="rounded-2xl overflow-hidden shadow-lg">
+                    <img
+                      src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80"
+                      alt="Data analytics and reporting"
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
+                {/* Floating credential badge */}
+                <div className="absolute -bottom-4 -left-4 bg-white rounded-2xl shadow-xl border border-slate-100 px-4 py-3 flex items-center gap-3">
+                  <div className="w-9 h-9 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center shrink-0">
+                    <ShieldCheck className="w-5 h-5 text-blue-700" />
+                  </div>
+                  <div>
+                    <p className="text-[10px] font-black text-orange-600 uppercase tracking-widest">SAM.gov Active</p>
+                    <p className="text-xs font-black text-slate-900 mt-0.5">CAGE 209X4 · UEI G7YUFGEZBHP4</p>
                   </div>
                 </div>
               </div>
