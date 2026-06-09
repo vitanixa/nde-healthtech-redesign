@@ -657,16 +657,16 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
             <div className="absolute -right-28 top-10 h-80 w-80 rounded-full bg-sky-400/10 blur-3xl" />
             <div className="absolute -left-24 bottom-0 h-72 w-72 rounded-full bg-blue-500/10 blur-3xl" />
 
-            <div className="relative z-10 max-w-7xl mx-auto px-6 py-14 md:py-18 lg:py-20 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+            <div className="relative z-10 max-w-7xl mx-auto px-6 py-12 md:py-16 lg:py-18 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
               {/* Left: Executive Value Proposition */}
-              <div className="lg:col-span-6 space-y-7 text-left">
+              <div className="lg:col-span-6 space-y-6 text-left">
                 <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/8 text-sky-200 text-[11px] font-black uppercase tracking-[0.24em] border border-white/12 shadow-[0_16px_40px_rgba(0,0,0,0.22)] backdrop-blur">
                   <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_0_5px_rgba(52,211,153,0.14)]"></span>
                   HEALTHCARE IT • FEDERAL • CLOUD • CYBERSECURITY
                 </div>
 
                 <div className="space-y-5">
-                  <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] leading-tight text-white font-sans">
+                  <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-[-0.03em] leading-tight text-white font-sans">
                     Healthcare IT & Federal Technology Solutions
                   </h1>
                   <p className="text-slate-200/88 text-base md:text-lg leading-8 max-w-2xl font-medium">
@@ -711,50 +711,85 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
 
               {/* Right: Premium Enterprise Visual */}
               <div className="lg:col-span-6 relative hidden lg:block">
-                <div className="relative ml-auto max-w-[560px] rounded-[2rem] border border-white/14 bg-white/[0.08] p-4 shadow-[0_30px_90px_rgba(0,0,0,0.34)] backdrop-blur-xl">
-                  <div className="rounded-[1.5rem] overflow-hidden border border-white/12 bg-slate-950">
-                    <div className="relative h-[390px]">
-                      <img
-                        src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=85"
-                        alt="Healthcare technology dashboard and analytics"
-                        className="w-full h-full object-cover opacity-90"
-                        fetchPriority="high"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/48 to-slate-900/10" />
-                      <div className="absolute inset-x-6 top-6 flex items-center justify-between">
-                        <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.22em] text-sky-200">
-                          <Activity className="w-4 h-4 text-emerald-300" /> Secure Operations View
+                <div className="relative ml-auto max-w-[560px] rounded-[2rem] border border-white/14 bg-white/[0.075] p-4 shadow-[0_30px_90px_rgba(0,0,0,0.34)] backdrop-blur-xl">
+                  <div className="rounded-[1.5rem] overflow-hidden border border-white/12 bg-[#061427]">
+                    <div className="relative h-[390px] p-6">
+                      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_18%,rgba(14,165,233,0.25),transparent_34%),linear-gradient(135deg,rgba(255,255,255,0.08)_0%,transparent_50%)]" />
+                      <div className="relative z-10 flex h-full flex-col">
+                        <div className="flex items-center justify-between border-b border-white/10 pb-4">
+                          <div>
+                            <p className="text-[10px] font-black uppercase tracking-[0.24em] text-sky-200">Secure operations command</p>
+                            <h2 className="mt-1 text-xl font-black tracking-tight text-white">Healthcare Technology Dashboard</h2>
+                          </div>
+                          <div className="rounded-full border border-emerald-300/20 bg-emerald-400/12 px-3 py-1 text-[10px] font-black uppercase tracking-wider text-emerald-200">Ready</div>
                         </div>
-                        <span className="rounded-full bg-emerald-400/14 px-3 py-1 text-[10px] font-black uppercase tracking-wider text-emerald-200 border border-emerald-300/20">Live Ready</span>
-                      </div>
-                      <div className="absolute bottom-6 left-6 right-6">
-                        <div className="grid grid-cols-3 gap-3 mb-4">
+
+                        <div className="mt-5 grid grid-cols-3 gap-3">
                           {[
                             ["HIPAA", "Compliance"],
-                            ["NIST", "Frameworks"],
+                            ["NIST", "Security"],
                             ["AWS", "Cloud Ops"]
                           ].map(([big, small]) => (
-                            <div key={big} className="rounded-2xl bg-white/10 border border-white/12 p-4 backdrop-blur-md">
-                              <p className="text-2xl font-black text-white leading-none">{big}</p>
+                            <div key={big} className="rounded-2xl border border-white/10 bg-white/[0.08] p-4 shadow-[0_18px_45px_rgba(0,0,0,0.20)] backdrop-blur-md">
+                              <p className="text-2xl font-black leading-none text-white">{big}</p>
                               <p className="mt-1 text-[10px] font-bold uppercase tracking-wide text-slate-300">{small}</p>
                             </div>
                           ))}
                         </div>
-                        <div className="rounded-2xl bg-white/12 border border-white/14 p-5 backdrop-blur-md">
-                          <p className="text-[11px] font-black uppercase tracking-[0.24em] text-sky-200">Enterprise consulting platform</p>
-                          <h2 className="mt-2 text-2xl font-black tracking-tight text-white">Secure modernization for clinical and mission-critical environments.</h2>
+
+                        <div className="mt-5 grid flex-1 grid-cols-5 gap-4">
+                          <div className="col-span-3 rounded-3xl border border-white/10 bg-white/[0.07] p-5 backdrop-blur-md">
+                            <div className="mb-4 flex items-center justify-between">
+                              <p className="text-xs font-black uppercase tracking-[0.2em] text-sky-200">Infrastructure Health</p>
+                              <Activity className="h-4 w-4 text-emerald-300" />
+                            </div>
+                            <div className="space-y-3">
+                              {[
+                                ["Cloud workloads", "92%"],
+                                ["Security posture", "98%"],
+                                ["Clinical systems", "95%"]
+                              ].map(([label, value]) => (
+                                <div key={label}>
+                                  <div className="mb-1 flex items-center justify-between text-[11px] font-bold text-slate-300">
+                                    <span>{label}</span><span className="text-white">{value}</span>
+                                  </div>
+                                  <div className="h-2 overflow-hidden rounded-full bg-white/10">
+                                    <div className="h-full rounded-full bg-gradient-to-r from-sky-400 to-emerald-300" style={{ width: value }} />
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+                            <div className="mt-5 rounded-2xl border border-sky-300/15 bg-sky-400/10 p-4">
+                              <p className="text-[11px] font-black uppercase tracking-[0.2em] text-sky-200">Modernization Focus</p>
+                              <p className="mt-2 text-sm font-semibold leading-6 text-white/90">Secure cloud, clinical workflow optimization, and compliant systems engineering for mission-critical organizations.</p>
+                            </div>
+                          </div>
+
+                          <div className="col-span-2 space-y-3">
+                            {[
+                              [ShieldCheck, "Security", "Zero Trust"],
+                              [HeartPulse, "Healthcare", "EHR Ready"],
+                              [Cloud, "Cloud", "Scalable"]
+                            ].map(([Icon, title, detail]: any) => (
+                              <div key={title} className="rounded-2xl border border-white/10 bg-white/[0.075] p-4 backdrop-blur-md">
+                                <Icon className="h-5 w-5 text-sky-300" />
+                                <p className="mt-3 text-sm font-black text-white">{title}</p>
+                                <p className="text-[11px] font-semibold text-slate-300">{detail}</p>
+                              </div>
+                            ))}
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div className="absolute -bottom-5 -left-1 bg-white text-slate-950 rounded-2xl shadow-[0_20px_55px_rgba(0,0,0,0.26)] border border-slate-100 px-5 py-4 flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-sky-50 border border-sky-100 flex items-center justify-center shrink-0">
-                    <ShieldCheck className="w-5 h-5 text-sky-700" />
+                <div className="absolute -bottom-5 -left-1 flex items-center gap-3 rounded-2xl border border-slate-100 bg-white px-5 py-4 text-slate-950 shadow-[0_20px_55px_rgba(0,0,0,0.26)]">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-sky-100 bg-sky-50">
+                    <ShieldCheck className="h-5 w-5 text-sky-700" />
                   </div>
                   <div>
-                    <p className="text-[10px] font-black text-sky-700 uppercase tracking-widest">SAM.gov Active</p>
-                    <p className="text-xs font-black text-slate-900 mt-0.5">CAGE 209X4 · UEI G7YUFGEZBHP4</p>
+                    <p className="text-[10px] font-black uppercase tracking-widest text-sky-700">SAM.gov Active</p>
+                    <p className="mt-0.5 text-xs font-black text-slate-900">CAGE 209X4 · UEI G7YUFGEZBHP4</p>
                   </div>
                 </div>
               </div>
