@@ -666,7 +666,7 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
                 </div>
 
                 <div className="space-y-5">
-                  <h1 className="text-4xl md:text-6xl lg:text-7xl font-black tracking-[-0.055em] leading-[0.96] text-white font-sans">
+                  <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] leading-tight text-white font-sans">
                     Healthcare IT & Federal Technology Solutions
                   </h1>
                   <p className="text-slate-200/88 text-base md:text-lg leading-8 max-w-2xl font-medium">
@@ -677,12 +677,12 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
                 <div className="flex flex-wrap gap-3">
                   <Link href="/contact">
                     <span className="inline-flex items-center justify-center bg-sky-400 text-slate-950 text-sm font-black px-6 py-3.5 rounded-xl shadow-[0_18px_36px_rgba(14,165,233,0.26)] hover:bg-sky-300 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 cursor-pointer">
-                      Schedule a Free Consultation <ArrowRight className="w-4 h-4 ml-2" />
+                      Schedule Consultation <ArrowRight className="w-4 h-4 ml-2" />
                     </span>
                   </Link>
                   <Link href="/services">
                     <span className="inline-flex items-center justify-center bg-white/7 text-white text-sm font-black px-6 py-3.5 rounded-xl border border-white/16 hover:border-sky-300/60 hover:bg-white/10 transition-all duration-200 cursor-pointer backdrop-blur">
-                      Explore Services <ArrowRight className="w-4 h-4 ml-2" />
+                      View Capabilities <ArrowRight className="w-4 h-4 ml-2" />
                     </span>
                   </Link>
                 </div>
@@ -717,7 +717,7 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
                       <img
                         src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=85"
                         alt="Healthcare technology dashboard and analytics"
-                        className="w-full h-full object-cover opacity-72"
+                        className="w-full h-full object-cover opacity-90"
                         fetchPriority="high"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/48 to-slate-900/10" />
