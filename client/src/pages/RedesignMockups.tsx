@@ -610,10 +610,10 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
                   <Shield className="w-3.5 h-3.5 text-orange-500" /> Clinical Precision & Enterprise Security
                 </div>
                 <h1 className="text-3xl md:text-5xl font-black tracking-tight leading-tight text-white">
-                  Securing Healthcare IT & Enterprise Infrastructure
+                  Technology Solutions for Healthcare, Government & Enterprise
                 </h1>
                 <p className="text-slate-300 text-xs md:text-sm leading-relaxed max-w-xl">
-                  Enterprise-grade consulting, secure cloud engineering, and cybersecurity safeguards designed specifically for healthcare environments and federal compliance.
+                  Enterprise-grade consulting, cloud engineering, cybersecurity, DevOps, healthcare IT, and infrastructure solutions designed to help organizations innovate securely and scale confidently.
                 </p>
                 
                 {/* Value Pillars Badges */}
@@ -680,7 +680,7 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
               {/* Category A: Clinical Health IT Solutions - Rebuilt with premium imagery */}
               <div className="rounded-2xl border border-slate-200 bg-white overflow-hidden shadow-[0_18px_45px_rgba(15,23,42,0.08)] hover:shadow-[0_24px_65px_rgba(15,23,42,0.14)] hover:border-orange-200 transition-all duration-300 flex flex-col justify-between">
                 <div>
@@ -773,7 +773,7 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
               </p>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto">
               {/* Review 1: Caleb (Commercial success) */}
               <div className="p-6 rounded-2xl border border-slate-100 bg-white space-y-4 shadow-sm flex flex-col justify-between">
                 <p className="text-[11px] md:text-xs font-medium italic text-slate-600 leading-relaxed">
@@ -1011,7 +1011,7 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
           </div>
 
           {/* Technical Specifications */}
-          <div className="py-10 px-6 space-y-8 max-w-4xl mx-auto w-full">
+          <div className="py-10 px-6 space-y-8 max-w-6xl mx-auto w-full">
             <div className="space-y-5">
               <h3 className="font-black text-xs text-slate-900 uppercase tracking-widest border-b border-slate-100 pb-3">
                 Clinical Technology Capabilities
@@ -1093,7 +1093,7 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
           </div>
 
           {/* Federal Registration details */}
-          <div className="py-10 px-6 space-y-8 max-w-4xl mx-auto w-full">
+          <div className="py-10 px-6 space-y-8 max-w-6xl mx-auto w-full">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* SAM.gov Card */}
               <div className="p-6 rounded-2xl border border-slate-200 bg-white space-y-4 shadow-sm flex flex-col justify-between">
@@ -1197,7 +1197,7 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
           </div>
 
           {/* Core Pillars */}
-          <div className="py-10 px-6 space-y-6 max-w-4xl mx-auto w-full">
+          <div className="py-10 px-6 space-y-6 max-w-6xl mx-auto w-full">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {[
                 { 
@@ -1259,27 +1259,34 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
           </div>
 
           {/* Team Members with Bios */}
-          <div className="py-10 px-6 space-y-6 max-w-4xl mx-auto w-full">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="py-10 px-6 space-y-6 max-w-6xl mx-auto w-full">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {[
                 { 
                   name: "Alexis Nde", 
                   role: "DevOps & Security Engineer", 
-                  bio: "Alexis specializes in secure cloud architecture and DevOps automation. He oversees technical compliance and infrastructure security.", 
+                  bio: "Alexis specializes in secure cloud architecture, DevOps automation, infrastructure modernization, and technical compliance for healthcare and enterprise environments.", 
                   img: "/team/alexis.jpeg",
                   linkedin: "https://www.linkedin.com/company/123453939/"
                 },
                 { 
                   name: "Nicoline Nde", 
-                  role: "Health Informatics & DevSecOps", 
-                  bio: "Nicoline combines a background in healthcare administration with clinical informatics. She maps technical systems directly to nursing and physician workflows.", 
+                  role: "Health Informatics & Operations", 
+                  bio: "Nicoline combines healthcare administration, informatics, finance, and operational governance to align technical systems with clinical and business workflows.", 
                   img: "/team/nicoline.jpeg",
                   linkedin: "https://www.linkedin.com/company/123453939/"
                 },
                 { 
-                  name: "Abbi Stephen", 
+                  name: "Abby Stephen", 
                   role: "Cloud Engineer & Health IT", 
-                  bio: "Abbi focuses on secure database migrations and clinical systems support, ensuring seamless database performance and zero downtime.", 
+                  bio: "Abby supports secure cloud operations, technical implementation, and health IT modernization initiatives across enterprise and clinical environments.", 
+                  img: "/team/abby-stock.jpeg",
+                  linkedin: "https://www.linkedin.com/company/123453939/"
+                },
+                { 
+                  name: "Belinda Nkembo", 
+                  role: "Security Engineer", 
+                  bio: "Belinda focuses on security operations, risk awareness, endpoint protection, and safeguards that support HIPAA-aligned and enterprise security programs.", 
                   img: "/team/abby.jpeg",
                   linkedin: "https://www.linkedin.com/company/123453939/"
                 }
@@ -1405,7 +1412,7 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
           </div>
 
           {/* Contact Details & Lead Qualifying Form */}
-          <div className="py-12 px-6 space-y-8 max-w-4xl mx-auto w-full">
+          <div className="py-12 px-6 space-y-8 max-w-6xl mx-auto w-full">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {/* Qualified Lead Form */}
               <div className="p-6 rounded-2xl border border-slate-200 bg-white space-y-4 shadow-sm">
@@ -1541,7 +1548,7 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
           </div>
 
           {/* Cleaned up articles */}
-          <div className="py-12 px-6 space-y-6 max-w-4xl mx-auto w-full">
+          <div className="py-12 px-6 space-y-6 max-w-6xl mx-auto w-full">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {[
                 { title: "The Benefits of Using Managed IT Services in Healthcare", date: "April 24, 2026", author: "Nicoline Nde, Health Informatics", desc: "How medical clinics and healthcare providers reduce technical downtime and optimize patient charting workflows through proactive technical monitoring." },
