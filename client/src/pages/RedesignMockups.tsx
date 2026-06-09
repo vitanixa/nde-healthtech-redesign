@@ -512,7 +512,7 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
 
   const renderHeader = () => (
     <header className="bg-white/90 backdrop-blur-xl border-b border-slate-200/70 text-slate-900 sticky top-0 z-50 shadow-[0_8px_30px_rgba(15,23,42,0.08)] shrink-0">
-      <div className="px-4 md:px-6 h-[72px] flex justify-between items-center max-w-7xl mx-auto">
+      <div className="px-4 md:px-6 h-[76px] flex justify-between items-center max-w-7xl mx-auto">
         <Link href="/">
           <div className="flex items-center gap-3 min-w-0 cursor-pointer" onClick={() => setMobileMenuOpen(false)}>
             <img 
@@ -524,7 +524,7 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
             />
             <div className="leading-none min-w-0">
               <span className="font-black text-base md:text-lg tracking-[-0.04em] text-slate-950 block whitespace-nowrap">NDE HealthTech</span>
-              <span className="text-[9px] md:text-[10px] font-black text-orange-600 uppercase tracking-[0.24em] block mt-1.5">Solutions</span>
+              <span className="text-[9px] md:text-[10px] font-black text-sky-600 uppercase tracking-[0.24em] block mt-1.5">Solutions</span>
             </div>
           </div>
         </Link>
@@ -536,15 +536,15 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
               const active = pageId === link.id;
               return (
                 <Link key={link.href} href={link.href}>
-                  <span className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-2 transition-all cursor-pointer border ${active ? 'bg-slate-950 text-white border-slate-950 shadow-[0_10px_25px_rgba(15,23,42,0.18)]' : 'bg-white text-slate-600 border-transparent hover:border-slate-200 hover:bg-slate-50 hover:text-slate-950 hover:shadow-sm'}`}>
-                    <Icon className={`w-3.5 h-3.5 ${active ? 'text-orange-400' : 'text-orange-500'}`} />
+                  <span className={`inline-flex items-center gap-1.5 rounded-full px-3 py-2 transition-all cursor-pointer border ${active ? 'bg-slate-950 text-white border-slate-950 shadow-[0_10px_25px_rgba(15,23,42,0.18)]' : 'bg-white text-slate-600 border-transparent hover:border-slate-200 hover:bg-slate-50 hover:text-slate-950 hover:shadow-sm'}`}>
+                    <Icon className={`w-3.5 h-3.5 ${active ? 'text-sky-300' : 'text-sky-600'}`} />
                     {link.label}
                   </span>
                 </Link>
               );
             })}
             <Link href="/contact">
-              <button className="ml-1 bg-orange-600 text-white text-[11px] px-4 py-2.5 rounded-full font-black hover:bg-orange-500 transition-all shadow-[0_12px_24px_rgba(234,88,12,0.25)] cursor-pointer">
+              <button className="ml-1 bg-slate-950 text-white text-[11px] px-4 py-2.5 rounded-full font-black hover:bg-slate-800 transition-all shadow-[0_12px_24px_rgba(15,23,42,0.22)] cursor-pointer">
                 Schedule Consultation
               </button>
             </Link>
@@ -573,8 +573,8 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
                     onClick={() => setMobileMenuOpen(false)}
                     className={`flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-black transition-colors ${pageId === link.id ? 'bg-slate-950 text-white shadow-lg' : 'text-slate-800 hover:bg-slate-50 border border-slate-100'}`}
                   >
-                    <span className="w-9 h-9 rounded-xl bg-orange-50 flex items-center justify-center border border-orange-100 shrink-0">
-                      <Icon className="w-4.5 h-4.5 text-orange-600" />
+                    <span className="w-9 h-9 rounded-xl bg-sky-50 flex items-center justify-center border border-sky-100 shrink-0">
+                      <Icon className="w-4.5 h-4.5 text-sky-700" />
                     </span>
                     {link.label}
                   </span>
@@ -584,7 +584,7 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
             <Link href="/contact">
               <span
                 onClick={() => setMobileMenuOpen(false)}
-                className="mt-2 block rounded-2xl px-4 py-3 text-sm font-black text-center bg-orange-600 text-white shadow-[0_12px_24px_rgba(234,88,12,0.25)]"
+                className="mt-2 block rounded-2xl px-4 py-3 text-sm font-black text-center bg-slate-950 text-white shadow-[0_12px_24px_rgba(15,23,42,0.25)]"
               >
                 Schedule Consultation
               </span>
@@ -597,7 +597,7 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
 
   // Global Footer Redesign
   const renderFooter = () => (
-    <div className="bg-slate-950 text-slate-400 py-12 px-6 border-t border-slate-900 text-[11px] space-y-6 shrink-0 mt-auto">
+    <div className="bg-slate-950 text-slate-400 py-10 px-6 border-t border-slate-900 text-[11px] space-y-6 shrink-0 mt-auto">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
         <div className="flex items-center gap-2.5 min-w-0">
           <img 
@@ -651,55 +651,57 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
           {renderHeader()}
           
           {/* Hero Section */}
-          <section className="relative overflow-hidden bg-white border-b border-slate-100 shrink-0">
-            {/* Subtle right-panel tint */}
-            <div className="absolute inset-y-0 right-0 w-5/12 bg-slate-50 pointer-events-none hidden lg:block"></div>
+          <section className="relative overflow-hidden bg-[#071B33] text-white shrink-0">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_15%,rgba(14,165,233,0.28),transparent_34%),radial-gradient(circle_at_78%_12%,rgba(59,130,246,0.18),transparent_30%),linear-gradient(135deg,#071B33_0%,#0B2545_48%,#102F55_100%)]" />
+            <div className="absolute inset-0 opacity-[0.14] bg-[linear-gradient(rgba(255,255,255,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.08)_1px,transparent_1px)] bg-[size:44px_44px]" />
+            <div className="absolute -right-28 top-10 h-80 w-80 rounded-full bg-sky-400/10 blur-3xl" />
+            <div className="absolute -left-24 bottom-0 h-72 w-72 rounded-full bg-blue-500/10 blur-3xl" />
 
-            <div className="max-w-7xl mx-auto px-6 py-16 md:py-20 lg:py-24 relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 xl:gap-16 items-center">
-              {/* Left: Value Proposition */}
-              <div className="lg:col-span-6 space-y-6 text-left">
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white text-blue-800 text-[11px] font-black uppercase tracking-widest border border-blue-100 shadow-sm">
-                  <span className="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_0_4px_rgba(16,185,129,0.12)]"></span>
-                  SAM.gov Active Federal Contractor
+            <div className="relative z-10 max-w-7xl mx-auto px-6 py-14 md:py-18 lg:py-20 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+              {/* Left: Executive Value Proposition */}
+              <div className="lg:col-span-6 space-y-7 text-left">
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/8 text-sky-200 text-[11px] font-black uppercase tracking-[0.24em] border border-white/12 shadow-[0_16px_40px_rgba(0,0,0,0.22)] backdrop-blur">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_0_5px_rgba(52,211,153,0.14)]"></span>
+                  Healthcare IT • Cloud • Cybersecurity
                 </div>
 
-                <div className="space-y-4">
-                  <h1 className="text-4xl md:text-6xl font-black tracking-tight leading-[1.03] text-slate-950 max-w-3xl">
-                    Technology Solutions for <span className="text-blue-800">Healthcare</span>, <span className="text-orange-600">Government</span> & Enterprise
+                <div className="space-y-5">
+                  <h1 className="text-4xl md:text-6xl lg:text-7xl font-black tracking-[-0.055em] leading-[0.96] text-white font-sans">
+                    Technology That Improves Healthcare, Strengthens Security, and Accelerates Growth
                   </h1>
-                  <p className="text-slate-600 text-base md:text-lg leading-relaxed max-w-2xl font-medium">
-                    From healthcare IT and cloud engineering to cybersecurity, DevOps, and digital transformation, we help organizations build secure, scalable, and future-ready technology environments.
+                  <p className="text-slate-200/88 text-base md:text-lg leading-8 max-w-2xl font-medium">
+                    NDE HealthTech Solutions helps healthcare organizations, government agencies, and enterprise teams modernize infrastructure, secure critical systems, and build scalable cloud-ready environments.
                   </p>
                 </div>
 
                 <div className="flex flex-wrap gap-3">
                   <Link href="/contact">
-                    <span className="inline-flex items-center justify-center bg-blue-800 text-white text-sm font-black px-7 py-4 rounded-xl shadow-lg shadow-blue-900/20 hover:bg-blue-900 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 cursor-pointer">
+                    <span className="inline-flex items-center justify-center bg-sky-400 text-slate-950 text-sm font-black px-6 py-3.5 rounded-xl shadow-[0_18px_36px_rgba(14,165,233,0.26)] hover:bg-sky-300 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 cursor-pointer">
                       Schedule a Free Consultation <ArrowRight className="w-4 h-4 ml-2" />
                     </span>
                   </Link>
-                  <Link href="/federal">
-                    <span className="inline-flex items-center justify-center bg-white text-blue-900 text-sm font-black px-7 py-4 rounded-xl border border-blue-200 hover:border-blue-400 hover:bg-blue-50 transition-all duration-200 cursor-pointer">
-                      View Federal Capabilities <ArrowRight className="w-4 h-4 ml-2" />
+                  <Link href="/services">
+                    <span className="inline-flex items-center justify-center bg-white/7 text-white text-sm font-black px-6 py-3.5 rounded-xl border border-white/16 hover:border-sky-300/60 hover:bg-white/10 transition-all duration-200 cursor-pointer backdrop-blur">
+                      Explore Services <ArrowRight className="w-4 h-4 ml-2" />
                     </span>
                   </Link>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
                   {[
-                    { icon: HeartPulse, title: "Healthcare IT", text: "EHR, Informatics & Workflows" },
-                    { icon: Cloud, title: "Cloud & DevOps", text: "AWS, Automation & Infrastructure" },
-                    { icon: ShieldCheck, title: "Cybersecurity", text: "HIPAA, NIST & Zero Trust" }
+                    { icon: HeartPulse, title: "Healthcare IT", text: "EHR, informatics, workflows" },
+                    { icon: Cloud, title: "Cloud Engineering", text: "AWS, automation, infrastructure" },
+                    { icon: ShieldCheck, title: "Security First", text: "HIPAA, NIST, Zero Trust" }
                   ].map((item, idx) => {
                     const Icon = item.icon;
                     return (
-                      <div key={idx} className="flex items-start gap-3 rounded-2xl bg-white/90 border border-slate-200 p-4 shadow-sm">
-                        <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center shrink-0 border border-blue-100">
-                          <Icon className="w-5 h-5 text-blue-800" />
+                      <div key={idx} className="flex items-start gap-3 rounded-2xl bg-white/[0.075] border border-white/12 p-3.5 shadow-[0_18px_40px_rgba(0,0,0,0.18)] backdrop-blur">
+                        <div className="w-10 h-10 rounded-xl bg-sky-400/12 flex items-center justify-center shrink-0 border border-sky-300/20">
+                          <Icon className="w-5 h-5 text-sky-300" />
                         </div>
                         <div>
-                          <p className="text-xs font-black text-slate-950">{item.title}</p>
-                          <p className="text-[11px] text-slate-500 font-semibold leading-snug mt-0.5">{item.text}</p>
+                          <p className="text-xs font-black text-white">{item.title}</p>
+                          <p className="text-[11px] text-slate-300 font-semibold leading-snug mt-0.5">{item.text}</p>
                         </div>
                       </div>
                     );
@@ -707,42 +709,51 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
                 </div>
               </div>
 
-              {/* Right: Professional Photo Collage */}
+              {/* Right: Premium Enterprise Visual */}
               <div className="lg:col-span-6 relative hidden lg:block">
-                {/* Tall primary image */}
-                <div className="grid grid-cols-2 gap-4 h-[500px]">
-                  <div className="rounded-[1.35rem] overflow-hidden shadow-lg row-span-2">
-                    <img
-                      src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=800&q=80"
-                      alt="Healthcare IT professional at work"
-                      className="w-full h-full object-cover"
-                      fetchPriority="high"
-                    />
-                  </div>
-                  <div className="rounded-[1.35rem] overflow-hidden shadow-lg">
-                    <img
-                      src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80"
-                      alt="Secure cloud infrastructure"
-                      className="w-full h-full object-cover"
-                      loading="lazy"
-                    />
-                  </div>
-                  <div className="rounded-[1.35rem] overflow-hidden shadow-lg">
-                    <img
-                      src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80"
-                      alt="Data analytics and reporting"
-                      className="w-full h-full object-cover"
-                      loading="lazy"
-                    />
+                <div className="relative ml-auto max-w-[560px] rounded-[2rem] border border-white/14 bg-white/[0.08] p-4 shadow-[0_30px_90px_rgba(0,0,0,0.34)] backdrop-blur-xl">
+                  <div className="rounded-[1.5rem] overflow-hidden border border-white/12 bg-slate-950">
+                    <div className="relative h-[390px]">
+                      <img
+                        src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=85"
+                        alt="Healthcare technology dashboard and analytics"
+                        className="w-full h-full object-cover opacity-72"
+                        fetchPriority="high"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/48 to-slate-900/10" />
+                      <div className="absolute inset-x-6 top-6 flex items-center justify-between">
+                        <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.22em] text-sky-200">
+                          <Activity className="w-4 h-4 text-emerald-300" /> Secure Operations View
+                        </div>
+                        <span className="rounded-full bg-emerald-400/14 px-3 py-1 text-[10px] font-black uppercase tracking-wider text-emerald-200 border border-emerald-300/20">Live Ready</span>
+                      </div>
+                      <div className="absolute bottom-6 left-6 right-6">
+                        <div className="grid grid-cols-3 gap-3 mb-4">
+                          {[
+                            ["HIPAA", "Compliance"],
+                            ["NIST", "Frameworks"],
+                            ["AWS", "Cloud Ops"]
+                          ].map(([big, small]) => (
+                            <div key={big} className="rounded-2xl bg-white/10 border border-white/12 p-4 backdrop-blur-md">
+                              <p className="text-2xl font-black text-white leading-none">{big}</p>
+                              <p className="mt-1 text-[10px] font-bold uppercase tracking-wide text-slate-300">{small}</p>
+                            </div>
+                          ))}
+                        </div>
+                        <div className="rounded-2xl bg-white/12 border border-white/14 p-5 backdrop-blur-md">
+                          <p className="text-[11px] font-black uppercase tracking-[0.24em] text-sky-200">Enterprise consulting platform</p>
+                          <h2 className="mt-2 text-2xl font-black tracking-tight text-white">Secure modernization for clinical and mission-critical environments.</h2>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
-                {/* Floating credential badge */}
-                <div className="absolute -bottom-5 -left-5 bg-white rounded-2xl shadow-xl border border-slate-100 px-4 py-3 flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center shrink-0">
-                    <ShieldCheck className="w-5 h-5 text-blue-700" />
+                <div className="absolute -bottom-5 -left-1 bg-white text-slate-950 rounded-2xl shadow-[0_20px_55px_rgba(0,0,0,0.26)] border border-slate-100 px-5 py-4 flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-sky-50 border border-sky-100 flex items-center justify-center shrink-0">
+                    <ShieldCheck className="w-5 h-5 text-sky-700" />
                   </div>
                   <div>
-                    <p className="text-[10px] font-black text-orange-600 uppercase tracking-widest">SAM.gov Active</p>
+                    <p className="text-[10px] font-black text-sky-700 uppercase tracking-widest">SAM.gov Active</p>
                     <p className="text-xs font-black text-slate-900 mt-0.5">CAGE 209X4 · UEI G7YUFGEZBHP4</p>
                   </div>
                 </div>
@@ -750,8 +761,8 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
             </div>
 
             {/* Trust Bar */}
-            <div className="max-w-7xl mx-auto px-6 pb-10 relative z-10">
-              <div className="rounded-2xl bg-white border border-slate-200 shadow-[0_16px_45px_rgba(15,23,42,0.08)] px-6 py-5 grid grid-cols-2 md:grid-cols-5 gap-4 items-center">
+            <div className="relative z-10 max-w-7xl mx-auto px-6 pb-8 md:pb-10">
+              <div className="rounded-2xl bg-white/[0.075] border border-white/12 shadow-[0_20px_70px_rgba(0,0,0,0.22)] px-5 py-4 grid grid-cols-2 md:grid-cols-5 gap-4 items-center backdrop-blur-xl">
                 {[
                   ["Active", "SAM.gov Registered"],
                   ["209X4", "CAGE Code"],
@@ -759,9 +770,9 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
                   ["HIPAA", "Healthcare Compliance"],
                   ["NIST", "Security Frameworks"]
                 ].map(([big, small]) => (
-                  <div key={small} className="text-center md:border-r md:last:border-r-0 border-slate-100">
-                    <p className="text-lg font-black text-blue-900 leading-none">{big}</p>
-                    <p className="text-[11px] text-slate-500 font-bold mt-1 uppercase tracking-wide">{small}</p>
+                  <div key={small} className="text-center md:border-r md:last:border-r-0 border-white/10">
+                    <p className="text-lg font-black text-white leading-none">{big}</p>
+                    <p className="text-[11px] text-slate-300 font-bold mt-1 uppercase tracking-wide">{small}</p>
                   </div>
                 ))}
               </div>
@@ -769,18 +780,18 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
           </section>
 
           {/* Premium Categorized Core Solutions Grid - High-Fidelity Modern Light Design with Custom Images */}
-          <div className="py-16 px-6 space-y-10 bg-slate-50 relative border-y border-slate-100">
+          <div className="py-10 px-6 space-y-8 bg-slate-50 relative border-y border-slate-100">
             <div className="text-center space-y-2 max-w-xl mx-auto">
-              <span className="text-xs font-black text-orange-600 uppercase tracking-widest">Consulting Excellence</span>
-              <h2 className="text-3xl md:text-4xl font-black text-slate-900 tracking-tight leading-tight">
-                Our Dual-Force Capabilities
+              <span className="text-xs font-black text-sky-700 uppercase tracking-widest">Consulting Excellence</span>
+              <h2 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight leading-tight">
+                Core Consulting Capabilities
               </h2>
-              <p className="text-slate-600 text-sm leading-relaxed max-w-2xl mx-auto">
-                Specialized Clinical Health IT combined with robust, enterprise-grade General IT Infrastructure & Security.
+              <p className="text-slate-500 text-xs leading-relaxed max-w-md mx-auto">
+                Healthcare IT, cloud engineering, cybersecurity, and infrastructure consulting delivered with enterprise standards.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10 max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
               {/* Category A: Clinical Health IT Solutions - Rebuilt with premium imagery */}
               <div className="rounded-2xl border border-slate-200 bg-white overflow-hidden shadow-[0_18px_45px_rgba(15,23,42,0.08)] hover:shadow-[0_24px_65px_rgba(15,23,42,0.14)] hover:border-orange-200 transition-all duration-300 flex flex-col justify-between">
                 <div>
@@ -804,17 +815,17 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
                   </div>
 
                   {/* Service Items */}
-                  <div className="p-6 space-y-5">
+                  <div className="p-5 space-y-4">
                     {[
                       { title: "Clinical Informatics & EHR Support", desc: "Expert HL7/FHIR compliant support for Epic, Cerner, and eClinicalWorks to optimize clinical workflows." },
                       { title: "System & Software Integrations", desc: "Aligning technical systems directly with nursing and physician pathways to prevent charting friction." },
                       { title: "Health IT Consulting & Strategy", desc: "Strategic advisory on software selections, database design, and HIPAA regulatory compliance frameworks." }
                     ].map((srv, idx) => (
-                      <div key={idx} className="space-y-1 hover:bg-slate-50 p-3 rounded-xl transition-colors duration-200">
+                      <div key={idx} className="space-y-1 hover:bg-slate-50 p-2.5 rounded-xl transition-colors duration-200">
                         <h4 className="font-extrabold text-xs text-slate-900 flex items-center gap-2">
                           <span className="w-1.5 h-1.5 bg-orange-600 rounded-full"></span> {srv.title}
                         </h4>
-                        <p className="text-sm text-slate-600 leading-relaxed pl-3.5">{srv.desc}</p>
+                        <p className="text-[15px] text-slate-700 leading-relaxed pl-3.5">{srv.desc}</p>
                       </div>
                     ))}
                   </div>
@@ -844,17 +855,17 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
                   </div>
 
                   {/* Service Items */}
-                  <div className="p-6 space-y-5">
+                  <div className="p-5 space-y-4">
                     {[
                       { title: "Managed Helpdesk Support (24/7)", desc: "Proactive network administration, troubleshooting, and continuous systems monitoring to eliminate downtime." },
                       { title: "Cloud & Infrastructure Engineering", desc: "Secure clinical cloud migrations, server virtualization, and robust database administration." },
                       { title: "Cybersecurity & Risk Safeguards", desc: "Advanced threat detection, penetration testing, and compliance configurations protecting networks." }
                     ].map((srv, idx) => (
-                      <div key={idx} className="space-y-1 hover:bg-slate-50 p-3 rounded-xl transition-colors duration-200">
+                      <div key={idx} className="space-y-1 hover:bg-slate-50 p-2.5 rounded-xl transition-colors duration-200">
                         <h4 className="font-extrabold text-xs text-slate-900 flex items-center gap-2">
                           <span className="w-1.5 h-1.5 bg-blue-600 rounded-full"></span> {srv.title}
                         </h4>
-                        <p className="text-sm text-slate-600 leading-relaxed pl-3.5">{srv.desc}</p>
+                        <p className="text-[15px] text-slate-700 leading-relaxed pl-3.5">{srv.desc}</p>
                       </div>
                     ))}
                   </div>
@@ -864,16 +875,16 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
           </div>
 
           {/* Professional Reviews & Testimonials Section - Tightened Spacing */}
-          <div className="bg-white py-14 px-6 border-y border-slate-100 space-y-6 shrink-0">
+          <div className="bg-slate-50 py-10 px-6 border-y border-slate-100 space-y-6 shrink-0">
             <div className="text-center space-y-2 max-w-lg mx-auto">
-              <span className="text-xs font-black text-orange-600 uppercase tracking-widest">Client Feedback</span>
+              <span className="text-xs font-black text-sky-700 uppercase tracking-widest">Client Feedback</span>
               <h2 className="text-xl md:text-2xl font-black text-slate-900">What Our Clients Say</h2>
               <p className="text-slate-500 text-xs leading-relaxed">
                 Professional testimonials demonstrating our commitment to secure, reliable, and compliant healthcare and commercial IT operations.
               </p>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-7 max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto">
               {/* Review 1: Caleb (Commercial success) */}
               <div className="p-6 rounded-2xl border border-slate-100 bg-white space-y-4 shadow-sm flex flex-col justify-between">
                 <p className="text-[11px] md:text-xs font-medium italic text-slate-600 leading-relaxed">
@@ -907,7 +918,7 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
                     <h4 className="font-black text-xs text-slate-900">Clinical Practice Client</h4>
                     <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest mt-0.5">DFW Metroplex, Texas</p>
                   </div>
-                  <span className="text-[10px] px-2 py-0.5 rounded bg-orange-50 text-orange-600 font-bold border border-orange-100 uppercase tracking-wider">Healthcare IT</span>
+                  <span className="text-[10px] px-2 py-0.5 rounded bg-orange-50 text-sky-700 font-bold border border-orange-100 uppercase tracking-wider">Healthcare IT</span>
                 </div>
               </div>
             </div>
@@ -947,10 +958,10 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
               <div className="border-b border-slate-100 pb-3">
                 <span className="text-[10px] px-2.5 py-0.5 rounded bg-orange-50 text-orange-700 font-bold uppercase tracking-wider border border-orange-100">Category 01</span>
                 <h2 className="text-lg font-black text-slate-900 mt-1 flex items-center gap-2">
-                  <Activity className="w-5 h-5 text-orange-600" /> Clinical Health IT Specializations
+                  <Activity className="w-5 h-5 text-sky-700" /> Clinical Health IT Specializations
                 </h2>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-7">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {[
                   { 
                     title: "Healthcare IT & Informatics", 
@@ -985,7 +996,7 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
                   return (
                     <div key={idx} className="rounded-2xl border border-slate-150 bg-white overflow-hidden shadow-[0_18px_45px_rgba(15,23,42,0.08)] hover:shadow-[0_24px_65px_rgba(15,23,42,0.14)] hover:border-orange-200 transition-all duration-300 flex flex-col justify-between">
                       <div>
-                        <div className="h-44 relative overflow-hidden bg-slate-900">
+                        <div className="h-40 relative overflow-hidden bg-slate-900">
                           <img src={srv.img} alt={srv.title} className="w-full h-full object-cover opacity-85" loading="lazy" onError={(e) => imageFallback(e, srv.fallback || "/assets/workflow-card.svg")} />
                           <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent"></div>
                           <div className="absolute bottom-3 left-4 flex items-center gap-2">
@@ -995,14 +1006,14 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
                             <h3 className="font-extrabold text-xs md:text-sm text-white leading-tight">{srv.title}</h3>
                           </div>
                         </div>
-                        <div className="p-5">
-                          <p className="text-sm text-slate-600 leading-relaxed">{srv.desc}</p>
+                        <div className="p-4">
+                          <p className="text-[15px] text-slate-700 leading-relaxed">{srv.desc}</p>
                         </div>
                       </div>
-                      <div className="px-5 pb-5 pt-3 border-t border-slate-50 mt-1 flex justify-between items-center">
+                      <div className="px-4 pb-4 pt-2 border-t border-slate-50 mt-1 flex justify-between items-center">
                         <Link href="/contact">
-                          <span className="text-xs font-black text-slate-950 hover:text-orange-600 flex items-center gap-1 cursor-pointer">
-                            Request Details <ArrowRight className="w-3.5 h-3.5 text-orange-600" />
+                          <span className="text-xs font-black text-slate-950 hover:text-sky-700 flex items-center gap-1 cursor-pointer">
+                            Request Details <ArrowRight className="w-3.5 h-3.5 text-sky-700" />
                           </span>
                         </Link>
                       </div>
@@ -1020,7 +1031,7 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
                   <Network className="w-5 h-5 text-slate-700" /> Enterprise IT & Security Infrastructure
                 </h2>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-7">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {[
                   { 
                     title: "Managed IT & Helpdesk Support", 
@@ -1055,7 +1066,7 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
                   return (
                     <div key={idx} className="rounded-2xl border border-slate-150 bg-white overflow-hidden shadow-[0_18px_45px_rgba(15,23,42,0.08)] hover:shadow-[0_24px_65px_rgba(15,23,42,0.14)] hover:border-blue-200 transition-all duration-300 flex flex-col justify-between">
                       <div>
-                        <div className="h-44 relative overflow-hidden bg-slate-900">
+                        <div className="h-40 relative overflow-hidden bg-slate-900">
                           <img src={srv.img} alt={srv.title} className="w-full h-full object-cover opacity-85" loading="lazy" onError={(e) => imageFallback(e, srv.fallback || "/assets/workflow-card.svg")} />
                           <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent"></div>
                           <div className="absolute bottom-3 left-4 flex items-center gap-2">
@@ -1065,13 +1076,13 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
                             <h3 className="font-extrabold text-xs md:text-sm text-white leading-tight">{srv.title}</h3>
                           </div>
                         </div>
-                        <div className="p-5">
-                          <p className="text-sm text-slate-600 leading-relaxed">{srv.desc}</p>
+                        <div className="p-4">
+                          <p className="text-[15px] text-slate-700 leading-relaxed">{srv.desc}</p>
                         </div>
                       </div>
-                      <div className="px-5 pb-5 pt-3 border-t border-slate-50 mt-1 flex justify-between items-center">
+                      <div className="px-4 pb-4 pt-2 border-t border-slate-50 mt-1 flex justify-between items-center">
                         <Link href="/contact">
-                          <span className="text-xs font-black text-slate-950 hover:text-orange-600 flex items-center gap-1 cursor-pointer">
+                          <span className="text-xs font-black text-slate-950 hover:text-sky-700 flex items-center gap-1 cursor-pointer">
                             Request Details <ArrowRight className="w-3.5 h-3.5 text-blue-600" />
                           </span>
                         </Link>
@@ -1094,7 +1105,7 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
 
           {/* Healthcare IT Banner with Background Image */}
           <div 
-            className="relative py-16 md:py-20 px-6 bg-cover bg-center text-white space-y-5 shrink-0"
+            className="relative py-14 px-6 bg-cover bg-center text-white space-y-4 shrink-0"
             style={{ 
               backgroundImage: `linear-gradient(rgba(8, 15, 30, 0.82), rgba(8, 15, 30, 0.94)), url("https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1800&q=85")` 
             }}
@@ -1111,7 +1122,7 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
           </div>
 
           {/* Technical Specifications */}
-          <div className="py-14 px-6 space-y-10 max-w-6xl mx-auto w-full">
+          <div className="py-10 px-6 space-y-8 max-w-6xl mx-auto w-full">
             <div className="space-y-5">
               <h3 className="font-black text-xs text-slate-900 uppercase tracking-widest border-b border-slate-100 pb-3">
                 Clinical Technology Capabilities
@@ -1154,8 +1165,8 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
                             <h4 className="font-extrabold text-xs text-white leading-tight">{cap.title}</h4>
                           </div>
                         </div>
-                        <div className="p-5">
-                          <p className="text-sm text-slate-600 leading-relaxed">{cap.desc}</p>
+                        <div className="p-4">
+                          <p className="text-[15px] text-slate-700 leading-relaxed">{cap.desc}</p>
                         </div>
                       </div>
                     </div>
@@ -1176,7 +1187,7 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
 
           {/* Federal Hero with Secure Compliance Image Background */}
           <div 
-            className="relative py-16 md:py-20 px-6 bg-cover bg-center text-white space-y-5 shrink-0"
+            className="relative py-14 px-6 bg-cover bg-center text-white space-y-4 shrink-0"
             style={{ 
               backgroundImage: `linear-gradient(rgba(8, 15, 30, 0.82), rgba(8, 15, 30, 0.94)), url("https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1800&q=85")` 
             }}
@@ -1193,8 +1204,8 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
           </div>
 
           {/* Federal Registration details */}
-          <div className="py-14 px-6 space-y-10 max-w-6xl mx-auto w-full">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-7">
+          <div className="py-10 px-6 space-y-8 max-w-6xl mx-auto w-full">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* SAM.gov Card */}
               <div className="p-6 rounded-2xl border border-slate-200 bg-white space-y-4 shadow-sm flex flex-col justify-between">
                 <div>
@@ -1229,7 +1240,7 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
                 <div className="space-y-2.5 text-[11px] text-slate-700">
                   <div className="p-3 rounded-lg border border-slate-200/50 bg-white font-medium flex justify-between items-center shadow-sm">
                     <span><strong className="font-bold text-slate-900">541512</strong> – Computer Systems Design Services</span>
-                    <span className="text-[8px] font-bold px-1.5 py-0.5 rounded bg-orange-50 text-orange-600 border border-orange-100 uppercase tracking-wider">Primary</span>
+                    <span className="text-[8px] font-bold px-1.5 py-0.5 rounded bg-orange-50 text-sky-700 border border-orange-100 uppercase tracking-wider">Primary</span>
                   </div>
                   <div className="p-3 rounded-lg border border-slate-200/50 bg-white font-medium flex justify-between items-center shadow-sm">
                     <span><strong className="font-bold text-slate-900">541511</strong> – Custom Computer Programming</span>
@@ -1349,7 +1360,7 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
 
           {/* Team Hero */}
           <div className="py-10 px-6 bg-slate-50 border-b border-slate-100 text-center space-y-3 shrink-0">
-            <span className="text-xs font-black text-orange-600 uppercase tracking-widest">Our Leadership</span>
+            <span className="text-xs font-black text-sky-700 uppercase tracking-widest">Our Leadership</span>
             <h1 className="text-xl md:text-2xl font-black text-slate-900 tracking-tight">
               Our Technology & Informatics Leadership
             </h1>
@@ -1461,7 +1472,7 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
                 const Icon = path.icon;
                 return (
                   <div key={idx} className="p-5 rounded-2xl border border-slate-100 bg-white shadow-[0_18px_45px_rgba(15,23,42,0.08)] hover:shadow-[0_24px_65px_rgba(15,23,42,0.14)] hover:border-orange-200 transition-all space-y-3">
-                    <div className="w-10 h-10 rounded-xl bg-orange-50 text-orange-600 flex items-center justify-center border border-orange-100">
+                    <div className="w-10 h-10 rounded-xl bg-orange-50 text-sky-700 flex items-center justify-center border border-orange-100">
                       <Icon className="w-5 h-5" />
                     </div>
                     <h3 className="font-black text-sm text-slate-900">{path.title}</h3>
@@ -1599,15 +1610,15 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
                 <h3 className="font-black text-xs text-slate-900 uppercase tracking-widest border-b border-slate-200 pb-3">Corporate Details</h3>
                 <div className="space-y-4 text-[11px] text-slate-600">
                   <p className="flex items-center gap-3">
-                    <MapPin className="w-5 h-5 text-orange-600 shrink-0 bg-orange-50 p-1 rounded border border-orange-100" />
+                    <MapPin className="w-5 h-5 text-sky-700 shrink-0 bg-orange-50 p-1 rounded border border-orange-100" />
                     <span><strong>Venus (Dallas-Fort Worth Metroplex), Texas, USA</strong></span>
                   </p>
                   <p className="flex items-center gap-3">
-                    <Mail className="w-5 h-5 text-orange-600 shrink-0 bg-orange-50 p-1 rounded border border-orange-100" />
+                    <Mail className="w-5 h-5 text-sky-700 shrink-0 bg-orange-50 p-1 rounded border border-orange-100" />
                     <span>contracts@ndehealthtech.com</span>
                   </p>
                   <p className="flex items-center gap-3">
-                    <Phone className="w-5 h-5 text-orange-600 shrink-0 bg-orange-50 p-1 rounded border border-orange-100" />
+                    <Phone className="w-5 h-5 text-sky-700 shrink-0 bg-orange-50 p-1 rounded border border-orange-100" />
                     <span>629-345-8366</span>
                   </p>
                 </div>
