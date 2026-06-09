@@ -1656,24 +1656,34 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
             </div>
           </div>
 
-          {/* Cleaned up articles */}
-          <div className="py-12 px-6 space-y-6 max-w-6xl mx-auto w-full">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Articles Grid */}
+          <div className="py-12 px-6 max-w-6xl mx-auto w-full">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {[
-                { title: "The Benefits of Using Managed IT Services in Healthcare", date: "April 24, 2026", author: "Nicoline Nde, Health Informatics", desc: "How medical clinics and healthcare providers reduce technical downtime and optimize patient charting workflows through proactive technical monitoring." },
-                { title: "Best Practices for Secure Clinical Workstation Configuration", date: "June 2, 2026", author: "Alexis Nde, DevOps & Security", desc: "An overview of the technical and physical safeguards required under NIST SP 800-66 to secure clinical workstations handling PHI." }
-              ].map((art, idx) => (
-                <div key={idx} className="p-5 rounded-xl border border-slate-100 bg-white shadow-sm space-y-3 hover:shadow-md transition-all duration-200 flex flex-col justify-between">
-                  <div className="space-y-2.5">
-                    <div className="flex justify-between items-center text-xs text-slate-400">
-                      <span>{art.date}</span>
-                      <span className="font-bold text-slate-500">{art.author}</span>
-                    </div>
-                    <h3 className="font-black text-xs md:text-sm text-slate-900 hover:text-slate-700 cursor-pointer leading-snug">{art.title}</h3>
-                    <p className="text-[15px] text-slate-700 leading-relaxed">{art.desc}</p>
+                { slug: "managed-it-services-healthcare", title: "The Benefits of Using Managed IT Services in Healthcare", date: "April 24, 2026", author: "Nicoline Nde", category: "Healthcare IT", catColor: "bg-blue-50 text-blue-700", desc: "How medical clinics and healthcare providers reduce technical downtime and optimize patient charting workflows through proactive technical monitoring.", img: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=600&q=75" },
+                { slug: "secure-clinical-workstation-configuration", title: "Best Practices for Secure Clinical Workstation Configuration", date: "June 2, 2026", author: "Alexis Nde", category: "Cybersecurity", catColor: "bg-orange-50 text-orange-700", desc: "An overview of the technical and physical safeguards required under NIST SP 800-66 to secure clinical workstations handling PHI.", img: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=600&q=75" },
+                { slug: "hipaa-security-rule-small-practice", title: "HIPAA Security Rule Essentials for Small Medical Practices", date: "May 15, 2026", author: "Nicoline Nde", category: "Compliance", catColor: "bg-emerald-50 text-emerald-700", desc: "A practical, plain-language breakdown of HIPAA Security Rule requirements that every small practice owner and office manager should understand.", img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=75" },
+                { slug: "aws-cloud-migration-healthcare", title: "Planning a HIPAA-Compliant AWS Cloud Migration for Healthcare", date: "May 3, 2026", author: "Alexis Nde", category: "Cloud Engineering", catColor: "bg-violet-50 text-violet-700", desc: "A step-by-step framework for healthcare organizations moving workloads to AWS while maintaining HIPAA compliance and data integrity.", img: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=600&q=75" },
+                { slug: "ehr-interoperability-fhir", title: "EHR Interoperability in 2026: FHIR, APIs, and What It Means for Your Practice", date: "April 10, 2026", author: "Nicoline Nde", category: "Healthcare IT", catColor: "bg-blue-50 text-blue-700", desc: "How the HL7 FHIR standard and ONC interoperability rules are changing the way patient data moves between EHR systems.", img: "https://images.unsplash.com/photo-1530497610245-94d3c16cda28?auto=format&fit=crop&w=600&q=75" },
+                { slug: "federal-it-contracting-small-business", title: "Breaking Into Federal IT Contracting as a Small Business", date: "March 28, 2026", author: "Alexis Nde", category: "Federal IT", catColor: "bg-slate-100 text-slate-700", desc: "A practical guide to SAM.gov registration, NAICS codes, set-aside programs, and winning your first federal IT contract as a small business.", img: "https://images.unsplash.com/photo-1486325212027-8081e485255e?auto=format&fit=crop&w=600&q=75" },
+              ].map((art) => (
+                <div key={art.slug} className="rounded-2xl border border-slate-100 bg-white shadow-sm hover:shadow-md transition-all duration-200 overflow-hidden flex flex-col">
+                  <div className="h-40 overflow-hidden bg-slate-100">
+                    <img src={art.img} alt={art.title} className="w-full h-full object-cover" loading="lazy" />
                   </div>
-                  <div className="pt-3 border-t border-slate-50 mt-4">
-                    <Link href="/blog"><span className="text-xs font-bold text-slate-900 cursor-pointer hover:underline">Read Article →</span></Link>
+                  <div className="p-5 flex flex-col flex-1 space-y-3">
+                    <div className="flex items-center justify-between gap-2">
+                      <span className={`text-[10px] font-black px-2 py-0.5 rounded-full uppercase tracking-wider ${art.catColor}`}>{art.category}</span>
+                      <span className="text-[11px] text-slate-400 font-semibold">{art.date}</span>
+                    </div>
+                    <h3 className="font-black text-sm text-slate-900 leading-snug">{art.title}</h3>
+                    <p className="text-xs text-slate-500 leading-relaxed flex-1">{art.desc}</p>
+                    <div className="pt-3 border-t border-slate-50 flex items-center justify-between">
+                      <span className="text-[11px] text-slate-400 font-semibold">{art.author}</span>
+                      <Link href={`/blog/${art.slug}`}>
+                        <span className="text-xs font-black text-blue-700 hover:text-blue-900 cursor-pointer flex items-center gap-1">Read Article <ArrowRight className="w-3 h-3" /></span>
+                      </Link>
+                    </div>
                   </div>
                 </div>
               ))}
