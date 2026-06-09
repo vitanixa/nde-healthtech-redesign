@@ -6,12 +6,14 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { MockupRenderer } from "./pages/RedesignMockups";
 import Analytics from "./components/Analytics";
+import { useIsMobile } from "./hooks/useMobile";
 
 // Standalone Page Wrapper that renders the clean redesigned mockup page in full-screen (desktop mode)
 function StandalonePage({ pageId }: { pageId: string }) {
+  const isMobile = useIsMobile();
   return (
     <div className="min-h-screen bg-white text-slate-800 flex flex-col font-sans">
-      <MockupRenderer pageId={pageId} mode="desktop" />
+      <MockupRenderer pageId={pageId} mode={isMobile ? "mobile" : "desktop"} />
     </div>
   );
 }
