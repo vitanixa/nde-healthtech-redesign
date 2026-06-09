@@ -512,7 +512,7 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
 
   const renderHeader = () => (
     <header className="bg-white/90 backdrop-blur-xl border-b border-slate-200/70 text-slate-900 sticky top-0 z-50 shadow-[0_8px_30px_rgba(15,23,42,0.08)] shrink-0">
-      <div className="px-4 md:px-6 h-[76px] flex justify-between items-center max-w-7xl mx-auto">
+      <div className="px-4 md:px-6 h-[72px] flex justify-between items-center max-w-7xl mx-auto">
         <Link href="/">
           <div className="flex items-center gap-3 min-w-0 cursor-pointer" onClick={() => setMobileMenuOpen(false)}>
             <img 
@@ -536,7 +536,7 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
               const active = pageId === link.id;
               return (
                 <Link key={link.href} href={link.href}>
-                  <span className={`inline-flex items-center gap-1.5 rounded-full px-3 py-2 transition-all cursor-pointer border ${active ? 'bg-slate-950 text-white border-slate-950 shadow-[0_10px_25px_rgba(15,23,42,0.18)]' : 'bg-white text-slate-600 border-transparent hover:border-slate-200 hover:bg-slate-50 hover:text-slate-950 hover:shadow-sm'}`}>
+                  <span className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-2 transition-all cursor-pointer border ${active ? 'bg-slate-950 text-white border-slate-950 shadow-[0_10px_25px_rgba(15,23,42,0.18)]' : 'bg-white text-slate-600 border-transparent hover:border-slate-200 hover:bg-slate-50 hover:text-slate-950 hover:shadow-sm'}`}>
                     <Icon className={`w-3.5 h-3.5 ${active ? 'text-orange-400' : 'text-orange-500'}`} />
                     {link.label}
                   </span>
@@ -597,7 +597,7 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
 
   // Global Footer Redesign
   const renderFooter = () => (
-    <div className="bg-slate-950 text-slate-400 py-10 px-6 border-t border-slate-900 text-[11px] space-y-6 shrink-0 mt-auto">
+    <div className="bg-slate-950 text-slate-400 py-12 px-6 border-t border-slate-900 text-[11px] space-y-6 shrink-0 mt-auto">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
         <div className="flex items-center gap-2.5 min-w-0">
           <img 
@@ -655,7 +655,7 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
             {/* Subtle right-panel tint */}
             <div className="absolute inset-y-0 right-0 w-5/12 bg-slate-50 pointer-events-none hidden lg:block"></div>
 
-            <div className="max-w-7xl mx-auto px-6 py-12 md:py-16 pb-16 relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+            <div className="max-w-7xl mx-auto px-6 py-16 md:py-20 lg:py-24 relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 xl:gap-16 items-center">
               {/* Left: Value Proposition */}
               <div className="lg:col-span-6 space-y-6 text-left">
                 <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white text-blue-800 text-[11px] font-black uppercase tracking-widest border border-blue-100 shadow-sm">
@@ -664,28 +664,28 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
                 </div>
 
                 <div className="space-y-4">
-                  <h1 className="text-3xl md:text-5xl font-black tracking-tight leading-[1.05] text-slate-950">
+                  <h1 className="text-4xl md:text-6xl font-black tracking-tight leading-[1.03] text-slate-950 max-w-3xl">
                     Technology Solutions for <span className="text-blue-800">Healthcare</span>, <span className="text-orange-600">Government</span> & Enterprise
                   </h1>
-                  <p className="text-slate-650 text-sm md:text-base leading-relaxed max-w-2xl font-medium">
+                  <p className="text-slate-600 text-base md:text-lg leading-relaxed max-w-2xl font-medium">
                     Enterprise-grade consulting, cloud engineering, cybersecurity, DevOps, healthcare IT, and infrastructure solutions designed to help organizations modernize securely and scale confidently.
                   </p>
                 </div>
 
                 <div className="flex flex-wrap gap-3">
                   <Link href="/contact">
-                    <span className="inline-flex items-center justify-center bg-blue-800 text-white text-sm font-black px-6 py-3.5 rounded-xl shadow-lg shadow-blue-900/20 hover:bg-blue-900 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 cursor-pointer">
+                    <span className="inline-flex items-center justify-center bg-blue-800 text-white text-sm font-black px-7 py-4 rounded-xl shadow-lg shadow-blue-900/20 hover:bg-blue-900 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 cursor-pointer">
                       Schedule a Free Consultation <ArrowRight className="w-4 h-4 ml-2" />
                     </span>
                   </Link>
                   <Link href="/federal">
-                    <span className="inline-flex items-center justify-center bg-white text-blue-900 text-sm font-black px-6 py-3.5 rounded-xl border border-blue-200 hover:border-blue-400 hover:bg-blue-50 transition-all duration-200 cursor-pointer">
+                    <span className="inline-flex items-center justify-center bg-white text-blue-900 text-sm font-black px-7 py-4 rounded-xl border border-blue-200 hover:border-blue-400 hover:bg-blue-50 transition-all duration-200 cursor-pointer">
                       View Federal Capabilities <ArrowRight className="w-4 h-4 ml-2" />
                     </span>
                   </Link>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
                   {[
                     { icon: HeartPulse, title: "Healthcare IT", text: "EHR, Informatics & Workflows" },
                     { icon: Cloud, title: "Cloud & DevOps", text: "AWS, Automation & Infrastructure" },
@@ -693,7 +693,7 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
                   ].map((item, idx) => {
                     const Icon = item.icon;
                     return (
-                      <div key={idx} className="flex items-start gap-3 rounded-2xl bg-white/90 border border-slate-200 p-3 shadow-sm">
+                      <div key={idx} className="flex items-start gap-3 rounded-2xl bg-white/90 border border-slate-200 p-4 shadow-sm">
                         <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center shrink-0 border border-blue-100">
                           <Icon className="w-5 h-5 text-blue-800" />
                         </div>
@@ -710,8 +710,8 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
               {/* Right: Professional Photo Collage */}
               <div className="lg:col-span-6 relative hidden lg:block">
                 {/* Tall primary image */}
-                <div className="grid grid-cols-2 gap-3 h-[480px]">
-                  <div className="rounded-2xl overflow-hidden shadow-lg row-span-2">
+                <div className="grid grid-cols-2 gap-4 h-[500px]">
+                  <div className="rounded-[1.35rem] overflow-hidden shadow-lg row-span-2">
                     <img
                       src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=800&q=80"
                       alt="Healthcare IT professional at work"
@@ -719,7 +719,7 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
                       fetchPriority="high"
                     />
                   </div>
-                  <div className="rounded-2xl overflow-hidden shadow-lg">
+                  <div className="rounded-[1.35rem] overflow-hidden shadow-lg">
                     <img
                       src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80"
                       alt="Secure cloud infrastructure"
@@ -727,7 +727,7 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
                       loading="lazy"
                     />
                   </div>
-                  <div className="rounded-2xl overflow-hidden shadow-lg">
+                  <div className="rounded-[1.35rem] overflow-hidden shadow-lg">
                     <img
                       src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80"
                       alt="Data analytics and reporting"
@@ -737,7 +737,7 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
                   </div>
                 </div>
                 {/* Floating credential badge */}
-                <div className="absolute -bottom-4 -left-4 bg-white rounded-2xl shadow-xl border border-slate-100 px-4 py-3 flex items-center gap-3">
+                <div className="absolute -bottom-5 -left-5 bg-white rounded-2xl shadow-xl border border-slate-100 px-4 py-3 flex items-center gap-3">
                   <div className="w-9 h-9 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center shrink-0">
                     <ShieldCheck className="w-5 h-5 text-blue-700" />
                   </div>
@@ -750,8 +750,8 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
             </div>
 
             {/* Trust Bar */}
-            <div className="max-w-7xl mx-auto px-6 pb-8 relative z-10">
-              <div className="rounded-2xl bg-white border border-slate-200 shadow-[0_16px_45px_rgba(15,23,42,0.08)] px-5 py-4 grid grid-cols-2 md:grid-cols-5 gap-4 items-center">
+            <div className="max-w-7xl mx-auto px-6 pb-10 relative z-10">
+              <div className="rounded-2xl bg-white border border-slate-200 shadow-[0_16px_45px_rgba(15,23,42,0.08)] px-6 py-5 grid grid-cols-2 md:grid-cols-5 gap-4 items-center">
                 {[
                   ["Active", "SAM.gov Registered"],
                   ["209X4", "CAGE Code"],
@@ -769,18 +769,18 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
           </section>
 
           {/* Premium Categorized Core Solutions Grid - High-Fidelity Modern Light Design with Custom Images */}
-          <div className="py-12 px-6 space-y-8 bg-slate-50 relative border-y border-slate-100">
+          <div className="py-16 px-6 space-y-10 bg-slate-50 relative border-y border-slate-100">
             <div className="text-center space-y-2 max-w-xl mx-auto">
               <span className="text-xs font-black text-orange-600 uppercase tracking-widest">Consulting Excellence</span>
-              <h2 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight leading-tight">
+              <h2 className="text-3xl md:text-4xl font-black text-slate-900 tracking-tight leading-tight">
                 Our Dual-Force Capabilities
               </h2>
-              <p className="text-slate-500 text-xs leading-relaxed max-w-md mx-auto">
+              <p className="text-slate-600 text-sm leading-relaxed max-w-2xl mx-auto">
                 Specialized Clinical Health IT combined with robust, enterprise-grade General IT Infrastructure & Security.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10 max-w-6xl mx-auto">
               {/* Category A: Clinical Health IT Solutions - Rebuilt with premium imagery */}
               <div className="rounded-2xl border border-slate-200 bg-white overflow-hidden shadow-[0_18px_45px_rgba(15,23,42,0.08)] hover:shadow-[0_24px_65px_rgba(15,23,42,0.14)] hover:border-orange-200 transition-all duration-300 flex flex-col justify-between">
                 <div>
@@ -804,17 +804,17 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
                   </div>
 
                   {/* Service Items */}
-                  <div className="p-5 space-y-4">
+                  <div className="p-6 space-y-5">
                     {[
                       { title: "Clinical Informatics & EHR Support", desc: "Expert HL7/FHIR compliant support for Epic, Cerner, and eClinicalWorks to optimize clinical workflows." },
                       { title: "System & Software Integrations", desc: "Aligning technical systems directly with nursing and physician pathways to prevent charting friction." },
                       { title: "Health IT Consulting & Strategy", desc: "Strategic advisory on software selections, database design, and HIPAA regulatory compliance frameworks." }
                     ].map((srv, idx) => (
-                      <div key={idx} className="space-y-1 hover:bg-slate-50 p-2.5 rounded-xl transition-colors duration-200">
+                      <div key={idx} className="space-y-1 hover:bg-slate-50 p-3 rounded-xl transition-colors duration-200">
                         <h4 className="font-extrabold text-xs text-slate-900 flex items-center gap-2">
                           <span className="w-1.5 h-1.5 bg-orange-600 rounded-full"></span> {srv.title}
                         </h4>
-                        <p className="text-[15px] text-slate-700 leading-relaxed pl-3.5">{srv.desc}</p>
+                        <p className="text-sm text-slate-600 leading-relaxed pl-3.5">{srv.desc}</p>
                       </div>
                     ))}
                   </div>
@@ -844,17 +844,17 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
                   </div>
 
                   {/* Service Items */}
-                  <div className="p-5 space-y-4">
+                  <div className="p-6 space-y-5">
                     {[
                       { title: "Managed Helpdesk Support (24/7)", desc: "Proactive network administration, troubleshooting, and continuous systems monitoring to eliminate downtime." },
                       { title: "Cloud & Infrastructure Engineering", desc: "Secure clinical cloud migrations, server virtualization, and robust database administration." },
                       { title: "Cybersecurity & Risk Safeguards", desc: "Advanced threat detection, penetration testing, and compliance configurations protecting networks." }
                     ].map((srv, idx) => (
-                      <div key={idx} className="space-y-1 hover:bg-slate-50 p-2.5 rounded-xl transition-colors duration-200">
+                      <div key={idx} className="space-y-1 hover:bg-slate-50 p-3 rounded-xl transition-colors duration-200">
                         <h4 className="font-extrabold text-xs text-slate-900 flex items-center gap-2">
                           <span className="w-1.5 h-1.5 bg-blue-600 rounded-full"></span> {srv.title}
                         </h4>
-                        <p className="text-[15px] text-slate-700 leading-relaxed pl-3.5">{srv.desc}</p>
+                        <p className="text-sm text-slate-600 leading-relaxed pl-3.5">{srv.desc}</p>
                       </div>
                     ))}
                   </div>
@@ -864,7 +864,7 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
           </div>
 
           {/* Professional Reviews & Testimonials Section - Tightened Spacing */}
-          <div className="bg-slate-50 py-10 px-6 border-y border-slate-100 space-y-6 shrink-0">
+          <div className="bg-white py-14 px-6 border-y border-slate-100 space-y-6 shrink-0">
             <div className="text-center space-y-2 max-w-lg mx-auto">
               <span className="text-xs font-black text-orange-600 uppercase tracking-widest">Client Feedback</span>
               <h2 className="text-xl md:text-2xl font-black text-slate-900">What Our Clients Say</h2>
@@ -873,7 +873,7 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
               </p>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-7 max-w-6xl mx-auto">
               {/* Review 1: Caleb (Commercial success) */}
               <div className="p-6 rounded-2xl border border-slate-100 bg-white space-y-4 shadow-sm flex flex-col justify-between">
                 <p className="text-[11px] md:text-xs font-medium italic text-slate-600 leading-relaxed">
@@ -950,7 +950,7 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
                   <Activity className="w-5 h-5 text-orange-600" /> Clinical Health IT Specializations
                 </h2>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-7">
                 {[
                   { 
                     title: "Healthcare IT & Informatics", 
@@ -985,7 +985,7 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
                   return (
                     <div key={idx} className="rounded-2xl border border-slate-150 bg-white overflow-hidden shadow-[0_18px_45px_rgba(15,23,42,0.08)] hover:shadow-[0_24px_65px_rgba(15,23,42,0.14)] hover:border-orange-200 transition-all duration-300 flex flex-col justify-between">
                       <div>
-                        <div className="h-40 relative overflow-hidden bg-slate-900">
+                        <div className="h-44 relative overflow-hidden bg-slate-900">
                           <img src={srv.img} alt={srv.title} className="w-full h-full object-cover opacity-85" loading="lazy" onError={(e) => imageFallback(e, srv.fallback || "/assets/workflow-card.svg")} />
                           <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent"></div>
                           <div className="absolute bottom-3 left-4 flex items-center gap-2">
@@ -995,11 +995,11 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
                             <h3 className="font-extrabold text-xs md:text-sm text-white leading-tight">{srv.title}</h3>
                           </div>
                         </div>
-                        <div className="p-4">
-                          <p className="text-[15px] text-slate-700 leading-relaxed">{srv.desc}</p>
+                        <div className="p-5">
+                          <p className="text-sm text-slate-600 leading-relaxed">{srv.desc}</p>
                         </div>
                       </div>
-                      <div className="px-4 pb-4 pt-2 border-t border-slate-50 mt-1 flex justify-between items-center">
+                      <div className="px-5 pb-5 pt-3 border-t border-slate-50 mt-1 flex justify-between items-center">
                         <Link href="/contact">
                           <span className="text-xs font-black text-slate-950 hover:text-orange-600 flex items-center gap-1 cursor-pointer">
                             Request Details <ArrowRight className="w-3.5 h-3.5 text-orange-600" />
@@ -1020,7 +1020,7 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
                   <Network className="w-5 h-5 text-slate-700" /> Enterprise IT & Security Infrastructure
                 </h2>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-7">
                 {[
                   { 
                     title: "Managed IT & Helpdesk Support", 
@@ -1055,7 +1055,7 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
                   return (
                     <div key={idx} className="rounded-2xl border border-slate-150 bg-white overflow-hidden shadow-[0_18px_45px_rgba(15,23,42,0.08)] hover:shadow-[0_24px_65px_rgba(15,23,42,0.14)] hover:border-blue-200 transition-all duration-300 flex flex-col justify-between">
                       <div>
-                        <div className="h-40 relative overflow-hidden bg-slate-900">
+                        <div className="h-44 relative overflow-hidden bg-slate-900">
                           <img src={srv.img} alt={srv.title} className="w-full h-full object-cover opacity-85" loading="lazy" onError={(e) => imageFallback(e, srv.fallback || "/assets/workflow-card.svg")} />
                           <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent"></div>
                           <div className="absolute bottom-3 left-4 flex items-center gap-2">
@@ -1065,11 +1065,11 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
                             <h3 className="font-extrabold text-xs md:text-sm text-white leading-tight">{srv.title}</h3>
                           </div>
                         </div>
-                        <div className="p-4">
-                          <p className="text-[15px] text-slate-700 leading-relaxed">{srv.desc}</p>
+                        <div className="p-5">
+                          <p className="text-sm text-slate-600 leading-relaxed">{srv.desc}</p>
                         </div>
                       </div>
-                      <div className="px-4 pb-4 pt-2 border-t border-slate-50 mt-1 flex justify-between items-center">
+                      <div className="px-5 pb-5 pt-3 border-t border-slate-50 mt-1 flex justify-between items-center">
                         <Link href="/contact">
                           <span className="text-xs font-black text-slate-950 hover:text-orange-600 flex items-center gap-1 cursor-pointer">
                             Request Details <ArrowRight className="w-3.5 h-3.5 text-blue-600" />
@@ -1094,7 +1094,7 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
 
           {/* Healthcare IT Banner with Background Image */}
           <div 
-            className="relative py-14 px-6 bg-cover bg-center text-white space-y-4 shrink-0"
+            className="relative py-16 md:py-20 px-6 bg-cover bg-center text-white space-y-5 shrink-0"
             style={{ 
               backgroundImage: `linear-gradient(rgba(8, 15, 30, 0.82), rgba(8, 15, 30, 0.94)), url("https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1800&q=85")` 
             }}
@@ -1111,7 +1111,7 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
           </div>
 
           {/* Technical Specifications */}
-          <div className="py-10 px-6 space-y-8 max-w-6xl mx-auto w-full">
+          <div className="py-14 px-6 space-y-10 max-w-6xl mx-auto w-full">
             <div className="space-y-5">
               <h3 className="font-black text-xs text-slate-900 uppercase tracking-widest border-b border-slate-100 pb-3">
                 Clinical Technology Capabilities
@@ -1154,8 +1154,8 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
                             <h4 className="font-extrabold text-xs text-white leading-tight">{cap.title}</h4>
                           </div>
                         </div>
-                        <div className="p-4">
-                          <p className="text-[15px] text-slate-700 leading-relaxed">{cap.desc}</p>
+                        <div className="p-5">
+                          <p className="text-sm text-slate-600 leading-relaxed">{cap.desc}</p>
                         </div>
                       </div>
                     </div>
@@ -1176,7 +1176,7 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
 
           {/* Federal Hero with Secure Compliance Image Background */}
           <div 
-            className="relative py-14 px-6 bg-cover bg-center text-white space-y-4 shrink-0"
+            className="relative py-16 md:py-20 px-6 bg-cover bg-center text-white space-y-5 shrink-0"
             style={{ 
               backgroundImage: `linear-gradient(rgba(8, 15, 30, 0.82), rgba(8, 15, 30, 0.94)), url("https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1800&q=85")` 
             }}
@@ -1193,8 +1193,8 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
           </div>
 
           {/* Federal Registration details */}
-          <div className="py-10 px-6 space-y-8 max-w-6xl mx-auto w-full">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="py-14 px-6 space-y-10 max-w-6xl mx-auto w-full">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-7">
               {/* SAM.gov Card */}
               <div className="p-6 rounded-2xl border border-slate-200 bg-white space-y-4 shadow-sm flex flex-col justify-between">
                 <div>

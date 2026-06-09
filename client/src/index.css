@@ -238,3 +238,26 @@
     -webkit-tap-highlight-color: transparent;
   }
 }
+
+
+@layer components {
+  .a-plus-site section,
+  .a-plus-site > div {
+    scroll-margin-top: 88px;
+  }
+
+  .a-plus-site .shadow-lg,
+  .a-plus-site .shadow-xl {
+    box-shadow: 0 18px 50px rgba(15, 23, 42, 0.10);
+  }
+
+  .a-plus-site p {
+    text-wrap: pretty;
+  }
+
+  .a-plus-site h1,
+  .a-plus-site h2,
+  .a-plus-site h3 {
+    text-wrap: balance;
+  }
+}
