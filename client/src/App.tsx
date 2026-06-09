@@ -5,6 +5,7 @@ import { Route, Switch, useLocation } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { MockupRenderer } from "./pages/RedesignMockups";
+import { BlogArticlePage } from "./pages/BlogArticle";
 import Analytics from "./components/Analytics";
 import { useIsMobile } from "./hooks/useMobile";
 
@@ -50,6 +51,10 @@ function Router() {
         <StandalonePage pageId="contact" />
       </Route>
       
+      <Route path="/blog/:slug">
+        <BlogArticlePage />
+      </Route>
+
       {/* 404 Route */}
       <Route path="/404" component={NotFound} />
       {/* Final fallback route */}
