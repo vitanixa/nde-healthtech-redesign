@@ -1,0 +1,64 @@
+<svg width="1200" height="850" viewBox="0 0 1200 850" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="850" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0B1E3A"/>
+      <stop offset="0.55" stop-color="#0B3866"/>
+      <stop offset="1" stop-color="#06111F"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(650 410) rotate(90) scale(400 520)">
+      <stop stop-color="#38BDF8" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#0B1E3A" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="blur" x="-40" y="-40" width="1280" height="930" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="16"/>
+    </filter>
+  </defs>
+  <rect width="1200" height="850" fill="url(#bg)"/>
+  <rect width="1200" height="850" fill="url(#glow)"/>
+  <g opacity="0.28">
+    <path d="M70 140H300L390 225H600" stroke="#60A5FA" stroke-width="3"/>
+    <path d="M65 230H260L330 305H520" stroke="#38BDF8" stroke-width="3"/>
+    <path d="M1120 150H890L815 225H630" stroke="#60A5FA" stroke-width="3"/>
+    <path d="M1130 260H965L900 330H690" stroke="#38BDF8" stroke-width="3"/>
+    <circle cx="390" cy="225" r="8" fill="#38BDF8"/>
+    <circle cx="330" cy="305" r="8" fill="#60A5FA"/>
+    <circle cx="815" cy="225" r="8" fill="#38BDF8"/>
+    <circle cx="900" cy="330" r="8" fill="#60A5FA"/>
+  </g>
+  <g opacity="0.12">
+    <path d="M760 100C850 120 935 165 990 238C1037 301 1055 373 1038 445C1014 546 908 625 790 655C650 691 489 665 392 584C312 516 284 419 319 332C363 222 510 110 760 100Z" fill="#E0F2FE"/>
+  </g>
+  <g transform="translate(260 175)">
+    <rect x="0" y="0" width="680" height="430" rx="34" fill="#0F2744" stroke="#60A5FA" stroke-opacity="0.5" stroke-width="2"/>
+    <rect x="35" y="40" width="610" height="70" rx="18" fill="#FFFFFF" fill-opacity="0.12"/>
+    <rect x="35" y="135" width="290" height="230" rx="22" fill="#FFFFFF" fill-opacity="0.12"/>
+    <rect x="355" y="135" width="290" height="230" rx="22" fill="#FFFFFF" fill-opacity="0.12"/>
+    <path d="M80 310C110 260 145 270 175 225C205 180 230 190 270 160" stroke="#38BDF8" stroke-width="5" stroke-linecap="round"/>
+    <path d="M405 310L445 260L480 285L525 210L575 235" stroke="#FB923C" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="270" cy="160" r="10" fill="#38BDF8"/>
+    <circle cx="575" cy="235" r="10" fill="#FB923C"/>
+    <text x="70" y="82" fill="white" fill-opacity="0.9" font-family="Arial, sans-serif" font-size="28" font-weight="800">Healthcare Cloud Command Center</text>
+    <text x="70" y="405" fill="#BAE6FD" fill-opacity="0.85" font-family="Arial, sans-serif" font-size="18" font-weight="700">EHR • DevOps • Cybersecurity • Compliance</text>
+  </g>
+  <g transform="translate(115 530)" filter="url(#blur)" opacity="0.7">
+    <rect width="280" height="90" rx="30" fill="#38BDF8" fill-opacity="0.35"/>
+  </g>
+  <g transform="translate(80 505)">
+    <rect width="325" height="120" rx="28" fill="#FFFFFF" fill-opacity="0.13" stroke="#7DD3FC" stroke-opacity="0.45"/>
+    <circle cx="62" cy="60" r="31" fill="#0EA5E9" fill-opacity="0.22" stroke="#38BDF8"/>
+    <path d="M62 38V82M40 60H84" stroke="#E0F2FE" stroke-width="9" stroke-linecap="round"/>
+    <text x="115" y="53" fill="white" font-family="Arial, sans-serif" font-size="21" font-weight="800">Clinical Systems</text>
+    <text x="115" y="82" fill="#BAE6FD" font-family="Arial, sans-serif" font-size="15" font-weight="600">EHR, analytics, workflow optimization</text>
+  </g>
+  <g transform="translate(800 505)">
+    <rect width="325" height="120" rx="28" fill="#FFFFFF" fill-opacity="0.13" stroke="#FDBA74" stroke-opacity="0.45"/>
+    <circle cx="62" cy="60" r="31" fill="#F97316" fill-opacity="0.25" stroke="#FB923C"/>
+    <path d="M48 60L59 72L80 48" stroke="#FFF7ED" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="115" y="53" fill="white" font-family="Arial, sans-serif" font-size="21" font-weight="800">Security & Compliance</text>
+    <text x="115" y="82" fill="#FED7AA" font-family="Arial, sans-serif" font-size="15" font-weight="600">HIPAA, NIST, federal readiness</text>
+  </g>
+  <g opacity="0.16">
+    <circle cx="145" cy="105" r="3" fill="#BAE6FD"/><circle cx="190" cy="105" r="3" fill="#BAE6FD"/><circle cx="235" cy="105" r="3" fill="#BAE6FD"/>
+    <circle cx="970" cy="720" r="3" fill="#BAE6FD"/><circle cx="1015" cy="720" r="3" fill="#BAE6FD"/><circle cx="1060" cy="720" r="3" fill="#BAE6FD"/>
+  </g>
+</svg>

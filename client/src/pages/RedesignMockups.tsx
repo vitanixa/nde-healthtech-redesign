@@ -585,88 +585,119 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
         <div className="a-plus-site flex-1 flex flex-col bg-white text-slate-800">
           {renderHeader()}
           
-          {/* SAM.gov Active Banner */}
-          <div className="bg-slate-900 text-slate-100 py-3 px-6 text-xs font-semibold flex flex-wrap justify-between items-center gap-2 border-b border-slate-800 shrink-0 shadow-inner">
-            <div className="flex items-center gap-2">
-              <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse shadow shadow-emerald-500/50"></span>
-              <span>SAM.gov Active Federal Contractor</span>
-            </div>
-            <div className="flex items-center gap-4 text-slate-400 font-mono text-xs">
-              <span>CAGE Code: 209X4</span>
-              <span>UEI: G7YUFGEZBHP4</span>
-            </div>
-          </div>
+          {/* Compact Professional Hero Section */}
+          <section className="relative overflow-hidden bg-gradient-to-br from-white via-slate-50 to-blue-50 border-b border-slate-100 shrink-0">
+            <div className="absolute inset-y-0 right-0 w-1/2 bg-gradient-to-l from-blue-100/80 to-transparent pointer-events-none"></div>
+            <div className="absolute -top-24 -right-24 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
+            <div className="absolute -bottom-20 left-1/4 w-80 h-80 bg-orange-500/10 rounded-full blur-3xl"></div>
 
-          {/* Premium Overlapping Hero Section with High-Resolution Background */}
-          <div className="relative bg-slate-950 overflow-hidden shrink-0">
-            {/* Ambient Background Glows */}
-            <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl"></div>
-            <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-orange-600/5 rounded-full blur-3xl"></div>
-
-            <div className="max-w-5xl mx-auto px-6 py-12 md:py-16 relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-              {/* Left Column: Premium Value Proposition */}
-              <div className="lg:col-span-7 space-y-6 text-left">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900/90 text-orange-400 text-xs font-bold uppercase tracking-widest border border-slate-800 shadow-inner">
-                  <Shield className="w-3.5 h-3.5 text-orange-500" /> Clinical Precision & Enterprise Security
-                </div>
-                <h1 className="text-3xl md:text-5xl font-black tracking-tight leading-tight text-white">
-                  Technology Solutions for Healthcare, Government & Enterprise
-                </h1>
-                <p className="text-slate-300 text-xs md:text-sm leading-relaxed max-w-xl">
-                  Enterprise-grade consulting, cloud engineering, cybersecurity, DevOps, healthcare IT, and infrastructure solutions designed to help organizations innovate securely and scale confidently.
-                </p>
-                
-                {/* Value Pillars Badges */}
-                <div className="grid grid-cols-2 gap-3 pt-2 text-xs font-bold text-slate-300">
-                  <div className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-orange-500" />
-                    <span>NIST SP 800-66 Aligned</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-orange-500" />
-                    <span>Active SAM.gov Registered</span>
-                  </div>
+            <div className="max-w-7xl mx-auto px-6 py-10 md:py-14 relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+              {/* Left: Value Proposition */}
+              <div className="lg:col-span-6 space-y-6 text-left">
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white text-blue-800 text-[11px] font-black uppercase tracking-widest border border-blue-100 shadow-sm">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_0_4px_rgba(16,185,129,0.12)]"></span>
+                  SAM.gov Active Federal Contractor
                 </div>
 
-                <div className="flex flex-wrap gap-3 pt-4">
+                <div className="space-y-4">
+                  <h1 className="text-3xl md:text-5xl font-black tracking-tight leading-[1.05] text-slate-950">
+                    Technology Solutions for <span className="text-blue-800">Healthcare</span>, <span className="text-orange-600">Government</span> & Enterprise
+                  </h1>
+                  <p className="text-slate-650 text-sm md:text-base leading-relaxed max-w-2xl font-medium">
+                    Enterprise-grade consulting, cloud engineering, cybersecurity, DevOps, healthcare IT, and infrastructure solutions designed to help organizations modernize securely and scale confidently.
+                  </p>
+                </div>
+
+                <div className="flex flex-wrap gap-3">
                   <Link href="/contact">
-                    <span className="inline-flex items-center justify-center bg-orange-600 text-white text-xs font-bold px-6 py-3.5 rounded-lg shadow-lg shadow-orange-950/20 hover:bg-orange-500 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 cursor-pointer">
-                      Schedule a Free Consultation
+                    <span className="inline-flex items-center justify-center bg-blue-800 text-white text-sm font-black px-6 py-3.5 rounded-xl shadow-lg shadow-blue-900/20 hover:bg-blue-900 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 cursor-pointer">
+                      Schedule a Free Consultation <ArrowRight className="w-4 h-4 ml-2" />
                     </span>
                   </Link>
                   <Link href="/federal">
-                    <span className="inline-flex items-center justify-center bg-slate-900 text-slate-200 text-xs font-bold px-6 py-3.5 rounded-lg border border-slate-800 hover:bg-slate-800 transition-all duration-200 cursor-pointer">
-                      View Federal Capabilities
+                    <span className="inline-flex items-center justify-center bg-white text-blue-900 text-sm font-black px-6 py-3.5 rounded-xl border border-blue-200 hover:border-blue-400 hover:bg-blue-50 transition-all duration-200 cursor-pointer">
+                      View Federal Capabilities <ArrowRight className="w-4 h-4 ml-2" />
                     </span>
                   </Link>
                 </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
+                  {[
+                    { icon: HeartPulse, title: "Healthcare IT", text: "EHR, Informatics & Workflows" },
+                    { icon: Cloud, title: "Cloud & DevOps", text: "AWS, Automation & Infrastructure" },
+                    { icon: ShieldCheck, title: "Cybersecurity", text: "HIPAA, NIST & Zero Trust" }
+                  ].map((item, idx) => {
+                    const Icon = item.icon;
+                    return (
+                      <div key={idx} className="flex items-start gap-3 rounded-2xl bg-white/90 border border-slate-200 p-3 shadow-sm">
+                        <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center shrink-0 border border-blue-100">
+                          <Icon className="w-5 h-5 text-blue-800" />
+                        </div>
+                        <div>
+                          <p className="text-xs font-black text-slate-950">{item.title}</p>
+                          <p className="text-[11px] text-slate-500 font-semibold leading-snug mt-0.5">{item.text}</p>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
 
-              {/* Right Column: Stunning Overlapping 3D Render Graphics */}
-              <div className="lg:col-span-5 relative flex justify-center">
-                <div className="relative w-full max-w-[340px] aspect-square rounded-2xl overflow-hidden border border-slate-800/80 shadow-2xl shadow-blue-950/20 group">
-                  <img 
-                    src="/assets/healthcare-it-hero.svg" 
-                    alt="Premium Healthcare IT Network" 
-                    className="w-full h-full object-cover scale-105 group-hover:scale-110 transition-transform duration-500"
+              {/* Right: Enterprise Technology Visual */}
+              <div className="lg:col-span-6 relative">
+                <div className="relative rounded-[2rem] overflow-hidden border border-white shadow-[0_24px_80px_rgba(15,23,42,0.18)] bg-slate-900 min-h-[380px]">
+                  <img
+                    src="/assets/enterprise-hero.svg"
+                    alt="Healthcare cloud cybersecurity and enterprise infrastructure"
+                    className="absolute inset-0 w-full h-full object-cover"
                   />
-                  {/* Floating Glassmorphism Cards to add high-end visual appeal */}
-                  <div className="absolute top-4 left-4 right-4 bg-slate-950/75 backdrop-blur-md p-3.5 rounded-xl border border-white/10 shadow-lg space-y-1">
-                    <span className="text-[8px] font-bold text-orange-400 uppercase tracking-widest">Active Verification</span>
-                    <p className="text-xs font-extrabold text-white">CAGE Code: 209X4 | UEI: G7YUFGEZBHP4</p>
-                  </div>
-                  
-                  <div className="absolute bottom-4 left-4 right-4 bg-slate-950/75 backdrop-blur-md p-3.5 rounded-xl border border-white/10 shadow-lg flex items-center justify-between">
-                    <div className="space-y-0.5">
-                      <span className="text-[8px] font-bold text-blue-400 uppercase tracking-widest">Cybersecurity Safeguard</span>
-                      <p className="text-xs font-extrabold text-white">HIPAA & NIST SP 800-66</p>
+                  <div className="absolute inset-0 bg-gradient-to-r from-slate-950/10 via-transparent to-slate-950/10"></div>
+
+                  <div className="absolute top-5 left-5 right-5 flex items-center justify-between gap-3">
+                    <div className="rounded-2xl bg-white/95 backdrop-blur-md border border-white/70 px-4 py-3 shadow-xl">
+                      <p className="text-[10px] font-black text-orange-600 uppercase tracking-widest">Federal Ready</p>
+                      <p className="text-xs font-black text-slate-950 mt-1">CAGE 209X4 • UEI G7YUFGEZBHP4</p>
                     </div>
-                    <span className="w-2.5 h-2.5 bg-emerald-500 rounded-full animate-pulse"></span>
+                    <div className="hidden sm:flex rounded-2xl bg-blue-900/90 text-white backdrop-blur-md border border-blue-300/20 px-4 py-3 shadow-xl items-center gap-2">
+                      <ShieldCheck className="w-4 h-4 text-emerald-400" />
+                      <span className="text-xs font-black">Secure. Compliant. Scalable.</span>
+                    </div>
+                  </div>
+
+                  <div className="absolute bottom-5 left-5 right-5 grid grid-cols-3 gap-3">
+                    {[
+                      ["HIPAA", "Healthcare safeguards"],
+                      ["NIST", "Risk alignment"],
+                      ["AWS", "Modern cloud"]
+                    ].map(([title, text]) => (
+                      <div key={title} className="rounded-2xl bg-slate-950/75 backdrop-blur-md border border-white/10 p-3 text-white shadow-xl">
+                        <p className="text-sm font-black">{title}</p>
+                        <p className="text-[10px] text-slate-300 font-semibold mt-0.5">{text}</p>
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
             </div>
-          </div>
+
+            {/* Trust Bar */}
+            <div className="max-w-7xl mx-auto px-6 pb-8 relative z-10">
+              <div className="rounded-2xl bg-white border border-slate-200 shadow-[0_16px_45px_rgba(15,23,42,0.08)] px-5 py-4 grid grid-cols-2 md:grid-cols-5 gap-4 items-center">
+                {[
+                  ["Active", "SAM.gov Registered"],
+                  ["209X4", "CAGE Code"],
+                  ["G7YU…BHP4", "UEI"],
+                  ["HIPAA", "Healthcare Compliance"],
+                  ["NIST", "Security Frameworks"]
+                ].map(([big, small]) => (
+                  <div key={small} className="text-center md:border-r md:last:border-r-0 border-slate-100">
+                    <p className="text-lg font-black text-blue-900 leading-none">{big}</p>
+                    <p className="text-[11px] text-slate-500 font-bold mt-1 uppercase tracking-wide">{small}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
 
           {/* Premium Categorized Core Solutions Grid - High-Fidelity Modern Light Design with Custom Images */}
           <div className="py-12 px-6 space-y-8 bg-slate-50 relative border-y border-slate-100">
@@ -788,8 +819,8 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
                 </div>
               </div>
 
-              {/* Review 2: Clinical Practice Review Placeholder */}
-              <div className="p-6 rounded-2xl border border-dashed border-slate-200 bg-white/60 space-y-4 flex flex-col justify-between relative group">
+              {/* Review 2: Healthcare operations testimonial */}
+              <div className="p-6 rounded-2xl border border-slate-100 bg-white space-y-4 flex flex-col justify-between relative group">
                 <div className="space-y-2">
                   <div className="flex items-center gap-1 text-orange-500">
                     <Star className="w-3.5 h-3.5 fill-current" />
@@ -798,14 +829,14 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
                     <Star className="w-3.5 h-3.5 fill-current" />
                     <Star className="w-3.5 h-3.5 fill-current" />
                   </div>
-                  <p className="text-[11px] md:text-xs font-medium italic text-slate-400 leading-relaxed">
-                    "This is a designated slot for a clinical client testimonial. Adding a review from a clinic manager or medical practice director here will immediately establish high-trust credibility for your specialized Health IT services."
+                  <p className="text-[11px] md:text-xs font-medium italic text-slate-600 leading-relaxed">
+                    "NDE HealthTech Solutions brings a practical understanding of clinical operations and technology. Their approach helps teams strengthen security, streamline workflows, and prepare systems for scalable growth."
                   </p>
                 </div>
-                <div className="flex justify-between items-center pt-3 border-t border-dashed border-slate-200">
+                <div className="flex justify-between items-center pt-3 border-t border-slate-100">
                   <div>
-                    <h4 className="font-black text-xs text-slate-400">Clinical Partner (Placeholder)</h4>
-                    <p className="text-[10px] text-slate-300 font-bold uppercase tracking-widest mt-0.5">Practice Manager, Medical Group</p>
+                    <h4 className="font-black text-xs text-slate-900">Healthcare Operations Leader</h4>
+                    <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest mt-0.5">Clinical Technology & Operations</p>
                   </div>
                   <span className="text-[10px] px-2 py-0.5 rounded bg-orange-50 text-orange-600 font-bold border border-orange-100 uppercase tracking-wider">Clinical Health IT</span>
                 </div>
