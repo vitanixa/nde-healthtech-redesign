@@ -5,6 +5,7 @@ import { Route, Switch, useLocation } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { MockupRenderer } from "./pages/RedesignMockups";
+import Analytics from "./components/Analytics";
 
 // Standalone Page Wrapper that renders the clean redesigned mockup page in full-screen (desktop mode)
 function StandalonePage({ pageId }: { pageId: string }) {
@@ -40,6 +41,9 @@ function Router() {
       <Route path="/blog">
         <StandalonePage pageId="blog" />
       </Route>
+      <Route path="/academy">
+        <StandalonePage pageId="academy" />
+      </Route>
       <Route path="/contact">
         <StandalonePage pageId="contact" />
       </Route>
@@ -57,6 +61,7 @@ function App() {
     <ErrorBoundary>
       <ThemeProvider defaultTheme="light">
         <TooltipProvider>
+          <Analytics />
           <Toaster />
           <Router />
         </TooltipProvider>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { Link } from "wouter";
 import { 
   Shield, 
@@ -32,7 +32,11 @@ import {
   Terminal,
   Activity,
   Star,
-  Linkedin
+  Linkedin,
+  BarChart3,
+  GraduationCap,
+  BookOpen,
+  Send
 } from "lucide-react";
 
 // Types for Mockup Definition
@@ -158,6 +162,18 @@ export default function RedesignMockups() {
         "Added 3-sentence professional biographies highlighting degrees, technical certifications, and DevOps/SecOps expertise.",
         "Significantly improved E-E-A-T (Expertise, Authoritativeness, Trustworthiness) which Google's Quality Guidelines reward.",
         "Removed raw, plain-text personal emails to eliminate spam and phishing risks, replacing them with a secure contact trigger."
+      ]
+    },
+    {
+      id: "academy",
+      name: "Academy",
+      title: "NDE HealthTech Academy",
+      beforeDesktopUrl: beforeUrls.home.desktop,
+      beforeMobileUrl: beforeUrls.home.mobile,
+      redesignNotes: [
+        "Added a dedicated academy page to connect consulting services with the NDE HealthTech Academy YouTube channel and future courses.",
+        "Structured learning paths for DevOps, AWS, Healthcare IT, Informatics, Cybersecurity, and Project Management.",
+        "Created a clear call-to-action for learners to subscribe and follow the academy launch."
       ]
     },
     {
@@ -347,6 +363,53 @@ export default function RedesignMockups() {
 // Custom Component to Render Redesigned Mockups Page-by-Page dynamically (purely CSS-based static design mockups)
 export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "desktop" | "mobile" }) {
   const isMobile = mode === "mobile";
+  const [contactSubmitted, setContactSubmitted] = useState(false);
+  const [contactSubmitting, setContactSubmitting] = useState(false);
+
+  const formspreeEndpoint = import.meta.env.VITE_FORMSPREE_ENDPOINT as string | undefined;
+  const calendlyUrl = import.meta.env.VITE_CALENDLY_URL as string | undefined;
+
+  const handleContactSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const data = new FormData(form);
+    setContactSubmitting(true);
+
+    try {
+      if (formspreeEndpoint) {
+        const response = await fetch(formspreeEndpoint, {
+          method: "POST",
+          body: data,
+          headers: { Accept: "application/json" }
+        });
+
+        if (!response.ok) {
+          throw new Error("Form submission failed");
+        }
+      } else {
+        const subject = encodeURIComponent("New consultation request from NDEHealthTech.com");
+        const body = encodeURIComponent(
+          `Name: ${data.get("name") || ""}
+` +
+          `Email: ${data.get("email") || ""}
+` +
+          `Organization: ${data.get("organization") || ""}
+` +
+          `Technical Need: ${data.get("need") || ""}
+` +
+          `Message: ${data.get("message") || ""}`
+        );
+        window.location.href = `mailto:contracts@ndehealthtech.com?subject=${subject}&body=${body}`;
+      }
+
+      setContactSubmitted(true);
+      form.reset();
+    } catch (error) {
+      alert("We could not submit the form automatically. Please email contracts@ndehealthtech.com.");
+    } finally {
+      setContactSubmitting(false);
+    }
+  };
 
   // Global Header Redesign
   const renderHeader = () => (
@@ -384,6 +447,9 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
           <Link href="/blog">
             <span className={`pb-0.5 transition-all cursor-pointer ${pageId === 'blog' ? 'text-slate-900 border-b-2 border-slate-900' : 'hover:text-slate-900'}`}>Blog</span>
           </Link>
+          <Link href="/academy">
+            <span className={`pb-0.5 transition-all cursor-pointer ${pageId === 'academy' ? 'text-slate-900 border-b-2 border-slate-900' : 'hover:text-slate-900'}`}>Academy</span>
+          </Link>
           <Link href="/contact">
             <button className="bg-slate-900 text-white text-[11px] px-4 py-2 rounded-lg font-bold hover:bg-slate-800 transition-colors shadow-sm cursor-pointer">
               Contact
@@ -419,6 +485,9 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
           </Link>
           <Link href="/why-us">
             <span className="hover:text-slate-300 cursor-pointer transition-colors">Why Choose Us</span>
+          </Link>
+          <Link href="/academy">
+            <span className="hover:text-slate-300 cursor-pointer transition-colors">Academy</span>
           </Link>
           <Link href="/contact">
             <span className="hover:text-slate-300 cursor-pointer transition-colors">Contact</span>
@@ -1162,6 +1231,66 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
         </div>
       );
 
+
+    case "academy":
+      return (
+        <div className="flex-1 flex flex-col bg-white text-slate-800">
+          {renderHeader()}
+
+          <div className="relative py-16 px-6 bg-slate-950 text-white text-center overflow-hidden shrink-0">
+            <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_top_left,#f97316,transparent_35%),radial-gradient(circle_at_bottom_right,#2563eb,transparent_35%)]" />
+            <div className="relative z-10 space-y-4 max-w-3xl mx-auto">
+              <span className="text-[9px] px-2.5 py-0.5 rounded bg-orange-600 text-white font-bold uppercase tracking-wider">Training Division</span>
+              <h1 className="text-2xl md:text-4xl font-black tracking-tight leading-tight">NDE HealthTech Academy</h1>
+              <p className="text-slate-300 text-xs md:text-sm max-w-2xl mx-auto leading-relaxed">
+                Structured learning paths for DevOps, cloud computing, healthcare IT, informatics, cybersecurity, and project management.
+              </p>
+              <a href="https://www.youtube.com/@NDEHealthTechAcademy" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 bg-orange-600 hover:bg-orange-500 text-white text-xs font-bold rounded-lg px-5 py-2.5 transition-colors shadow-lg">
+                <GraduationCap className="w-4 h-4" /> Visit YouTube Academy
+              </a>
+            </div>
+          </div>
+
+          <div className="py-12 px-6 max-w-5xl mx-auto w-full space-y-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+              {[
+                { icon: Terminal, title: "DevOps Fundamentals", desc: "Linux, Git, CI/CD, Docker, Kubernetes, Terraform, and monitoring." },
+                { icon: Cloud, title: "AWS Cloud Engineer", desc: "Core AWS services, networking, security, compute, storage, and architecture." },
+                { icon: Activity, title: "Healthcare IT", desc: "EHR systems, interoperability, HIPAA, clinical workflows, and health informatics." },
+                { icon: Shield, title: "Cybersecurity", desc: "Risk management, IAM, cloud security, compliance, and secure operations." },
+                { icon: BarChart3, title: "Healthcare Analytics", desc: "Dashboards, KPIs, reporting, data visualization, and decision support." },
+                { icon: Briefcase, title: "Career Development", desc: "Certification planning, interviews, resumes, leadership, and career growth." }
+              ].map((path, idx) => {
+                const Icon = path.icon;
+                return (
+                  <div key={idx} className="p-5 rounded-2xl border border-slate-100 bg-white shadow-sm hover:shadow-md hover:border-orange-200 transition-all space-y-3">
+                    <div className="w-10 h-10 rounded-xl bg-orange-50 text-orange-600 flex items-center justify-center border border-orange-100">
+                      <Icon className="w-5 h-5" />
+                    </div>
+                    <h3 className="font-black text-sm text-slate-900">{path.title}</h3>
+                    <p className="text-[11px] text-slate-500 leading-relaxed">{path.desc}</p>
+                  </div>
+                );
+              })}
+            </div>
+
+            <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6 md:p-8 flex flex-col md:flex-row md:items-center justify-between gap-5">
+              <div className="space-y-2">
+                <h2 className="font-black text-lg text-slate-900">Coming Soon: Complete DevOps Learning Path</h2>
+                <p className="text-xs text-slate-600 leading-relaxed max-w-2xl">
+                  The first academy series will start with beginner-friendly DevOps lessons and progress into real-world cloud and automation projects.
+                </p>
+              </div>
+              <a href="/contact" className="inline-flex items-center justify-center gap-2 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold rounded-lg px-5 py-2.5 transition-colors">
+                <BookOpen className="w-4 h-4" /> Request Training Info
+              </a>
+            </div>
+          </div>
+
+          {renderFooter()}
+        </div>
+      );
+
     case "contact":
       return (
         <div className="flex-1 flex flex-col bg-white text-slate-800">
@@ -1193,44 +1322,70 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
                 <h3 className="font-black text-xs text-slate-900 uppercase tracking-widest border-b border-slate-100 pb-3">
                   Request Discovery Session
                 </h3>
-                <div className="space-y-3">
-                  <div className="grid grid-cols-2 gap-3">
-                    <div className="space-y-1">
-                      <label className="text-[9px] font-bold text-slate-400 uppercase tracking-wider">Full Name</label>
-                      <input type="text" className="w-full border border-slate-200 rounded-lg px-3 py-1.5 text-[11px]" disabled />
+                {contactSubmitted ? (
+                  <div className="rounded-xl border border-emerald-100 bg-emerald-50 p-5 text-center space-y-3">
+                    <Check className="w-8 h-8 text-emerald-700 mx-auto" />
+                    <h4 className="font-black text-sm text-slate-900">Request Received</h4>
+                    <p className="text-[11px] text-slate-600 leading-relaxed">
+                      Thank you. We will review your request and follow up within 24 business hours.
+                    </p>
+                    <button onClick={() => setContactSubmitted(false)} className="text-[10px] font-bold text-orange-700 hover:underline">
+                      Submit another request
+                    </button>
+                  </div>
+                ) : (
+                  <form onSubmit={handleContactSubmit} className="space-y-3">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      <div className="space-y-1">
+                        <label className="text-[9px] font-bold text-slate-400 uppercase tracking-wider">Full Name</label>
+                        <input name="name" type="text" required placeholder="Your name" className="w-full border border-slate-200 rounded-lg px-3 py-2 text-[11px] focus:outline-none focus:ring-2 focus:ring-orange-500/30" />
+                      </div>
+                      <div className="space-y-1">
+                        <label className="text-[9px] font-bold text-slate-400 uppercase tracking-wider">Email Address</label>
+                        <input name="email" type="email" required placeholder="you@company.com" className="w-full border border-slate-200 rounded-lg px-3 py-2 text-[11px] focus:outline-none focus:ring-2 focus:ring-orange-500/30" />
+                      </div>
                     </div>
+                    
                     <div className="space-y-1">
-                      <label className="text-[9px] font-bold text-slate-400 uppercase tracking-wider">Email Address</label>
-                      <input type="email" className="w-full border border-slate-200 rounded-lg px-3 py-1.5 text-[11px]" disabled />
+                      <label className="text-[9px] font-bold text-slate-400 uppercase tracking-wider">Organization Type</label>
+                      <select name="organization" required className="w-full border border-slate-200 rounded-lg px-3 py-2 text-[11px] bg-white text-slate-600 focus:outline-none focus:ring-2 focus:ring-orange-500/30">
+                        <option value="">Select organization...</option>
+                        <option>Clinical Practice / Clinic</option>
+                        <option>Hospital / Health System</option>
+                        <option>Government Agency</option>
+                        <option>Commercial Enterprise</option>
+                        <option>Small Business</option>
+                      </select>
                     </div>
-                  </div>
-                  
-                  <div className="space-y-1">
-                    <label className="text-[9px] font-bold text-slate-400 uppercase tracking-wider">Organization Type</label>
-                    <select className="w-full border border-slate-200 rounded-lg px-3 py-1.5 text-[11px] bg-white text-slate-400" disabled>
-                      <option>Select organization...</option>
-                      <option>Clinical Practice / Clinic</option>
-                      <option>Hospital / Health System</option>
-                      <option>Government Agency</option>
-                      <option>Commercial Enterprise</option>
-                    </select>
-                  </div>
 
-                  <div className="space-y-1">
-                    <label className="text-[9px] font-bold text-slate-400 uppercase tracking-wider">Primary Technical Need</label>
-                    <select className="w-full border border-slate-200 rounded-lg px-3 py-1.5 text-[11px] bg-white text-slate-400" disabled>
-                      <option>Select primary interest...</option>
-                      <option>HIPAA Cybersecurity Audit</option>
-                      <option>EHR Support & Interoperability</option>
-                      <option>Medical Cloud Migration</option>
-                      <option>24/7 Managed IT Support</option>
-                    </select>
-                  </div>
+                    <div className="space-y-1">
+                      <label className="text-[9px] font-bold text-slate-400 uppercase tracking-wider">Primary Technical Need</label>
+                      <select name="need" required className="w-full border border-slate-200 rounded-lg px-3 py-2 text-[11px] bg-white text-slate-600 focus:outline-none focus:ring-2 focus:ring-orange-500/30">
+                        <option value="">Select primary interest...</option>
+                        <option>HIPAA Cybersecurity Audit</option>
+                        <option>EHR Support & Interoperability</option>
+                        <option>Medical Cloud Migration</option>
+                        <option>24/7 Managed IT Support</option>
+                        <option>Federal Contracting / Subcontracting</option>
+                        <option>Training / NDE HealthTech Academy</option>
+                      </select>
+                    </div>
 
-                  <button className="w-full bg-orange-600 text-white text-xs font-bold py-2.5 rounded-lg hover:bg-orange-500 mt-2 transition-colors shadow-md">
-                    Request Free Assessment
-                  </button>
-                </div>
+                    <div className="space-y-1">
+                      <label className="text-[9px] font-bold text-slate-400 uppercase tracking-wider">Brief Message</label>
+                      <textarea name="message" rows={4} placeholder="Tell us what you need help with..." className="w-full border border-slate-200 rounded-lg px-3 py-2 text-[11px] focus:outline-none focus:ring-2 focus:ring-orange-500/30 resize-none" />
+                    </div>
+
+                    <button type="submit" disabled={contactSubmitting} className="w-full bg-orange-600 text-white text-xs font-bold py-2.5 rounded-lg hover:bg-orange-500 mt-2 transition-colors shadow-md flex items-center justify-center gap-2 disabled:opacity-60">
+                      <Send className="w-3.5 h-3.5" /> {contactSubmitting ? "Sending..." : "Request Free Assessment"}
+                    </button>
+                    {!formspreeEndpoint && (
+                      <p className="text-[10px] text-slate-400 leading-relaxed">
+                        This form opens your email app by default. Add VITE_FORMSPREE_ENDPOINT in Vercel for direct email delivery.
+                      </p>
+                    )}
+                  </form>
+                )}
               </div>
 
               {/* Address Context */}
@@ -1248,6 +1403,20 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
                   <p className="flex items-center gap-3">
                     <Phone className="w-5 h-5 text-orange-600 shrink-0 bg-orange-50 p-1 rounded border border-orange-100" />
                     <span>629-345-8366</span>
+                  </p>
+                </div>
+                <div className="pt-2 space-y-2">
+                  {calendlyUrl ? (
+                    <a href={calendlyUrl} target="_blank" rel="noreferrer" className="w-full inline-flex justify-center items-center gap-2 bg-slate-900 text-white text-xs font-bold py-2.5 rounded-lg hover:bg-slate-800 transition-colors shadow-sm">
+                      <Calendar className="w-3.5 h-3.5" /> Book on Calendly
+                    </a>
+                  ) : (
+                    <a href="mailto:contracts@ndehealthtech.com" className="w-full inline-flex justify-center items-center gap-2 bg-slate-900 text-white text-xs font-bold py-2.5 rounded-lg hover:bg-slate-800 transition-colors shadow-sm">
+                      <Mail className="w-3.5 h-3.5" /> Email Consultation Request
+                    </a>
+                  )}
+                  <p className="text-[10px] text-slate-400 leading-relaxed">
+                    Add VITE_CALENDLY_URL in Vercel when your Calendly booking link is ready.
                   </p>
                 </div>
               </div>
