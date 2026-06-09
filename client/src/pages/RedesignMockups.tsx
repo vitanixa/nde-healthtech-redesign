@@ -610,12 +610,16 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
                 </div>
 
                 <div className="flex flex-wrap gap-3 pt-4">
-                  <button className="bg-orange-600 text-white text-xs font-bold px-6 py-3.5 rounded-lg shadow-lg shadow-orange-950/20 hover:bg-orange-500 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200">
-                    Schedule a Free Consultation
-                  </button>
-                  <button className="bg-slate-900 text-slate-200 text-xs font-bold px-6 py-3.5 rounded-lg border border-slate-800 hover:bg-slate-800 transition-all duration-200">
-                    View Federal Capabilities
-                  </button>
+                  <Link href="/contact">
+                    <span className="inline-flex items-center justify-center bg-orange-600 text-white text-xs font-bold px-6 py-3.5 rounded-lg shadow-lg shadow-orange-950/20 hover:bg-orange-500 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 cursor-pointer">
+                      Schedule a Free Consultation
+                    </span>
+                  </Link>
+                  <Link href="/federal">
+                    <span className="inline-flex items-center justify-center bg-slate-900 text-slate-200 text-xs font-bold px-6 py-3.5 rounded-lg border border-slate-800 hover:bg-slate-800 transition-all duration-200 cursor-pointer">
+                      View Federal Capabilities
+                    </span>
+                  </Link>
                 </div>
               </div>
 
@@ -877,9 +881,11 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
                         </div>
                       </div>
                       <div className="px-4 pb-4 pt-2 border-t border-slate-50 mt-1 flex justify-between items-center">
-                        <button className="text-xs font-bold text-slate-900 hover:text-slate-600 flex items-center gap-1">
-                          Request Details <ArrowRight className="w-3.5 h-3.5 text-orange-600" />
-                        </button>
+                        <Link href="/contact">
+                          <span className="text-xs font-bold text-slate-900 hover:text-slate-600 flex items-center gap-1 cursor-pointer">
+                            Request Details <ArrowRight className="w-3.5 h-3.5 text-orange-600" />
+                          </span>
+                        </Link>
                       </div>
                     </div>
                   );
@@ -945,9 +951,11 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
                         </div>
                       </div>
                       <div className="px-4 pb-4 pt-2 border-t border-slate-50 mt-1 flex justify-between items-center">
-                        <button className="text-xs font-bold text-slate-900 hover:text-slate-600 flex items-center gap-1">
-                          Request Details <ArrowRight className="w-3.5 h-3.5 text-blue-600" />
-                        </button>
+                        <Link href="/contact">
+                          <span className="text-xs font-bold text-slate-900 hover:text-slate-600 flex items-center gap-1 cursor-pointer">
+                            Request Details <ArrowRight className="w-3.5 h-3.5 text-blue-600" />
+                          </span>
+                        </Link>
                       </div>
                     </div>
                   );
@@ -1126,7 +1134,7 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
               <div className="p-6 md:p-8 bg-slate-900/60 border-t md:border-t-0 md:border-l border-slate-900 md:w-1/2 flex flex-col justify-center space-y-3">
                 <div className="space-y-2.5">
                   <a 
-                    href="/manus-storage/Capability_d6d878a7.pdf" 
+                    href="/assets/NDE_HealthTech_Capability_Statement.pdf" 
                     download="NDE_HealthTech_Solutions_Capability_Statement.pdf"
                     target="_blank"
                     rel="noreferrer"
@@ -1280,9 +1288,11 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
                       {mem.bio}
                     </p>
                   </div>
-                  <button className="w-full bg-slate-900 text-white text-xs font-bold py-1.5 rounded-lg hover:bg-slate-800 transition-colors mt-2 shadow-sm">
-                    Contact Professional
-                  </button>
+                  <Link href="/contact">
+                    <span className="block w-full text-center bg-slate-900 text-white text-xs font-bold py-1.5 rounded-lg hover:bg-slate-800 transition-colors mt-2 shadow-sm cursor-pointer">
+                      Contact Professional
+                    </span>
+                  </Link>
                 </div>
               ))}
             </div>
@@ -1528,7 +1538,7 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
                     <p className="text-sm text-slate-600 leading-relaxed">{art.desc}</p>
                   </div>
                   <div className="pt-3 border-t border-slate-50 mt-4">
-                    <span className="text-xs font-bold text-slate-900 cursor-pointer hover:underline">Read Article →</span>
+                    <Link href="/blog"><span className="text-xs font-bold text-slate-900 cursor-pointer hover:underline">Read Article →</span></Link>
                   </div>
                 </div>
               ))}
