@@ -1,4 +1,4 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, SyntheticEvent, useState } from "react";
 import { Link } from "wouter";
 import { 
   Shield, 
@@ -365,6 +365,24 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
   const isMobile = mode === "mobile";
   const [contactSubmitted, setContactSubmitted] = useState(false);
   const [contactSubmitting, setContactSubmitting] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const realImages = {
+    clinical: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1200&q=85",
+    ehr: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=1200&q=85",
+    cloud: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=85",
+    security: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1200&q=85",
+    datacenter: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=85",
+    strategy: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=85",
+    analytics: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=85",
+    support: "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=85"
+  };
+
+  const imageFallback = (event: SyntheticEvent<HTMLImageElement>, fallback: string) => {
+    const img = event.currentTarget;
+    if (img.src.endsWith(fallback)) return;
+    img.src = fallback;
+  };
 
   const formspreeEndpoint = import.meta.env.VITE_FORMSPREE_ENDPOINT as string | undefined;
   const calendlyUrl = import.meta.env.VITE_CALENDLY_URL as string | undefined;
@@ -412,56 +430,85 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
   };
 
   // Global Header Redesign
+  const navLinks = [
+    { href: "/", label: "Home", id: "home" },
+    { href: "/services", label: "Services", id: "services" },
+    { href: "/healthcare-it", label: "Healthcare IT", id: "healthcare_it" },
+    { href: "/federal", label: "Federal", id: "federal" },
+    { href: "/why-us", label: "Why Choose Us", id: "why_us" },
+    { href: "/team", label: "Our Team", id: "team" },
+    { href: "/blog", label: "Blog", id: "blog" },
+    { href: "/academy", label: "Academy", id: "academy" },
+  ];
+
   const renderHeader = () => (
-    <div className="bg-white/95 backdrop-blur-md border-b border-slate-100 text-slate-900 py-3 px-4 md:px-6 flex justify-between items-center shrink-0 shadow-sm sticky top-0 z-40 min-h-[68px]">
-      <div className="flex items-center gap-2.5 min-w-0">
-        <img 
-          src="/assets/nde-logo.png" 
-          alt="NDE HealthTech Logo" 
-          className="w-9 h-9 md:w-10 md:h-10 object-contain rounded bg-slate-50 border border-slate-100 p-0.5 shadow-sm shrink-0"
-        />
-        <div className="leading-none">
-          <span className="font-black text-sm md:text-base tracking-tight text-slate-900 block whitespace-nowrap">NDE HealthTech</span>
-        </div>
+    <header className="bg-white/95 backdrop-blur-md border-b border-slate-100 text-slate-900 sticky top-0 z-50 shadow-sm shrink-0">
+      <div className="px-4 md:px-6 h-[68px] flex justify-between items-center max-w-7xl mx-auto">
+        <Link href="/">
+          <div className="flex items-center gap-2.5 min-w-0 cursor-pointer" onClick={() => setMobileMenuOpen(false)}>
+            <img 
+              src="/assets/nde-logo.png" 
+              alt="NDE HealthTech Logo" 
+              className="w-9 h-9 md:w-10 md:h-10 object-contain rounded bg-slate-50 border border-slate-100 p-0.5 shadow-sm shrink-0"
+            />
+            <div className="leading-none min-w-0">
+              <span className="font-black text-sm md:text-base tracking-tight text-slate-900 block whitespace-nowrap">NDE HealthTech</span>
+              <span className="text-[9px] md:text-[10px] font-bold text-orange-600 uppercase tracking-[0.18em] block mt-1">Solutions</span>
+            </div>
+          </div>
+        </Link>
+
+        {!isMobile ? (
+          <div className="flex items-center gap-3 xl:gap-5 text-[11px] xl:text-xs font-bold text-slate-600">
+            {navLinks.map((link) => (
+              <Link key={link.href} href={link.href}>
+                <span className={`pb-0.5 transition-all cursor-pointer ${pageId === link.id ? 'text-slate-900 border-b-2 border-slate-900' : 'hover:text-slate-900'}`}>{link.label}</span>
+              </Link>
+            ))}
+            <Link href="/contact">
+              <button className="bg-slate-900 text-white text-[11px] px-4 py-2 rounded-lg font-bold hover:bg-slate-800 transition-colors shadow-sm cursor-pointer">
+                Contact
+              </button>
+            </Link>
+          </div>
+        ) : (
+          <button
+            type="button"
+            aria-label="Open navigation menu"
+            aria-expanded={mobileMenuOpen}
+            onClick={() => setMobileMenuOpen((open) => !open)}
+            className="w-10 h-10 flex items-center justify-center rounded-lg bg-slate-50 cursor-pointer border border-slate-100 shadow-sm active:scale-95 transition-transform"
+          >
+            <Menu className="w-5 h-5 text-slate-800" />
+          </button>
+        )}
       </div>
-      {!isMobile ? (
-        <div className="flex items-center gap-3 xl:gap-5 text-[11px] xl:text-xs font-bold text-slate-600">
-          <Link href="/">
-            <span className={`pb-0.5 transition-all cursor-pointer ${pageId === 'home' ? 'text-slate-900 border-b-2 border-slate-900' : 'hover:text-slate-900'}`}>Home</span>
-          </Link>
-          <Link href="/services">
-            <span className={`pb-0.5 transition-all cursor-pointer ${pageId === 'services' ? 'text-slate-900 border-b-2 border-slate-900' : 'hover:text-slate-900'}`}>Services</span>
-          </Link>
-          <Link href="/healthcare-it">
-            <span className={`pb-0.5 transition-all cursor-pointer ${pageId === 'healthcare_it' ? 'text-slate-900 border-b-2 border-slate-900' : 'hover:text-slate-900'}`}>Healthcare IT</span>
-          </Link>
-          <Link href="/federal">
-            <span className={`pb-0.5 transition-all cursor-pointer ${pageId === 'federal' ? 'text-slate-900 border-b-2 border-slate-900' : 'hover:text-slate-900'}`}>Federal</span>
-          </Link>
-          <Link href="/why-us">
-            <span className={`pb-0.5 transition-all cursor-pointer ${pageId === 'why_us' ? 'text-slate-900 border-b-2 border-slate-900' : 'hover:text-slate-900'}`}>Why Choose Us</span>
-          </Link>
-          <Link href="/team">
-            <span className={`pb-0.5 transition-all cursor-pointer ${pageId === 'team' ? 'text-slate-900 border-b-2 border-slate-900' : 'hover:text-slate-900'}`}>Our Team</span>
-          </Link>
-          <Link href="/blog">
-            <span className={`pb-0.5 transition-all cursor-pointer ${pageId === 'blog' ? 'text-slate-900 border-b-2 border-slate-900' : 'hover:text-slate-900'}`}>Blog</span>
-          </Link>
-          <Link href="/academy">
-            <span className={`pb-0.5 transition-all cursor-pointer ${pageId === 'academy' ? 'text-slate-900 border-b-2 border-slate-900' : 'hover:text-slate-900'}`}>Academy</span>
-          </Link>
-          <Link href="/contact">
-            <button className="bg-slate-900 text-white text-[11px] px-4 py-2 rounded-lg font-bold hover:bg-slate-800 transition-colors shadow-sm cursor-pointer">
-              Contact
-            </button>
-          </Link>
-        </div>
-      ) : (
-        <div className="w-10 h-10 flex items-center justify-center rounded-lg bg-slate-50 cursor-pointer border border-slate-100 shadow-sm">
-          <Menu className="w-4 h-4 text-slate-700" />
-        </div>
+
+      {isMobile && mobileMenuOpen && (
+        <nav className="absolute left-0 right-0 top-[68px] z-50 bg-white border-b border-slate-200 shadow-xl px-4 py-4">
+          <div className="grid gap-1 max-w-md mx-auto">
+            {navLinks.map((link) => (
+              <Link key={link.href} href={link.href}>
+                <span
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`block rounded-xl px-4 py-3 text-sm font-bold transition-colors ${pageId === link.id ? 'bg-slate-900 text-white' : 'text-slate-700 hover:bg-slate-50'}`}
+                >
+                  {link.label}
+                </span>
+              </Link>
+            ))}
+            <Link href="/contact">
+              <span
+                onClick={() => setMobileMenuOpen(false)}
+                className="mt-2 block rounded-xl px-4 py-3 text-sm font-black text-center bg-orange-600 text-white shadow-sm"
+              >
+                Schedule Consultation
+              </span>
+            </Link>
+          </div>
+        </nav>
       )}
-    </div>
+    </header>
   );
 
   // Global Footer Redesign
@@ -756,7 +803,7 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
           <div 
             className="relative py-14 px-6 bg-cover bg-center text-white text-center space-y-3 shrink-0"
             style={{ 
-              backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.92)), url("/assets/healthcare-it-hero.svg")` 
+              backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.92)), url("https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1800&q=85")` 
             }}
           >
             <div className="relative z-10 max-w-2xl mx-auto space-y-2">
@@ -786,25 +833,29 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
                     title: "Healthcare IT & Informatics", 
                     desc: "Comprehensive support for medical workflows, EHR data interoperability, and platform-specific management (Epic, Cerner, eClinicalWorks) ensuring seamless patient care pathways.", 
                     icon: Cpu,
-                    img: "/assets/workflow-card.svg"
+                    img: realImages.clinical,
+                    fallback: "/assets/workflow-card.svg"
                   },
                   { 
                     title: "Clinical System Integrations", 
                     desc: "Aligning technical software systems directly with nursing and physician workflows, optimizing database structures, and enabling HL7/FHIR compliant data pipelines.", 
                     icon: Layers,
-                    img: "/assets/ehr-card.svg"
+                    img: realImages.ehr,
+                    fallback: "/assets/ehr-card.svg"
                   },
                   { 
                     title: "Health IT Consulting Services", 
                     desc: "Strategic advisory on clinical software selections, long-term system optimization, regulatory compliance pathways, and specialized healthcare technology architectures.", 
                     icon: Briefcase,
-                    img: "/assets/ehr-card.svg"
+                    img: realImages.strategy,
+                    fallback: "/assets/ehr-card.svg"
                   },
                   { 
                     title: "Medical Data Management", 
                     desc: "Secure storage, migration, and management of Protected Health Information (PHI) and clinical imaging records with strict technical safeguard compliance.", 
                     icon: Database,
-                    img: "/assets/hipaa-card.svg"
+                    img: realImages.security,
+                    fallback: "/assets/hipaa-card.svg"
                   }
                 ].map((srv, idx) => {
                   const Icon = srv.icon;
@@ -812,7 +863,7 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
                     <div key={idx} className="rounded-2xl border border-slate-150 bg-white overflow-hidden shadow-sm hover:shadow-md hover:border-orange-200 transition-all duration-300 flex flex-col justify-between">
                       <div>
                         <div className="h-32 relative overflow-hidden bg-slate-900">
-                          <img src={srv.img} alt={srv.title} className="w-full h-full object-cover opacity-75" />
+                          <img src={srv.img} alt={srv.title} className="w-full h-full object-cover opacity-85" loading="lazy" onError={(e) => imageFallback(e, srv.fallback || "/assets/workflow-card.svg")} />
                           <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent"></div>
                           <div className="absolute bottom-3 left-4 flex items-center gap-2">
                             <div className="w-7 h-7 rounded-lg bg-orange-500/15 backdrop-blur-md flex items-center justify-center border border-orange-500/20">
@@ -850,25 +901,29 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
                     title: "Managed IT & Helpdesk Support", 
                     desc: "Proactive 24/7/365 helpdesk, network administration, and systems monitoring designed to eliminate technical friction and ensure operational continuity.", 
                     icon: Laptop,
-                    img: "/assets/workflow-card.svg"
+                    img: realImages.support,
+                    fallback: "/assets/workflow-card.svg"
                   },
                   { 
                     title: "Cloud & Infrastructure Engineering", 
                     desc: "Secure medical cloud architecture, server migrations, virtualization, and robust database administration ensuring optimal performance and scalability.", 
                     icon: Cloud,
-                    img: "/assets/hipaa-card.svg"
+                    img: realImages.cloud,
+                    fallback: "/assets/hipaa-card.svg"
                   },
                   { 
                     title: "Cybersecurity & Risk Management", 
                     desc: "Technical, physical, and administrative safeguards protecting clinical networks from advanced threats, including automated threat detection and penetration testing.", 
                     icon: Lock,
-                    img: "/assets/hipaa-card.svg"
+                    img: realImages.security,
+                    fallback: "/assets/hipaa-card.svg"
                   },
                   { 
                     title: "Backup & Disaster Recovery Planning", 
                     desc: "Automated off-site backup protocols, redundancy configurations, and rigorous business continuity blueprints to protect operations during critical outages.", 
                     icon: Shield,
-                    img: "/assets/workflow-card.svg"
+                    img: realImages.datacenter,
+                    fallback: "/assets/workflow-card.svg"
                   }
                 ].map((srv, idx) => {
                   const Icon = srv.icon;
@@ -876,7 +931,7 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
                     <div key={idx} className="rounded-2xl border border-slate-150 bg-white overflow-hidden shadow-sm hover:shadow-md hover:border-blue-200 transition-all duration-300 flex flex-col justify-between">
                       <div>
                         <div className="h-32 relative overflow-hidden bg-slate-900">
-                          <img src={srv.img} alt={srv.title} className="w-full h-full object-cover opacity-75" />
+                          <img src={srv.img} alt={srv.title} className="w-full h-full object-cover opacity-85" loading="lazy" onError={(e) => imageFallback(e, srv.fallback || "/assets/workflow-card.svg")} />
                           <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent"></div>
                           <div className="absolute bottom-3 left-4 flex items-center gap-2">
                             <div className="w-7 h-7 rounded-lg bg-blue-500/15 backdrop-blur-md flex items-center justify-center border border-blue-500/20">
@@ -914,7 +969,7 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
           <div 
             className="relative py-14 px-6 bg-cover bg-center text-white space-y-4 shrink-0"
             style={{ 
-              backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.92)), url("/assets/healthcare-it-hero.svg")` 
+              backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.92)), url("https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1800&q=85")` 
             }}
           >
             <div className="relative z-10 space-y-2 max-w-2xl">
@@ -940,19 +995,22 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
                     title: "EHR Support & Interoperability", 
                     desc: "Seamless integration and secure data exchange for leading platforms, including Epic, Cerner, and eClinicalWorks, utilizing HL7 and FHIR standards.", 
                     icon: Cpu,
-                    img: "/assets/ehr-card.svg"
+                    img: realImages.strategy,
+                    fallback: "/assets/ehr-card.svg"
                   },
                   { 
                     title: "HIPAA-Compliant Security", 
                     desc: "Implementation of rigorous administrative, physical, and technical safeguards aligned with NIST SP 800-66 and HHS security guidelines.", 
                     icon: Lock,
-                    img: "/assets/hipaa-card.svg"
+                    img: realImages.security,
+                    fallback: "/assets/hipaa-card.svg"
                   },
                   { 
                     title: "Clinical Workflow Optimization", 
                     desc: "Mapping technical systems directly to nursing and physician workflows to eliminate slowness, lag, and charting friction.", 
                     icon: Layers,
-                    img: "/assets/workflow-card.svg"
+                    img: realImages.clinical,
+                    fallback: "/assets/workflow-card.svg"
                   }
                 ].map((cap, idx) => {
                   const Icon = cap.icon;
@@ -960,7 +1018,7 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
                     <div key={idx} className="rounded-xl border border-slate-150 bg-white overflow-hidden shadow-sm hover:shadow-md hover:border-orange-200 transition-all duration-300 flex flex-col justify-between">
                       <div>
                         <div className="h-28 relative overflow-hidden bg-slate-900">
-                          <img src={cap.img} alt={cap.title} className="w-full h-full object-cover opacity-75" />
+                          <img src={cap.img} alt={cap.title} className="w-full h-full object-cover opacity-85" loading="lazy" onError={(e) => imageFallback(e, cap.fallback || "/assets/workflow-card.svg")} />
                           <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent"></div>
                           <div className="absolute bottom-3 left-4 flex items-center gap-2">
                             <div className="w-6.5 h-6.5 rounded-lg bg-orange-500/15 backdrop-blur-md flex items-center justify-center border border-orange-500/20">
@@ -993,7 +1051,7 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
           <div 
             className="relative py-14 px-6 bg-cover bg-center text-white space-y-4 shrink-0"
             style={{ 
-              backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.92)), url("/assets/hipaa-card.svg")` 
+              backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.92)), url("https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1800&q=85")` 
             }}
           >
             <div className="relative z-10 space-y-2 max-w-2xl">
@@ -1097,7 +1155,7 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
           <div 
             className="relative py-14 px-6 bg-cover bg-center text-white text-center space-y-3 shrink-0"
             style={{ 
-              backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.92)), url("/assets/healthcare-it-hero.svg")` 
+              backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.92)), url("https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1800&q=85")` 
             }}
           >
             <div className="relative z-10 space-y-2 max-w-2xl mx-auto">
@@ -1118,23 +1176,26 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
                 { 
                   title: "Predictable, High-Value Pricing", 
                   desc: "We deliver enterprise-grade solutions with transparent, predictable pricing models designed to maximize your technology investment and protect your clinical budgets.",
-                  img: "/assets/ehr-card.svg"
+                  img: realImages.analytics,
+                  fallback: "/assets/ehr-card.svg"
                 },
                 { 
                   title: "24/7/365 Proactive Support", 
                   desc: "We identify security risks and technical issues early, preventing outages before they disrupt clinical care. Our support team is always available.",
-                  img: "/assets/workflow-card.svg"
+                  img: realImages.support,
+                  fallback: "/assets/workflow-card.svg"
                 },
                 { 
                   title: "Specialized Clinical Informatics", 
                   desc: "We are not just IT support. Our team understands medical billing, charting, and patient care workflows, allowing us to build systems that work for medical staff.",
-                  img: "/assets/workflow-card.svg"
+                  img: realImages.clinical,
+                  fallback: "/assets/workflow-card.svg"
                 }
               ].map((plr, idx) => (
                 <div key={idx} className="rounded-xl border border-slate-150 bg-white overflow-hidden shadow-sm hover:shadow-md hover:border-orange-200 transition-all duration-300 flex flex-col justify-between">
                   <div>
                     <div className="h-28 relative overflow-hidden bg-slate-900">
-                      <img src={plr.img} alt={plr.title} className="w-full h-full object-cover opacity-75" />
+                      <img src={plr.img} alt={plr.title} className="w-full h-full object-cover opacity-85" loading="lazy" onError={(e) => imageFallback(e, plr.fallback || "/assets/workflow-card.svg")} />
                       <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent"></div>
                       <div className="absolute bottom-3 left-4 flex items-center gap-2">
                         <span className="w-6 h-6 rounded-lg bg-orange-500/15 backdrop-blur-md flex items-center justify-center font-bold text-xs border border-orange-500/20 text-orange-400">0{idx + 1}</span>
@@ -1300,7 +1361,7 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
           <div 
             className="relative py-16 px-6 bg-cover bg-center text-white text-center space-y-3 shrink-0"
             style={{ 
-              backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.94)), url("/assets/workflow-card.svg")` 
+              backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.94)), url("https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1800&q=85")` 
             }}
           >
             <div className="relative z-10 space-y-3 max-w-2xl mx-auto">
@@ -1436,7 +1497,7 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
           <div 
             className="relative py-16 px-6 bg-cover bg-center text-white text-center space-y-3 shrink-0"
             style={{ 
-              backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.94)), url("/assets/healthcare-it-hero.svg")` 
+              backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.94)), url("https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1800&q=85")` 
             }}
           >
             <div className="relative z-10 space-y-3 max-w-2xl mx-auto">
