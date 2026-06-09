@@ -1,4 +1,5 @@
 import { FormEvent, SyntheticEvent, useState } from "react";
+import { useSEO } from "../hooks/useSEO";
 import { Link } from "wouter";
 import { 
   Shield, 
@@ -174,8 +175,8 @@ export default function RedesignMockups() {
       id: "academy",
       name: "Academy",
       title: "NDE HealthTech Academy",
-      beforeDesktopUrl: beforeUrls.home.desktop,
-      beforeMobileUrl: beforeUrls.home.mobile,
+      beforeDesktopUrl: "",
+      beforeMobileUrl: "",
       redesignNotes: [
         "Added a dedicated academy page to connect consulting services with the NDE HealthTech Academy YouTube channel and future courses.",
         "Structured learning paths for DevOps, AWS, Healthcare IT, Informatics, Cybersecurity, and Project Management.",
@@ -372,6 +373,58 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
   const [contactSubmitted, setContactSubmitted] = useState(false);
   const [contactSubmitting, setContactSubmitting] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [formErrors, setFormErrors] = useState<Record<string, string>>({});
+
+  // Per-page SEO
+  const seoMap: Record<string, { title: string; description: string; canonical: string }> = {
+    home: {
+      title: "Secure Healthcare IT, Cloud & Cybersecurity Consulting",
+      description: "Enterprise-grade Healthcare IT, cloud engineering, HIPAA cybersecurity, and EHR support for clinical practices, hospitals, and federal agencies. SAM.gov Active. Venus, TX (DFW).",
+      canonical: "https://ndehealthtech.com/"
+    },
+    services: {
+      title: "Healthcare IT & Enterprise IT Services",
+      description: "Clinical Health IT, EHR support, managed helpdesk, cloud engineering, cybersecurity, and disaster recovery services for healthcare providers and enterprises.",
+      canonical: "https://ndehealthtech.com/services"
+    },
+    healthcare_it: {
+      title: "Clinical Informatics & HIPAA-Compliant Security",
+      description: "Expert EHR support for Epic, Cerner, and eClinicalWorks. HIPAA compliance, HL7/FHIR interoperability, and clinical workflow optimization.",
+      canonical: "https://ndehealthtech.com/healthcare-it"
+    },
+    federal: {
+      title: "Federal Healthcare IT & Systems Engineering",
+      description: "Active SAM.gov Registered Small Business providing secure, NIST-compliant IT systems and informatics to federal agencies. CAGE: 209X4 | UEI: G7YUFGEZBHP4.",
+      canonical: "https://ndehealthtech.com/federal"
+    },
+    why_us: {
+      title: "Why Choose NDE HealthTech Solutions",
+      description: "Enterprise standards and clinical precision. Predictable pricing, 24/7 support, and specialized healthcare informatics from a trusted Texas-based IT consulting firm.",
+      canonical: "https://ndehealthtech.com/why-us"
+    },
+    team: {
+      title: "Our Healthcare IT & Technology Team",
+      description: "Meet our DevOps, cloud, health informatics, and cybersecurity professionals committed to securing clinical environments and modernizing healthcare technology.",
+      canonical: "https://ndehealthtech.com/team"
+    },
+    academy: {
+      title: "NDE HealthTech Academy — DevOps, Cloud & Healthcare IT Training",
+      description: "Structured learning paths for DevOps, AWS, Healthcare IT, informatics, cybersecurity, and project management. Follow our YouTube Academy channel.",
+      canonical: "https://ndehealthtech.com/academy"
+    },
+    contact: {
+      title: "Schedule a Free Healthcare IT Consultation",
+      description: "Book a complimentary 20-minute discovery session with our healthcare IT consultants. Serving clinical practices, hospitals, and federal agencies across the DFW Metroplex.",
+      canonical: "https://ndehealthtech.com/contact"
+    },
+    blog: {
+      title: "Clinical Informatics & Cybersecurity Insights",
+      description: "Expert articles on healthcare IT, HIPAA compliance, EHR best practices, and clinical cybersecurity from NDE HealthTech Solutions.",
+      canonical: "https://ndehealthtech.com/blog"
+    }
+  };
+  const currentSEO = seoMap[pageId] || seoMap.home;
+  useSEO(currentSEO);
 
   const realImages = {
     clinical: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1200&q=85",
@@ -393,12 +446,34 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
   const formspreeEndpoint = import.meta.env.VITE_FORMSPREE_ENDPOINT as string | undefined;
   const calendlyUrl = import.meta.env.VITE_CALENDLY_URL as string | undefined;
 
+  const validateContactForm = (data: FormData): Record<string, string> => {
+    const errors: Record<string, string> = {};
+    const name = (data.get("name") as string || "").trim();
+    const email = (data.get("email") as string || "").trim();
+    const organization = (data.get("organization") as string || "").trim();
+    const need = (data.get("need") as string || "").trim();
+    if (!name) errors.name = "Full name is required.";
+    if (!email) {
+      errors.email = "Email address is required.";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      errors.email = "Please enter a valid email address.";
+    }
+    if (!organization) errors.organization = "Please select your organization type.";
+    if (!need) errors.need = "Please select your primary technical need.";
+    return errors;
+  };
+
   const handleContactSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const form = event.currentTarget;
     const data = new FormData(form);
+    const errors = validateContactForm(data);
+    if (Object.keys(errors).length > 0) {
+      setFormErrors(errors);
+      return;
+    }
+    setFormErrors({});
     setContactSubmitting(true);
-
     try {
       if (formspreeEndpoint) {
         const response = await fetch(formspreeEndpoint, {
@@ -406,30 +481,18 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
           body: data,
           headers: { Accept: "application/json" }
         });
-
-        if (!response.ok) {
-          throw new Error("Form submission failed");
-        }
+        if (!response.ok) throw new Error("Form submission failed");
       } else {
         const subject = encodeURIComponent("New consultation request from NDEHealthTech.com");
-        const body = encodeURIComponent(
-          `Name: ${data.get("name") || ""}
-` +
-          `Email: ${data.get("email") || ""}
-` +
-          `Organization: ${data.get("organization") || ""}
-` +
-          `Technical Need: ${data.get("need") || ""}
-` +
-          `Message: ${data.get("message") || ""}`
+        const msgBody = encodeURIComponent(
+          `Name: ${data.get("name") || ""}\nEmail: ${data.get("email") || ""}\nOrganization: ${data.get("organization") || ""}\nTechnical Need: ${data.get("need") || ""}\nMessage: ${data.get("message") || ""}`
         );
-        window.location.href = `mailto:contracts@ndehealthtech.com?subject=${subject}&body=${body}`;
+        window.location.href = `mailto:contracts@ndehealthtech.com?subject=${subject}&body=${msgBody}`;
       }
-
       setContactSubmitted(true);
       form.reset();
-    } catch (error) {
-      alert("We could not submit the form automatically. Please email contracts@ndehealthtech.com.");
+    } catch {
+      setFormErrors({ _global: "We could not send your request. Please email contracts@ndehealthtech.com directly." });
     } finally {
       setContactSubmitting(false);
     }
@@ -455,6 +518,8 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
             <img 
               src="/assets/nde-logo.png" 
               alt="NDE HealthTech Logo" 
+              width="48" height="48"
+              fetchPriority="high"
               className="w-11 h-11 md:w-12 md:h-12 object-contain rounded-xl bg-white border border-slate-200 p-0.5 shadow-[0_12px_30px_rgba(15,23,42,0.12)] shrink-0"
             />
             <div className="leading-none min-w-0">
@@ -645,76 +710,40 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
 
               {/* Right: Enterprise Technology Visual */}
               <div className="lg:col-span-6 relative">
-                <div className="relative rounded-[2rem] overflow-hidden border border-white shadow-[0_24px_80px_rgba(15,23,42,0.18)] bg-gradient-to-br from-[#eef7ff] via-white to-[#d9ecff] min-h-[390px] p-5">
-                  {/* Soft professional background */}
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(37,99,235,0.22),transparent_34%),radial-gradient(circle_at_bottom_left,rgba(249,115,22,0.15),transparent_32%)]"></div>
-                  <div className="absolute inset-0 opacity-[0.45]">
-                    <div className="absolute left-8 top-10 w-44 h-44 rounded-full border border-blue-200"></div>
-                    <div className="absolute right-8 top-14 w-52 h-52 rounded-full border border-orange-200"></div>
-                    <div className="absolute left-16 bottom-16 h-px w-80 bg-gradient-to-r from-transparent via-blue-300 to-transparent"></div>
-                    <div className="absolute right-16 bottom-28 h-px w-72 bg-gradient-to-r from-transparent via-orange-300 to-transparent"></div>
-                  </div>
+                <div className="relative rounded-[2rem] overflow-hidden border border-white shadow-[0_24px_80px_rgba(15,23,42,0.18)] bg-slate-900 min-h-[380px]">
+                  <img
+                    src="/assets/enterprise-hero.svg"
+                    alt="Healthcare cloud cybersecurity and enterprise infrastructure"
+                    className="absolute inset-0 w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-r from-slate-950/10 via-transparent to-slate-950/10"></div>
 
-                  {/* Top badges */}
-                  <div className="relative z-10 flex flex-wrap items-center justify-between gap-3">
-                    <div className="rounded-2xl bg-white/95 backdrop-blur-md border border-white/80 px-4 py-3 shadow-xl">
+                  <div className="absolute top-5 left-5 right-5 flex items-center justify-between gap-3">
+                    <div className="rounded-2xl bg-white/95 backdrop-blur-md border border-white/70 px-4 py-3 shadow-xl">
                       <p className="text-[10px] font-black text-orange-600 uppercase tracking-widest">Federal Ready</p>
                       <p className="text-xs font-black text-slate-950 mt-1">CAGE 209X4 • UEI G7YUFGEZBHP4</p>
                     </div>
-                    <div className="rounded-2xl bg-blue-900 text-white border border-blue-700 px-4 py-3 shadow-xl flex items-center gap-2">
+                    <div className="hidden sm:flex rounded-2xl bg-blue-900/90 text-white backdrop-blur-md border border-blue-300/20 px-4 py-3 shadow-xl items-center gap-2">
                       <ShieldCheck className="w-4 h-4 text-emerald-400" />
                       <span className="text-xs font-black">Secure. Compliant. Scalable.</span>
                     </div>
                   </div>
 
-                  {/* Premium visual dashboard */}
-                  <div className="relative z-10 mt-6 grid grid-cols-2 gap-4">
-                    <div className="col-span-2 rounded-3xl bg-white/90 border border-white shadow-xl p-5 overflow-hidden">
-                      <div className="flex items-start justify-between gap-4">
-                        <div>
-                          <p className="text-[11px] font-black text-blue-800 uppercase tracking-widest">Enterprise Technology Command Center</p>
-                          <h3 className="text-xl font-black text-slate-950 mt-1 leading-tight">Healthcare systems, cloud operations, and security visibility in one place.</h3>
-                        </div>
-                        <div className="w-12 h-12 rounded-2xl bg-blue-50 border border-blue-100 flex items-center justify-center shrink-0">
-                          <BarChart3 className="w-6 h-6 text-blue-800" />
-                        </div>
-                      </div>
-                      <div className="mt-5 grid grid-cols-3 gap-3">
-                        {[
-                          {label: "Clinical Workflows", value: "EHR"},
-                          {label: "Automation", value: "DevOps"},
-                          {label: "Cloud Security", value: "AWS"}
-                        ].map((item) => (
-                          <div key={item.label} className="rounded-2xl bg-slate-50 border border-slate-200 p-3">
-                            <p className="text-lg font-black text-blue-900 leading-none">{item.value}</p>
-                            <p className="text-[10px] font-bold text-slate-500 mt-1 uppercase tracking-wide">{item.label}</p>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
+                  <div className="absolute bottom-5 left-5 right-5 grid grid-cols-3 gap-3">
                     {[
-                      { icon: HeartPulse, title: "Healthcare IT", text: "EHR, interoperability, analytics" },
-                      { icon: Cloud, title: "Cloud & DevOps", text: "AWS, pipelines, automation" },
-                      { icon: ShieldCheck, title: "Cybersecurity", text: "HIPAA, NIST, zero trust" },
-                      { icon: Landmark, title: "Federal Services", text: "SAM.gov, CAGE, UEI ready" }
-                    ].map((item) => {
-                      const Icon = item.icon;
-                      return (
-                        <div key={item.title} className="rounded-2xl bg-white/90 backdrop-blur border border-white shadow-lg p-4 flex items-start gap-3">
-                          <div className="w-10 h-10 rounded-xl bg-blue-900 text-white flex items-center justify-center shrink-0 shadow-md">
-                            <Icon className="w-5 h-5" />
-                          </div>
-                          <div>
-                            <p className="text-sm font-black text-slate-950">{item.title}</p>
-                            <p className="text-[11px] text-slate-500 font-semibold leading-snug mt-1">{item.text}</p>
-                          </div>
-                        </div>
-                      );
-                    })}
+                      ["HIPAA", "Healthcare safeguards"],
+                      ["NIST", "Risk alignment"],
+                      ["AWS", "Modern cloud"]
+                    ].map(([title, text]) => (
+                      <div key={title} className="rounded-2xl bg-slate-950/75 backdrop-blur-md border border-white/10 p-3 text-white shadow-xl">
+                        <p className="text-sm font-black">{title}</p>
+                        <p className="text-[10px] text-slate-300 font-semibold mt-0.5">{text}</p>
+                      </div>
+                    ))}
                   </div>
                 </div>
-              </div>            </div>
+              </div>
+            </div>
 
             {/* Trust Bar */}
             <div className="max-w-7xl mx-auto px-6 pb-8 relative z-10">
@@ -855,7 +884,7 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
                 </div>
               </div>
 
-              {/* Review 2: Healthcare operations testimonial */}
+              {/* Review 2: Healthcare / clinical testimonial */}
               <div className="p-6 rounded-2xl border border-slate-100 bg-white space-y-4 flex flex-col justify-between relative group">
                 <div className="space-y-2">
                   <div className="flex items-center gap-1 text-orange-500">
@@ -866,15 +895,15 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
                     <Star className="w-3.5 h-3.5 fill-current" />
                   </div>
                   <p className="text-[11px] md:text-xs font-medium italic text-slate-600 leading-relaxed">
-                    "NDE HealthTech Solutions brings a practical understanding of clinical operations and technology. Their approach helps teams strengthen security, streamline workflows, and prepare systems for scalable growth."
+                    "NDE HealthTech Solutions has been instrumental in modernizing our clinic's IT infrastructure. Their team understood our EHR workflows immediately and delivered HIPAA-compliant solutions without disrupting patient care."
                   </p>
                 </div>
                 <div className="flex justify-between items-center pt-3 border-t border-slate-100">
                   <div>
-                    <h4 className="font-black text-xs text-slate-900">Healthcare Operations Leader</h4>
-                    <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest mt-0.5">Clinical Technology & Operations</p>
+                    <h4 className="font-black text-xs text-slate-900">Clinical Practice Client</h4>
+                    <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest mt-0.5">DFW Metroplex, Texas</p>
                   </div>
-                  <span className="text-[10px] px-2 py-0.5 rounded bg-orange-50 text-orange-600 font-bold border border-orange-100 uppercase tracking-wider">Clinical Health IT</span>
+                  <span className="text-[10px] px-2 py-0.5 rounded bg-orange-50 text-orange-600 font-bold border border-orange-100 uppercase tracking-wider">Healthcare IT</span>
                 </div>
               </div>
             </div>
@@ -1499,20 +1528,27 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
                   </div>
                 ) : (
                   <form onSubmit={handleContactSubmit} className="space-y-3">
+                    {formErrors._global && (
+                      <div className="rounded-lg bg-red-50 border border-red-100 px-3 py-2 text-[11px] text-red-700 font-medium">
+                        {formErrors._global}
+                      </div>
+                    )}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <div className="space-y-1">
                         <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Full Name</label>
-                        <input name="name" type="text" required placeholder="Your name" className="w-full border border-slate-200 rounded-lg px-3 py-2 text-[11px] focus:outline-none focus:ring-2 focus:ring-orange-500/30" />
+                        <input name="name" type="text" placeholder="Your name" className={`w-full border rounded-lg px-3 py-2 text-[11px] focus:outline-none focus:ring-2 focus:ring-orange-500/30 ${formErrors.name ? "border-red-400 bg-red-50" : "border-slate-200"}`} />
+                        {formErrors.name && <p className="text-[10px] text-red-600 font-medium">{formErrors.name}</p>}
                       </div>
                       <div className="space-y-1">
                         <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Email Address</label>
-                        <input name="email" type="email" required placeholder="you@company.com" className="w-full border border-slate-200 rounded-lg px-3 py-2 text-[11px] focus:outline-none focus:ring-2 focus:ring-orange-500/30" />
+                        <input name="email" type="email" placeholder="you@company.com" className={`w-full border rounded-lg px-3 py-2 text-[11px] focus:outline-none focus:ring-2 focus:ring-orange-500/30 ${formErrors.email ? "border-red-400 bg-red-50" : "border-slate-200"}`} />
+                        {formErrors.email && <p className="text-[10px] text-red-600 font-medium">{formErrors.email}</p>}
                       </div>
                     </div>
                     
                     <div className="space-y-1">
                       <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Organization Type</label>
-                      <select name="organization" required className="w-full border border-slate-200 rounded-lg px-3 py-2 text-[11px] bg-white text-slate-600 focus:outline-none focus:ring-2 focus:ring-orange-500/30">
+                      <select name="organization" className={`w-full border rounded-lg px-3 py-2 text-[11px] bg-white text-slate-600 focus:outline-none focus:ring-2 focus:ring-orange-500/30 ${formErrors.organization ? "border-red-400 bg-red-50" : "border-slate-200"}`}>
                         <option value="">Select organization...</option>
                         <option>Clinical Practice / Clinic</option>
                         <option>Hospital / Health System</option>
@@ -1520,11 +1556,12 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
                         <option>Commercial Enterprise</option>
                         <option>Small Business</option>
                       </select>
+                      {formErrors.organization && <p className="text-[10px] text-red-600 font-medium">{formErrors.organization}</p>}
                     </div>
 
                     <div className="space-y-1">
                       <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Primary Technical Need</label>
-                      <select name="need" required className="w-full border border-slate-200 rounded-lg px-3 py-2 text-[11px] bg-white text-slate-600 focus:outline-none focus:ring-2 focus:ring-orange-500/30">
+                      <select name="need" className={`w-full border rounded-lg px-3 py-2 text-[11px] bg-white text-slate-600 focus:outline-none focus:ring-2 focus:ring-orange-500/30 ${formErrors.need ? "border-red-400 bg-red-50" : "border-slate-200"}`}>
                         <option value="">Select primary interest...</option>
                         <option>HIPAA Cybersecurity Audit</option>
                         <option>EHR Support & Interoperability</option>
@@ -1533,6 +1570,7 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
                         <option>Federal Contracting / Subcontracting</option>
                         <option>Training / NDE HealthTech Academy</option>
                       </select>
+                      {formErrors.need && <p className="text-[10px] text-red-600 font-medium">{formErrors.need}</p>}
                     </div>
 
                     <div className="space-y-1">
