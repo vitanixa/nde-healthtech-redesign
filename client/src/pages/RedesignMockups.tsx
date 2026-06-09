@@ -645,40 +645,76 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
 
               {/* Right: Enterprise Technology Visual */}
               <div className="lg:col-span-6 relative">
-                <div className="relative rounded-[2rem] overflow-hidden border border-white shadow-[0_24px_80px_rgba(15,23,42,0.18)] bg-slate-900 min-h-[380px]">
-                  <img
-                    src="/assets/enterprise-hero.svg"
-                    alt="Healthcare cloud cybersecurity and enterprise infrastructure"
-                    className="absolute inset-0 w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-r from-slate-950/10 via-transparent to-slate-950/10"></div>
+                <div className="relative rounded-[2rem] overflow-hidden border border-white shadow-[0_24px_80px_rgba(15,23,42,0.18)] bg-gradient-to-br from-[#eef7ff] via-white to-[#d9ecff] min-h-[390px] p-5">
+                  {/* Soft professional background */}
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(37,99,235,0.22),transparent_34%),radial-gradient(circle_at_bottom_left,rgba(249,115,22,0.15),transparent_32%)]"></div>
+                  <div className="absolute inset-0 opacity-[0.45]">
+                    <div className="absolute left-8 top-10 w-44 h-44 rounded-full border border-blue-200"></div>
+                    <div className="absolute right-8 top-14 w-52 h-52 rounded-full border border-orange-200"></div>
+                    <div className="absolute left-16 bottom-16 h-px w-80 bg-gradient-to-r from-transparent via-blue-300 to-transparent"></div>
+                    <div className="absolute right-16 bottom-28 h-px w-72 bg-gradient-to-r from-transparent via-orange-300 to-transparent"></div>
+                  </div>
 
-                  <div className="absolute top-5 left-5 right-5 flex items-center justify-between gap-3">
-                    <div className="rounded-2xl bg-white/95 backdrop-blur-md border border-white/70 px-4 py-3 shadow-xl">
+                  {/* Top badges */}
+                  <div className="relative z-10 flex flex-wrap items-center justify-between gap-3">
+                    <div className="rounded-2xl bg-white/95 backdrop-blur-md border border-white/80 px-4 py-3 shadow-xl">
                       <p className="text-[10px] font-black text-orange-600 uppercase tracking-widest">Federal Ready</p>
                       <p className="text-xs font-black text-slate-950 mt-1">CAGE 209X4 • UEI G7YUFGEZBHP4</p>
                     </div>
-                    <div className="hidden sm:flex rounded-2xl bg-blue-900/90 text-white backdrop-blur-md border border-blue-300/20 px-4 py-3 shadow-xl items-center gap-2">
+                    <div className="rounded-2xl bg-blue-900 text-white border border-blue-700 px-4 py-3 shadow-xl flex items-center gap-2">
                       <ShieldCheck className="w-4 h-4 text-emerald-400" />
                       <span className="text-xs font-black">Secure. Compliant. Scalable.</span>
                     </div>
                   </div>
 
-                  <div className="absolute bottom-5 left-5 right-5 grid grid-cols-3 gap-3">
-                    {[
-                      ["HIPAA", "Healthcare safeguards"],
-                      ["NIST", "Risk alignment"],
-                      ["AWS", "Modern cloud"]
-                    ].map(([title, text]) => (
-                      <div key={title} className="rounded-2xl bg-slate-950/75 backdrop-blur-md border border-white/10 p-3 text-white shadow-xl">
-                        <p className="text-sm font-black">{title}</p>
-                        <p className="text-[10px] text-slate-300 font-semibold mt-0.5">{text}</p>
+                  {/* Premium visual dashboard */}
+                  <div className="relative z-10 mt-6 grid grid-cols-2 gap-4">
+                    <div className="col-span-2 rounded-3xl bg-white/90 border border-white shadow-xl p-5 overflow-hidden">
+                      <div className="flex items-start justify-between gap-4">
+                        <div>
+                          <p className="text-[11px] font-black text-blue-800 uppercase tracking-widest">Enterprise Technology Command Center</p>
+                          <h3 className="text-xl font-black text-slate-950 mt-1 leading-tight">Healthcare systems, cloud operations, and security visibility in one place.</h3>
+                        </div>
+                        <div className="w-12 h-12 rounded-2xl bg-blue-50 border border-blue-100 flex items-center justify-center shrink-0">
+                          <BarChart3 className="w-6 h-6 text-blue-800" />
+                        </div>
                       </div>
-                    ))}
+                      <div className="mt-5 grid grid-cols-3 gap-3">
+                        {[
+                          {label: "Clinical Workflows", value: "EHR"},
+                          {label: "Automation", value: "DevOps"},
+                          {label: "Cloud Security", value: "AWS"}
+                        ].map((item) => (
+                          <div key={item.label} className="rounded-2xl bg-slate-50 border border-slate-200 p-3">
+                            <p className="text-lg font-black text-blue-900 leading-none">{item.value}</p>
+                            <p className="text-[10px] font-bold text-slate-500 mt-1 uppercase tracking-wide">{item.label}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {[
+                      { icon: HeartPulse, title: "Healthcare IT", text: "EHR, interoperability, analytics" },
+                      { icon: Cloud, title: "Cloud & DevOps", text: "AWS, pipelines, automation" },
+                      { icon: ShieldCheck, title: "Cybersecurity", text: "HIPAA, NIST, zero trust" },
+                      { icon: Landmark, title: "Federal Services", text: "SAM.gov, CAGE, UEI ready" }
+                    ].map((item) => {
+                      const Icon = item.icon;
+                      return (
+                        <div key={item.title} className="rounded-2xl bg-white/90 backdrop-blur border border-white shadow-lg p-4 flex items-start gap-3">
+                          <div className="w-10 h-10 rounded-xl bg-blue-900 text-white flex items-center justify-center shrink-0 shadow-md">
+                            <Icon className="w-5 h-5" />
+                          </div>
+                          <div>
+                            <p className="text-sm font-black text-slate-950">{item.title}</p>
+                            <p className="text-[11px] text-slate-500 font-semibold leading-snug mt-1">{item.text}</p>
+                          </div>
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
-              </div>
-            </div>
+              </div>            </div>
 
             {/* Trust Bar */}
             <div className="max-w-7xl mx-auto px-6 pb-8 relative z-10">
