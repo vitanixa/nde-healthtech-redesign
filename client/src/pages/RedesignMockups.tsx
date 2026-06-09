@@ -668,7 +668,7 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
                     Technology Solutions for <span className="text-blue-800">Healthcare</span>, <span className="text-orange-600">Government</span> & Enterprise
                   </h1>
                   <p className="text-slate-600 text-base md:text-lg leading-relaxed max-w-2xl font-medium">
-                    Enterprise-grade consulting, cloud engineering, cybersecurity, DevOps, healthcare IT, and infrastructure solutions designed to help organizations modernize securely and scale confidently.
+                    From healthcare IT and cloud engineering to cybersecurity, DevOps, and digital transformation, we help organizations build secure, scalable, and future-ready technology environments.
                   </p>
                 </div>
 
