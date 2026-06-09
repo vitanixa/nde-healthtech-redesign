@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { Link } from "wouter";
 import { 
   Shield, 
   Search, 
@@ -344,7 +345,7 @@ export default function RedesignMockups() {
 }
 
 // Custom Component to Render Redesigned Mockups Page-by-Page dynamically (purely CSS-based static design mockups)
-function MockupRenderer({ pageId, mode }: { pageId: string; mode: "desktop" | "mobile" }) {
+export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "desktop" | "mobile" }) {
   const isMobile = mode === "mobile";
 
   // Global Header Redesign
@@ -362,16 +363,32 @@ function MockupRenderer({ pageId, mode }: { pageId: string; mode: "desktop" | "m
       </div>
       {!isMobile ? (
         <div className="flex items-center gap-5 text-xs font-bold text-slate-600">
-          <span className={`pb-0.5 transition-all cursor-pointer ${pageId === 'home' ? 'text-slate-900 border-b-2 border-slate-900' : 'hover:text-slate-900'}`}>Home</span>
-          <span className={`pb-0.5 transition-all cursor-pointer ${pageId === 'services' ? 'text-slate-900 border-b-2 border-slate-900' : 'hover:text-slate-900'}`}>Services</span>
-          <span className={`pb-0.5 transition-all cursor-pointer ${pageId === 'healthcare_it' ? 'text-slate-900 border-b-2 border-slate-900' : 'hover:text-slate-900'}`}>Healthcare IT</span>
-          <span className={`pb-0.5 transition-all cursor-pointer ${pageId === 'federal' ? 'text-slate-900 border-b-2 border-slate-900' : 'hover:text-slate-900'}`}>Federal</span>
-          <span className={`pb-0.5 transition-all cursor-pointer ${pageId === 'why_us' ? 'text-slate-900 border-b-2 border-slate-900' : 'hover:text-slate-900'}`}>Why Choose Us</span>
-          <span className={`pb-0.5 transition-all cursor-pointer ${pageId === 'team' ? 'text-slate-900 border-b-2 border-slate-900' : 'hover:text-slate-900'}`}>Our Team</span>
-          <span className={`pb-0.5 transition-all cursor-pointer ${pageId === 'blog' ? 'text-slate-900 border-b-2 border-slate-900' : 'hover:text-slate-900'}`}>Blog</span>
-          <button className="bg-slate-900 text-white text-[11px] px-4 py-2 rounded-lg font-bold hover:bg-slate-800 transition-colors shadow-sm">
-            Contact
-          </button>
+          <Link href="/">
+            <span className={`pb-0.5 transition-all cursor-pointer ${pageId === 'home' ? 'text-slate-900 border-b-2 border-slate-900' : 'hover:text-slate-900'}`}>Home</span>
+          </Link>
+          <Link href="/services">
+            <span className={`pb-0.5 transition-all cursor-pointer ${pageId === 'services' ? 'text-slate-900 border-b-2 border-slate-900' : 'hover:text-slate-900'}`}>Services</span>
+          </Link>
+          <Link href="/healthcare-it">
+            <span className={`pb-0.5 transition-all cursor-pointer ${pageId === 'healthcare_it' ? 'text-slate-900 border-b-2 border-slate-900' : 'hover:text-slate-900'}`}>Healthcare IT</span>
+          </Link>
+          <Link href="/federal">
+            <span className={`pb-0.5 transition-all cursor-pointer ${pageId === 'federal' ? 'text-slate-900 border-b-2 border-slate-900' : 'hover:text-slate-900'}`}>Federal</span>
+          </Link>
+          <Link href="/why-us">
+            <span className={`pb-0.5 transition-all cursor-pointer ${pageId === 'why_us' ? 'text-slate-900 border-b-2 border-slate-900' : 'hover:text-slate-900'}`}>Why Choose Us</span>
+          </Link>
+          <Link href="/team">
+            <span className={`pb-0.5 transition-all cursor-pointer ${pageId === 'team' ? 'text-slate-900 border-b-2 border-slate-900' : 'hover:text-slate-900'}`}>Our Team</span>
+          </Link>
+          <Link href="/blog">
+            <span className={`pb-0.5 transition-all cursor-pointer ${pageId === 'blog' ? 'text-slate-900 border-b-2 border-slate-900' : 'hover:text-slate-900'}`}>Blog</span>
+          </Link>
+          <Link href="/contact">
+            <button className="bg-slate-900 text-white text-[11px] px-4 py-2 rounded-lg font-bold hover:bg-slate-800 transition-colors shadow-sm cursor-pointer">
+              Contact
+            </button>
+          </Link>
         </div>
       ) : (
         <div className="w-8 h-8 flex items-center justify-center rounded-lg bg-slate-50 cursor-pointer border border-slate-100">
@@ -394,10 +411,18 @@ function MockupRenderer({ pageId, mode }: { pageId: string; mode: "desktop" | "m
           <span className="font-extrabold text-white tracking-tight text-sm">NDE HealthTech Solutions</span>
         </div>
         <div className="flex flex-wrap gap-5 text-slate-500 font-medium">
-          <span className="hover:text-slate-300 cursor-pointer transition-colors">Services</span>
-          <span className="hover:text-slate-300 cursor-pointer transition-colors">Federal Capabilities</span>
-          <span className="hover:text-slate-300 cursor-pointer transition-colors">Why Choose Us</span>
-          <span className="hover:text-slate-300 cursor-pointer transition-colors">Privacy Policy</span>
+          <Link href="/services">
+            <span className="hover:text-slate-300 cursor-pointer transition-colors">Services</span>
+          </Link>
+          <Link href="/federal">
+            <span className="hover:text-slate-300 cursor-pointer transition-colors">Federal Capabilities</span>
+          </Link>
+          <Link href="/why-us">
+            <span className="hover:text-slate-300 cursor-pointer transition-colors">Why Choose Us</span>
+          </Link>
+          <Link href="/contact">
+            <span className="hover:text-slate-300 cursor-pointer transition-colors">Contact</span>
+          </Link>
         </div>
       </div>
       <div className="border-t border-slate-900 pt-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 text-slate-600 font-medium">
