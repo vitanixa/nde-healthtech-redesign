@@ -443,8 +443,6 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
     img.src = fallback;
   };
 
-  const calendlyUrl = import.meta.env.VITE_CALENDLY_URL as string | undefined;
-
   const validateContactForm = (data: FormData): Record<string, string> => {
     const errors: Record<string, string> = {};
     const name = (data.get("name") as string || "").trim();
@@ -474,27 +472,26 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
     setFormErrors({});
     setContactSubmitting(true);
     try {
-      const payload = {
-        name: data.get("name") || "",
-        email: data.get("email") || "",
-        organization: data.get("organization") || "",
-        need: data.get("need") || "",
-        message: data.get("message") || "",
-        source: "NDE HealthTech website contact form",
-      };
+      data.append("access_key", "73d28357-294f-4120-afab-5cf238bfc7f3");
+      data.append("subject", "New Consultation Request - NDE HealthTech Website");
+      data.append("from_name", "NDE HealthTech Website");
+      data.append("botcheck", "");
 
-      const response = await fetch("/api/contact", {
+      const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+        body: data,
       });
 
-      if (!response.ok) throw new Error("Form submission failed");
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok || !result.success) {
+        throw new Error(result.message || "Form submission failed");
+      }
 
       setContactSubmitted(true);
       form.reset();
-    } catch {
-      setFormErrors({ _global: "We could not send your request. Please email contracts@ndehealthtech.com directly." });
+    } catch (error) {
+      console.error("Contact form submission failed", error);
+      setFormErrors({ _global: "We could not send your request. Please email contracts@ndehealthtech.com directly or call 629-345-8366." });
     } finally {
       setContactSubmitting(false);
     }
@@ -1634,7 +1631,7 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
                       <Send className="w-3.5 h-3.5" /> {contactSubmitting ? "Sending..." : "Request Free Assessment"}
                     </button>
                     <p className="text-xs text-slate-400 leading-relaxed">
-                      Your request will be emailed securely to contracts@ndehealthtech.com.
+                      Your request will be sent securely to our consulting team at contracts@ndehealthtech.com.
                     </p>
                   </form>
                 )}
@@ -1658,18 +1655,12 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
                   </p>
                 </div>
                 <div className="pt-2 space-y-2">
-                  {calendlyUrl ? (
-                    <a href={calendlyUrl} target="_blank" rel="noreferrer" className="w-full inline-flex justify-center items-center gap-2 bg-slate-900 text-white text-xs font-bold py-2.5 rounded-lg hover:bg-slate-800 transition-colors shadow-sm">
-                      <Calendar className="w-3.5 h-3.5" /> Book on Calendly
-                    </a>
-                  ) : (
-                    <a href="mailto:contracts@ndehealthtech.com" className="w-full inline-flex justify-center items-center gap-2 bg-slate-900 text-white text-xs font-bold py-2.5 rounded-lg hover:bg-slate-800 transition-colors shadow-sm">
-                      <Mail className="w-3.5 h-3.5" /> Email Consultation Request
-                    </a>
-                  )}
-                  <p className="text-xs text-slate-400 leading-relaxed">
-                    Add VITE_CALENDLY_URL in Vercel when your Calendly booking link is ready.
-                  </p>
+                  <a href="mailto:contracts@ndehealthtech.com?subject=Consultation%20Request%20-%20NDE%20HealthTech" className="w-full inline-flex justify-center items-center gap-2 bg-slate-900 text-white text-xs font-bold py-2.5 rounded-lg hover:bg-slate-800 transition-colors shadow-sm">
+                    <Mail className="w-3.5 h-3.5" /> Email Consultation Request
+                  </a>
+                  <a href="tel:+16293458366" className="w-full inline-flex justify-center items-center gap-2 border border-slate-300 bg-white text-slate-900 text-xs font-bold py-2.5 rounded-lg hover:bg-slate-50 transition-colors shadow-sm">
+                    <Phone className="w-3.5 h-3.5" /> Call 629-345-8366
+                  </a>
                 </div>
               </div>
             </div>

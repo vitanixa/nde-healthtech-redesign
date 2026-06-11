@@ -27,8 +27,9 @@ cp .env.example .env.local
 
 | Variable | Purpose |
 |----------|---------|
-| `VITE_FORMSPREE_ENDPOINT` | Formspree form ID for contact form submissions |
-| `VITE_CALENDLY_URL` | Calendly booking link for consultation scheduling |
+| `RESEND_API_KEY` | Resend API key for contact form email delivery |
+| `CONTACT_TO_EMAIL` | Destination email for consultation requests, usually contracts@ndehealthtech.com |
+| `RESEND_FROM_EMAIL` | Verified sender address for Resend. Use onboarding@resend.dev only for testing. |
 | `VITE_ANALYTICS_ENDPOINT` | Umami analytics instance URL |
 | `VITE_ANALYTICS_WEBSITE_ID` | Umami website ID |
 
