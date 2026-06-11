@@ -443,7 +443,6 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
     img.src = fallback;
   };
 
-  const formspreeEndpoint = import.meta.env.VITE_FORMSPREE_ENDPOINT as string | undefined;
   const calendlyUrl = import.meta.env.VITE_CALENDLY_URL as string | undefined;
 
   const validateContactForm = (data: FormData): Record<string, string> => {
@@ -475,20 +474,23 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
     setFormErrors({});
     setContactSubmitting(true);
     try {
-      if (formspreeEndpoint) {
-        const response = await fetch(formspreeEndpoint, {
-          method: "POST",
-          body: data,
-          headers: { Accept: "application/json" }
-        });
-        if (!response.ok) throw new Error("Form submission failed");
-      } else {
-        const subject = encodeURIComponent("New consultation request from NDEHealthTech.com");
-        const msgBody = encodeURIComponent(
-          `Name: ${data.get("name") || ""}\nEmail: ${data.get("email") || ""}\nOrganization: ${data.get("organization") || ""}\nTechnical Need: ${data.get("need") || ""}\nMessage: ${data.get("message") || ""}`
-        );
-        window.location.href = `mailto:contracts@ndehealthtech.com?subject=${subject}&body=${msgBody}`;
-      }
+      const payload = {
+        name: data.get("name") || "",
+        email: data.get("email") || "",
+        organization: data.get("organization") || "",
+        need: data.get("need") || "",
+        message: data.get("message") || "",
+        source: "NDE HealthTech website contact form",
+      };
+
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) throw new Error("Form submission failed");
+
       setContactSubmitted(true);
       form.reset();
     } catch {
@@ -1631,11 +1633,9 @@ export function MockupRenderer({ pageId, mode }: { pageId: string; mode: "deskto
                     <button type="submit" disabled={contactSubmitting} className="w-full bg-orange-600 text-white text-xs font-bold py-2.5 rounded-lg hover:bg-orange-500 mt-2 transition-colors shadow-md flex items-center justify-center gap-2 disabled:opacity-60">
                       <Send className="w-3.5 h-3.5" /> {contactSubmitting ? "Sending..." : "Request Free Assessment"}
                     </button>
-                    {!formspreeEndpoint && (
-                      <p className="text-xs text-slate-400 leading-relaxed">
-                        This form opens your email app by default. Add VITE_FORMSPREE_ENDPOINT in Vercel for direct email delivery.
-                      </p>
-                    )}
+                    <p className="text-xs text-slate-400 leading-relaxed">
+                      Your request will be emailed securely to contracts@ndehealthtech.com.
+                    </p>
                   </form>
                 )}
               </div>

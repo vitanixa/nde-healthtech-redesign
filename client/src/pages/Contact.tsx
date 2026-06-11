@@ -6,11 +6,38 @@ import { toast } from "sonner";
 
 export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSubmitted(true);
-    toast.success("Consultation request submitted! We will contact you shortly.");
+    const form = e.currentTarget;
+    const data = new FormData(form);
+    setSubmitting(true);
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: data.get("name") || "",
+          email: data.get("email") || "",
+          preferredDate: data.get("preferredDate") || "",
+          timeZone: data.get("timeZone") || "",
+          message: data.get("message") || "",
+          source: "NDE HealthTech discovery call form",
+        }),
+      });
+
+      if (!response.ok) throw new Error("Unable to submit form");
+
+      setSubmitted(true);
+      form.reset();
+      toast.success("Consultation request submitted! We will contact you shortly.");
+    } catch {
+      toast.error("We could not send your request. Please email contracts@ndehealthtech.com directly.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -90,6 +117,7 @@ export default function Contact() {
                     <div className="space-y-1">
                       <label className="text-xs font-bold text-slate-700 block">Full Name</label>
                       <input 
+                        name="name"
                         type="text" 
                         placeholder="John Doe" 
                         required
@@ -99,6 +127,7 @@ export default function Contact() {
                     <div className="space-y-1">
                       <label className="text-xs font-bold text-slate-700 block">Work Email</label>
                       <input 
+                        name="email"
                         type="email" 
                         placeholder="jdoe@clinic.org" 
                         required
@@ -111,6 +140,7 @@ export default function Contact() {
                     <div className="space-y-1">
                       <label className="text-xs font-bold text-slate-700 block">Preferred Date</label>
                       <input 
+                        name="preferredDate"
                         type="date" 
                         required
                         className="w-full border border-border rounded-lg p-2.5 text-sm bg-white focus:outline-none focus:ring-1 focus:ring-primary"
@@ -119,6 +149,7 @@ export default function Contact() {
                     <div className="space-y-1">
                       <label className="text-xs font-bold text-slate-700 block">Time Zone</label>
                       <select 
+                        name="timeZone"
                         required
                         className="w-full border border-border rounded-lg p-2.5 text-sm bg-white focus:outline-none focus:ring-1 focus:ring-primary"
                       >
@@ -133,14 +164,15 @@ export default function Contact() {
                   <div className="space-y-1">
                     <label className="text-xs font-bold text-slate-700 block">Brief System Description</label>
                     <textarea 
+                      name="message"
                       placeholder="e.g., We are migrating our clinical database to Azure and require secure HIPAA pipeline consulting."
                       rows={3}
                       className="w-full border border-border rounded-lg p-2.5 text-sm bg-white focus:outline-none focus:ring-1 focus:ring-primary resize-none"
                     ></textarea>
                   </div>
 
-                  <button type="submit" className="cursor-pointer w-full bg-primary text-primary-foreground hover:bg-primary/90 font-bold rounded-lg py-3 text-sm flex justify-center items-center gap-2 transition-all">
-                    <Calendar className="w-4 h-4" /> Request Call Slot
+                  <button type="submit" disabled={submitting} className="cursor-pointer w-full bg-primary text-primary-foreground hover:bg-primary/90 font-bold rounded-lg py-3 text-sm flex justify-center items-center gap-2 transition-all">
+                    <Calendar className="w-4 h-4" /> {submitting ? "Sending..." : "Request Call Slot"}
                   </button>
                 </form>
               ) : (
